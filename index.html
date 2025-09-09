@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Tristonia Animation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Press Start 2P', cursive;
+            background: linear-gradient(to bottom, #a0d2eb, #e5eaf5, #f0d9e5);
+        }
+        canvas {
+            display: block;
+        }
+        .title-container {
+            position: absolute;
+            top: 40px;
+            width: 100%;
+            text-align: center;
+            pointer-events: none; /* Allows mouse controls to pass through */
+        }
+        .main-title {
+            color: #4a4e69;
+            font-size: 2.5rem;
+            text-shadow: 3px 3px 0px rgba(242, 233, 228, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="title-container">
+        <div class="main-title">WELCOME TO TRISTONIA</div>
+    </div>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+        // --- Basic Setup ---
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        document.body.appendChild(renderer.domElement);
+
+        // --- Controls ---
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.minDistance = 25;
+        controls.maxDistance = 100;
+        controls.maxPolarAngle = Math.PI / 1.8;
+
+        // --- Lighting ---
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
+        scene.add(ambientLight);
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1.2);
+        directionalLight.position.set(20, 30, 15);
+        scene.add(directionalLight);
+
+        // --- Helper to create objects ---
+        function createBox(width, height, depth, color, x, y, z) {
+            const geometry = new THREE.BoxGeometry(width, height, depth);
+            const material = new THREE.MeshStandardMaterial({ color });
+            const box = new THREE.Mesh(geometry, material);
+            box.position.set(x, y, z);
+            return box;
+        }
+
+        function createSpire(radius, height, color, x, y, z) {
+            const geometry = new THREE.ConeGeometry(radius, height, 4); // 4 sides for a pyramid look
+            const material = new THREE.MeshStandardMaterial({ color });
+            const cone = new THREE.Mesh(geometry, material);
+            cone.position.set(x, y, z);
+            cone.rotation.y = Math.PI / 4; // Align pyramid sides
+            return cone;
+        }
+        
+        // --- Create HYPER DETAILED Complex Objects ---
+        function createHyperDetailedSkyscraper(width, height, depth, color, x, y, z) {
+            const building = new THREE.Group();
+            const main = createBox(width, height, depth, color, 0, height / 2, 0);
+            main.material.metalness = 0.3;
+            main.material.roughness = 0.5;
+            building.add(main);
+
+            const windowColor = '#334155';
+            const accentColor = new THREE.Color(color).multiplyScalar(0.7).getHexString();
+            
+            // Inset window structure
+            building.add(createBox(width - 0.5, height - 1, depth - 0.5, accentColor, 0, height/2, 0));
+
+            // Window bands
+            const numFloors = Math.floor(height / 1.8);
+            for (let i = 1; i < numFloors; i++) {
+                const yPos = i * 1.8 - (height/2) + 1.2;
+                // Check to ensure the window's bottom is above ground level (y=0 in local space)
+                if (yPos > 0.5) { 
+                    building.add(createBox(width * 0.7, 1, 0.2, windowColor, 0, yPos, depth / 2 + 0.01));
+                    building.add(createBox(width * 0.7, 1, 0.2, windowColor, 0, yPos, -depth / 2 - 0.01));
+                    building.add(createBox(0.2, 1, depth * 0.7, windowColor, width/2+0.01, yPos, 0));
+                }
+            }
+             // Rooftop details
+            building.add(createBox(width * 0.5, 0.5, depth * 0.5, accentColor, 0, height + 0.25, 0));
+            building.add(createBox(0.2, 1.5, 0.2, '#8d99ae', -width/4, height+1, depth/4));
+            building.add(createBox(0.3, 2.0, 0.3, '#8d99ae', width/4, height+1.2, -depth/4));
+            
+            building.position.set(x, y, z);
+            return building;
+        }
+
+        function createTree(x, y, z) {
+            const tree = new THREE.Group();
+            tree.add(createBox(0.8, 2, 0.8, '#593d2b', 0, 1, 0)); // Trunk
+            tree.add(createBox(2.5, 2.5, 2.5, '#4a7c59', 0, 3, 0)); // Leaves
+            tree.add(createBox(1.5, 1.5, 1.5, '#3a5a40', 0.5, 2.5, -0.5)); // Leaf variation
+            tree.position.set(x, y, z);
+            return tree;
+        }
+        
+        function createBush(x, y, z) {
+             const bush = createBox(1.2 + Math.random(), 1, 1.2 + Math.random(), '#3a5a40');
+             bush.position.set(x,y,z);
+             return bush;
+        }
+
+        function createVillageHouse(x, y, z, rotation = 0) {
+            const house = new THREE.Group();
+            house.add(createBox(2, 1.5, 2.5, '#f2e9e4', 0, 0.75, 0)); // Base
+            house.add(createBox(0.4, 0.6, 0.2, '#593d2b', 0.8, 0.8, 1.26)); // Window
+            house.add(createBox(2.2, 1, 2.7, '#c9ada7', 0, 2, 0)); // Roof
+            house.add(createBox(0.4, 0.8, 0.4, '#8d99ae', 0.7, 2.5, 0)); // Chimney
+            house.position.set(x, y, z);
+            house.rotation.y = rotation;
+            return house;
+        }
+
+        function createCloud() {
+            const cloud = new THREE.Group();
+            const mainBlock = createBox(8 + Math.random() * 8, 2.5 + Math.random() * 3, 7 + Math.random() * 6, '#ffffff');
+            mainBlock.material.transparent = true;
+            mainBlock.material.opacity = 0.95;
+            cloud.add(mainBlock);
+
+            for (let i = 0; i < 7; i++) {
+                const puff = createBox(2 + Math.random() * 5, 1.5 + Math.random() * 4, 2 + Math.random() * 5, '#ffffff');
+                puff.material.transparent = true;
+                puff.material.opacity = 0.95;
+                puff.position.set((Math.random() - 0.5) * 12, (Math.random() - 0.5) * 4, (Math.random() - 0.5) * 10);
+                cloud.add(puff);
+            }
+            cloud.position.set((Math.random() - 0.5) * 130, 25 + Math.random() * 12, (Math.random() - 0.5) * 70);
+            cloud.speed = 0.02 + Math.random() * 0.04;
+            return cloud;
+        }
+        
+        // --- Create the Island ---
+        const islandGroup = new THREE.Group();
+        islandGroup.add(createBox(32, 2, 22, '#6a994e', 0, 0, 0)); // Grass
+        islandGroup.add(createBox(31, 3, 21, '#8c5e3c', 0, -2.5, 0)); // Dirt
+        islandGroup.add(createBox(29, 2, 19, '#8c5e3c', 0, -5, 0));
+        islandGroup.add(createBox(27, 4, 18, '#6d4c3c', 0, -8, 0));
+        islandGroup.add(createBox(24, 3, 15, '#6d4c3c', 0, -11.5, 0));
+        islandGroup.add(createBox(21, 4, 13, '#593d2b', 0, -14, 0));
+        islandGroup.add(createBox(18, 4, 10, '#452f23', 0, -18, 0));
+        // More floating rocks
+        islandGroup.add(createBox(2, 2, 3, '#6d4c3c', 7, -22, 5)); 
+        islandGroup.add(createBox(3, 2, 2, '#593d2b', -10, -23, -3));
+        islandGroup.add(createBox(2.5, 2.5, 2.5, '#6d4c3c', -3, -24, 2));
+        islandGroup.add(createBox(2, 2, 2, '#593d2b', 11, -23, -4));
+        islandGroup.add(createBox(1.5, 3, 1.5, '#452f23', -12, -25, 4));
+        islandGroup.add(createBox(2, 2, 2, '#6d4c3c', 13, -24, 2));
+        scene.add(islandGroup);
+        
+        // --- Create Landscape Details ---
+        const landscapeGroup = new THREE.Group();
+        // River
+        // Main flow from back
+        landscapeGroup.add(createBox(3, 0.1, 4, '#63b2e2', 12, 1.1, -8));
+        landscapeGroup.add(createBox(3, 0.1, 4, '#63b2e2', 10, 1.1, -4));
+        landscapeGroup.add(createBox(4, 0.1, 3, '#63b2e2', 6, 1.1, 0));
+        landscapeGroup.add(createBox(3, 0.1, 4, '#63b2e2', 2.5, 1.1, 3));
+        landscapeGroup.add(createBox(4, 0.1, 3, '#63b2e2', -1, 1.1, 5));
+        // Fork 1 (to the right waterfall)
+        landscapeGroup.add(createBox(4, 0.1, 3, '#63b2e2', 2, 1.1, 8));
+        landscapeGroup.add(createBox(4, 0.1, 3, '#63b2e2', 2.5, 1.1, 11));
+        // Fork 2 (to the left waterfall)
+        landscapeGroup.add(createBox(3, 0.1, 3, '#63b2e2', -5, 1.1, 7));
+        landscapeGroup.add(createBox(3, 0.1, 3, '#63b2e2', -8, 1.1, 10));
+
+
+        // Denser village, trees, bushes, flowers
+        landscapeGroup.add(createVillageHouse(-12, 1, 5, 0.2));
+        landscapeGroup.add(createVillageHouse(-14, 1, 2, -0.3));
+        landscapeGroup.add(createVillageHouse(-10.5, 1, 7.5, 0));
+        landscapeGroup.add(createVillageHouse(-9, 1, 4, 0.5));
+        landscapeGroup.add(createVillageHouse(-14, 1, 7, -0.1));
+        landscapeGroup.add(createVillageHouse(-14, 1, -1, 0.8));
+        landscapeGroup.add(createVillageHouse(-8, 1, 5.5, 1.2));
+        landscapeGroup.add(createTree(-6, 1, 6));
+        landscapeGroup.add(createTree(-2, 1, 7));
+        landscapeGroup.add(createTree(-9, 1, 8.5));
+        landscapeGroup.add(createTree(-13, 1, -1));
+        landscapeGroup.add(createTree(-15, 1, 4));
+        // Bushes & flowers
+        for(let i = 0; i < 15; i++) {
+            landscapeGroup.add(createBush(-16 + Math.random()*13, 0.5, -2 + Math.random()*13));
+            if (i < 8) landscapeGroup.add(createBox(0.2,0.2,0.2, '#ffadad', -15 + Math.random()*12, 1.1, -1 + Math.random()*12));
+        }
+        // Path
+        const pathBrown = '#8c5e3c';
+        landscapeGroup.add(createBox(1, 0.15, 2, pathBrown, -10, 1.1, 6));
+        landscapeGroup.add(createBox(1.5, 0.15, 1, pathBrown, -11.2, 1.1, 5));
+        landscapeGroup.add(createBox(2, 0.15, 1, pathBrown, -12.5, 1.1, 3.5));
+        scene.add(landscapeGroup);
+
+        // --- Create the City (denser, more detail) ---
+        const cityGroup = new THREE.Group();
+        cityGroup.add(createHyperDetailedSkyscraper(4, 14, 4.5, '#5c677d', -10, 1, -5));
+        cityGroup.add(createHyperDetailedSkyscraper(3.5, 18, 4, '#6b7891', -5, 1, -6));
+        cityGroup.add(createHyperDetailedSkyscraper(4, 11, 4, '#7d8ba1', -1, 1, -5));
+        cityGroup.add(createHyperDetailedSkyscraper(3.5, 16, 3.5, '#626e83', -7, 1, -9));
+        cityGroup.add(createHyperDetailedSkyscraper(4, 12, 4, '#556278', -13, 1, -8));
+        cityGroup.add(createHyperDetailedSkyscraper(3, 20, 3, '#7f8da4', -3, 1, -10));
+        scene.add(cityGroup);
+
+        // --- Create the Castle (hyper detailed) ---
+        const castleGroup = new THREE.Group();
+        const castleBlue = '#4a90e2';
+        const castleWhite = '#e8e8e8';
+        const flagGold = '#ffd700';
+        const windowColor = '#4a4e69';
+        const darkStone = '#a9a9a9';
+        
+        function createStoneWall(width, height, depth, x, y, z, rotY=0) {
+            const wall = new THREE.Group();
+            const blockWidth = 1, blockHeight = 0.8;
+            const numX = Math.floor(width / blockWidth);
+            const numY = Math.floor(height / blockHeight);
+            for(let i=0; i < numX; i++) {
+                for(let j=0; j < numY; j++) {
+                    const stone = createBox(blockWidth, blockHeight, depth, castleWhite, i * blockWidth - width/2, j * blockHeight - height/2, 0);
+                    stone.material.color.offsetHSL(0,0, (Math.random()-0.5) * 0.1);
+                    wall.add(stone);
+                }
+            }
+            wall.position.set(x,y,z);
+            wall.rotation.y = rotY;
+            return wall;
+        }
+
+        // Main building with gate
+        castleGroup.add(createStoneWall(8, 7, 1, 8, 4.5, 5));
+        castleGroup.add(createStoneWall(6, 7, 1, 11.5, 4.5, 2, Math.PI/2));
+        castleGroup.add(createStoneWall(6, 7, 1, 4.5, 4.5, 2, -Math.PI/2));
+        castleGroup.add(createBox(3.5, 4.5, 0.5, '#4a3f35', 8, 3.25, 5.5)); // Gate Frame
+        castleGroup.add(createBox(2.5, 3.5, 0.5, '#593d2b', 8, 2.75, 5.6)); // Gate
+        castleGroup.add(createSpire(5, 4, castleBlue, 8, 8.5, 2));
+        // Main back tower
+        castleGroup.add(createBox(4, 15, 4, castleWhite, 8, 8.5, -2));
+        castleGroup.add(createBox(1.2, 1.8, 0.2, windowColor, 8, 12, 0.1)); // window
+        castleGroup.add(createBox(1.2, 1.8, 0.2, windowColor, 8, 8, 0.1)); // window 2
+        castleGroup.add(createSpire(2.8, 4, castleBlue, 8, 17, -2));
+        castleGroup.add(createBox(0.2, 1.2, 0.2, flagGold, 8, 19.2, -2)); // Flag
+        // Side towers
+        castleGroup.add(createBox(2.5, 10, 2.5, castleWhite, 4, 6, 4));
+        castleGroup.add(createBox(0.8, 1.2, 0.2, windowColor, 4, 8, 5.3)); // window
+        castleGroup.add(createSpire(1.8, 3, castleBlue, 4, 12, 4));
+        castleGroup.add(createBox(0.2, 0.8, 0.2, flagGold, 4, 13.8, 4)); // Flag
+        castleGroup.add(createBox(2.5, 10, 2.5, castleWhite, 12, 6, 4));
+        castleGroup.add(createBox(0.8, 1.2, 0.2, windowColor, 12, 8, 5.3)); // window
+        castleGroup.add(createSpire(1.8, 3, castleBlue, 12, 12, 4));
+        castleGroup.add(createBox(0.2, 0.8, 0.2, flagGold, 12, 13.8, 4)); // Flag
+        // Smaller front towers with gatehouse
+        castleGroup.add(createBox(2, 7, 2, castleWhite, 5.5, 4.5, 7.5));
+        castleGroup.add(createSpire(1.5, 2.5, castleBlue, 5.5, 9, 7.5));
+        castleGroup.add(createBox(2, 7, 2, castleWhite, 10.5, 4.5, 7.5));
+        castleGroup.add(createSpire(1.5, 2.5, castleBlue, 10.5, 9, 7.5));
+        castleGroup.add(createBox(5, 2.5, 2, castleWhite, 8, 5.75, 7.5)); // gatehouse top
+        scene.add(castleGroup);
+
+        // --- Animated Waterfalls (4x denser, DUAL) ---
+        const particleCount = 8000;
+        const positions = new Float32Array(particleCount * 3);
+        const velocities = new Float32Array(particleCount * 3);
+        const waterfall1_x_start = -9.5; 
+        const waterfall1_z_pos = 10.5;
+        const waterfall2_x_start = 0.5; 
+        const waterfall2_z_pos = 11;
+
+
+        for (let i = 0; i < particleCount; i++) {
+            const isWaterfall1 = i < particleCount / 2;
+            if (isWaterfall1) {
+                positions[i * 3] = waterfall1_x_start + Math.random() * 3; // x
+                positions[i * 3 + 2] = waterfall1_z_pos + Math.random();     // z
+            } else {
+                positions[i * 3] = waterfall2_x_start + Math.random() * 4; // x
+                positions[i * 3 + 2] = waterfall2_z_pos + Math.random();     // z
+            }
+            positions[i * 3 + 1] = 1 - Math.random() * 40;  // y
+            velocities[i * 3 + 1] = -0.22 - Math.random() * 0.25; // y-velocity
+        }
+
+        const particleGeometry = new THREE.BufferGeometry();
+        particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        const particleMaterial = new THREE.PointsMaterial({
+            color: '#63b2e2', size: 0.3, transparent: true, opacity: 0.75,
+            blending: THREE.AdditiveBlending
+        });
+        const waterfalls = new THREE.Points(particleGeometry, particleMaterial);
+        scene.add(waterfalls);
+
+        // --- Animated Clouds (denser) ---
+        const clouds = [];
+        for (let i = 0; i < 15; i++) {
+            const cloud = createCloud();
+            clouds.push(cloud);
+            scene.add(cloud);
+        }
+
+        // --- Initial Camera Position ---
+        camera.position.set(0, 28, 55);
+        camera.lookAt(scene.position);
+
+        // --- Animation Loop ---
+        function animate() {
+            requestAnimationFrame(animate);
+            // Animate waterfalls
+            const positions = waterfalls.geometry.attributes.position.array;
+            for (let i = 0; i < particleCount; i++) {
+                positions[i * 3 + 1] += velocities[i * 3 + 1];
+                if (positions[i * 3 + 1] < -35) {
+                    positions[i * 3 + 1] = 1.2; // Reset to top
+                }
+            }
+            waterfalls.geometry.attributes.position.needsUpdate = true;
+            // Animate clouds
+            clouds.forEach(cloud => {
+                cloud.position.x += cloud.speed;
+                if (cloud.position.x > 100) {
+                    cloud.position.x = -100;
+                }
+            });
+            controls.update();
+            renderer.render(scene, camera);
+        }
+
+        // --- Handle Window Resize ---
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        animate();
+    </script>
+</body>
+</html>
