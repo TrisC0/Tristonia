@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Tristonia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: #f8f9fa;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .header {
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 30px;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #6c757d;
+            font-size: 0.95rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #4a90e2;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-top: 35px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            font-size: 1rem;
+            color: #495057;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #a0d2eb20, #f0d9e520);
+            border-left: 4px solid #4a90e2;
+            padding: 20px 25px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+            font-size: 1.05rem;
+            color: #2c3e50;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .value-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 25px;
+            border: 1px solid #e9ecef;
+        }
+
+        .value-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        .value-card p {
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px 15px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">&larr; Back to Home</a>
+
+        <div class="header">
+            <h1>About Us</h1>
+            <p>Learn more about Tristonia and the team behind it.</p>
+        </div>
+
+        <div class="highlight-box">
+            <p>Tristonia is an imaginative fantasy world brought to life through interactive 3D experiences, games, and creative storytelling.</p>
+        </div>
+
+        <h2>Our Story</h2>
+        <p>Tristonia began as a vision to create an immersive fantasy world that players and visitors could explore and enjoy. From towering castles with blue spires to bustling cities and serene villages, every corner of Tristonia has been crafted with care and attention to detail.</p>
+        <p>What started as a creative project has grown into a living, breathing world filled with unique landscapes, animated waterfalls, floating islands, and much more.</p>
+
+        <h2>What We Do</h2>
+        <p>We design and develop interactive experiences set in the world of Tristonia. Whether it's through our web-based 3D explorations or our mobile applications, we aim to bring the magic of Tristonia to everyone.</p>
+
+        <h2>Our Values</h2>
+        <div class="values-grid">
+            <div class="value-card">
+                <h3>Creativity</h3>
+                <p>We push the boundaries of imagination to build worlds that inspire wonder and curiosity.</p>
+            </div>
+            <div class="value-card">
+                <h3>Quality</h3>
+                <p>Every detail matters. We take pride in delivering polished, well-crafted experiences.</p>
+            </div>
+            <div class="value-card">
+                <h3>Community</h3>
+                <p>We believe in building for our audience and listening to the people who explore Tristonia.</p>
+            </div>
+            <div class="value-card">
+                <h3>Privacy</h3>
+                <p>We respect our users and are committed to protecting their data and personal information.</p>
+            </div>
+        </div>
+
+        <h2>Get in Touch</h2>
+        <p>Have questions, feedback, or just want to say hello? Visit our <a href="contact.html" style="color: #4a90e2;">Contact Us</a> page — we'd love to hear from you.</p>
+    </div>
+</body>
+</html>
