@@ -17,7 +17,7 @@
         }
         .title-container {
             position: absolute;
-            top: 40px;
+            top: 90px;
             width: 100%;
             text-align: center;
             pointer-events: none; /* Allows mouse controls to pass through */
@@ -26,6 +26,119 @@
             color: #4a4e69;
             font-size: 2.5rem;
             text-shadow: 3px 3px 0px rgba(242, 233, 228, 0.8);
+        }
+
+        /* Cloud Navigation */
+        .cloud-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 18px 0 10px;
+            pointer-events: none;
+        }
+
+        .cloud-btn {
+            position: relative;
+            display: inline-block;
+            pointer-events: auto;
+            text-decoration: none;
+            cursor: pointer;
+            animation: cloud-float 4s ease-in-out infinite;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.10));
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+        .cloud-btn:nth-child(1) { animation-delay: 0s; }
+        .cloud-btn:nth-child(2) { animation-delay: 1.3s; }
+        .cloud-btn:nth-child(3) { animation-delay: 2.6s; }
+
+        .cloud-btn:hover {
+            transform: scale(1.12);
+            filter: drop-shadow(0 6px 16px rgba(74,144,226,0.25));
+        }
+
+        .cloud-puff {
+            position: absolute;
+            background: rgba(255,255,255,0.92);
+            border-radius: 50%;
+        }
+        /* Main body of cloud */
+        .puff-1 {
+            width: 140px;
+            height: 48px;
+            border-radius: 24px;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        /* Top bumps */
+        .puff-2 {
+            width: 50px;
+            height: 50px;
+            top: -8px;
+            left: 22px;
+        }
+        .puff-3 {
+            width: 60px;
+            height: 55px;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .puff-4 {
+            width: 45px;
+            height: 45px;
+            top: -4px;
+            right: 22px;
+        }
+        /* Bottom fill */
+        .puff-5 {
+            width: 100px;
+            height: 30px;
+            border-radius: 15px;
+            bottom: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.85);
+        }
+
+        .cloud-label {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 140px;
+            height: 60px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.55rem;
+            color: #4a4e69;
+            text-align: center;
+            line-height: 1.4;
+            padding: 8px 10px;
+        }
+
+        @keyframes cloud-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .cloud-btn:hover {
+            animation-play-state: paused;
+            transform: translateY(-6px) scale(1.12);
+        }
+
+        @media (max-width: 600px) {
+            .cloud-nav { gap: 12px; padding: 10px 0 6px; }
+            .puff-1 { width: 100px; height: 36px; }
+            .puff-2 { width: 36px; height: 36px; left: 14px; }
+            .puff-3 { width: 44px; height: 40px; }
+            .puff-4 { width: 32px; height: 32px; right: 14px; }
+            .puff-5 { width: 72px; height: 22px; }
+            .cloud-label { width: 100px; height: 48px; font-size: 0.4rem; }
         }
     </style>
 </head>
@@ -367,10 +480,31 @@
 
         animate();
     </script>
-    <div style="position: fixed; bottom: 10px; right: 15px; z-index: 1000; display: flex; gap: 20px;">
-        <a href="about.html" style="color: rgba(255,255,255,0.5); font-family: 'Press Start 2P', cursive; font-size: 0.5rem; text-decoration: none;">About Us</a>
-        <a href="contact.html" style="color: rgba(255,255,255,0.5); font-family: 'Press Start 2P', cursive; font-size: 0.5rem; text-decoration: none;">Contact Us</a>
-        <a href="privacy-policy.html" style="color: rgba(255,255,255,0.5); font-family: 'Press Start 2P', cursive; font-size: 0.5rem; text-decoration: none;">Privacy Policy</a>
-    </div>
+    <nav class="cloud-nav">
+        <a href="about.html" class="cloud-btn">
+            <span class="cloud-puff puff-1"></span>
+            <span class="cloud-puff puff-2"></span>
+            <span class="cloud-puff puff-3"></span>
+            <span class="cloud-puff puff-4"></span>
+            <span class="cloud-puff puff-5"></span>
+            <span class="cloud-label">About Us</span>
+        </a>
+        <a href="contact.html" class="cloud-btn">
+            <span class="cloud-puff puff-1"></span>
+            <span class="cloud-puff puff-2"></span>
+            <span class="cloud-puff puff-3"></span>
+            <span class="cloud-puff puff-4"></span>
+            <span class="cloud-puff puff-5"></span>
+            <span class="cloud-label">Contact Us</span>
+        </a>
+        <a href="privacy-policy.html" class="cloud-btn">
+            <span class="cloud-puff puff-1"></span>
+            <span class="cloud-puff puff-2"></span>
+            <span class="cloud-puff puff-3"></span>
+            <span class="cloud-puff puff-4"></span>
+            <span class="cloud-puff puff-5"></span>
+            <span class="cloud-label">Privacy Policy</span>
+        </a>
+    </nav>
 </body>
 </html>
