@@ -134,6 +134,39 @@
             background: #3a7bd5;
         }
 
+        .coming-soon-section {
+            position: relative;
+        }
+
+        .coming-soon-section .contact-form {
+            opacity: 0.4;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .coming-soon-badge {
+            display: inline-block;
+            background: #ffc107;
+            color: #1a1a1a;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        .coming-soon-notice {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            color: #664d03;
+            padding: 15px 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
         .success-message {
             display: none;
             background: #d4edda;
@@ -208,7 +241,9 @@
             <p>We'd love to hear from you. Reach out with questions, feedback, or ideas.</p>
         </div>
 
-        <h2>Send Us a Message</h2>
+        <h2>Send Us a Message <span class="coming-soon-badge">Coming Soon</span></h2>
+        <div class="coming-soon-section">
+        <div class="coming-soon-notice">This form is not yet active. We're working on it — check back soon!</div>
         <form class="contact-form" id="contactForm">
             <div class="form-group">
                 <label for="name">Name</label>
@@ -237,6 +272,7 @@
                 Thank you for your message! We'll get back to you as soon as possible.
             </div>
         </form>
+        </div>
 
         <h2>Other Ways to Reach Us</h2>
         <div class="contact-info">
