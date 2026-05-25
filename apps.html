@@ -105,6 +105,51 @@
             fill: #ffffff;
         }
 
+        .app-icon.spinner-icon {
+            background: transparent;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .app-icon.spinner-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 18px;
+            display: block;
+        }
+
+        .app-tagline {
+            margin-top: 6px;
+            font-size: 0.95rem;
+            color: #4a90e2;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .spinner-gallery {
+            display: flex;
+            gap: 12px;
+            margin: 20px 0 10px;
+            overflow-x: auto;
+            padding-bottom: 6px;
+            scrollbar-width: thin;
+        }
+
+        .spinner-gallery img {
+            width: 180px;
+            flex-shrink: 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+            border: 1px solid #e9ecef;
+        }
+
+        @media (max-width: 768px) {
+            .spinner-gallery img {
+                width: 150px;
+            }
+        }
+
         .app-title-block h3 {
             font-size: 1.4rem;
             font-weight: 700;
@@ -212,30 +257,34 @@
 
         <div class="app-showcase">
             <div class="app-header">
-                <div class="app-icon">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="12" cy="12" r="10" fill="none" stroke="#ffffff" stroke-width="1.5"/>
-                        <path d="M12 2 L12 12 L18 6" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <circle cx="12" cy="12" r="2" fill="#ffffff"/>
-                    </svg>
+                <div class="app-icon spinner-icon">
+                    <img src="assets/decision-spinner/icon.png" alt="Decision Spinner icon" />
                 </div>
                 <div class="app-title-block">
                     <h3>Decision Spinner</h3>
-                    <span class="app-platform">Android App</span>
+                    <span class="app-platform">Android App · Royal Edition</span>
+                    <p class="app-tagline">The game-show wheel for everyday choices.</p>
                 </div>
             </div>
 
             <p class="app-description">
-                Can't make up your mind? I built Decision Spinner as a fun, simple way to settle any choice. Just add your options, spin the wheel, and let fate decide. Whether you're picking where to eat, what to watch, or settling a friendly debate, Decision Spinner has you covered.
+                Can't decide what to eat? Who's washing up? Where to go next weekend? Decision Spinner is a beautifully crafted spinning wheel that turns indecision into a moment. Tap the wheel, watch it spin, hear the satisfying ticks slow down, and let the winner land where it lands.
             </p>
+
+            <div class="spinner-gallery">
+                <img src="assets/decision-spinner/screenshot_winner.png" alt="Winner moment with confetti" />
+                <img src="assets/decision-spinner/screenshot_themes.png" alt="Theme picker showing six wheel styles" />
+                <img src="assets/decision-spinner/screenshot_roulette.png" alt="Roulette wheel theme" />
+            </div>
 
             <h2>Features</h2>
             <ul class="features-list">
-                <li><span class="feature-dot"></span> Create custom spinning wheels with your own options</li>
-                <li><span class="feature-dot"></span> Colourful, smooth spin animations</li>
-                <li><span class="feature-dot"></span> Save and reuse your favourite wheels</li>
-                <li><span class="feature-dot"></span> Simple, intuitive interface with no clutter</li>
-                <li><span class="feature-dot"></span> Works offline, no internet required</li>
+                <li><span class="feature-dot"></span> Six hand-crafted themes — Game Show, Roulette, Alloy Wheel, Carnival, Cartwheel, Minimal</li>
+                <li><span class="feature-dot"></span> Real game-show physics with a flapper peg that ticks every slice</li>
+                <li><span class="feature-dot"></span> Wood-on-wood tick sound and a C-major arpeggio win chime</li>
+                <li><span class="feature-dot"></span> 220-particle confetti burst in the theme's palette</li>
+                <li><span class="feature-dot"></span> Weight options 1× to 5×, tournament mode, history of the last 25 winners</li>
+                <li><span class="feature-dot"></span> No ads, no accounts, no tracking — everything stays on your device</li>
             </ul>
 
             <a href="https://play.google.com/store/apps/details?id=com.tristonia.decisionspinner&hl=en" class="store-button" target="_blank" rel="noopener noreferrer">
