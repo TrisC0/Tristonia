@@ -37,7 +37,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 86px 0 26px;
+            padding: 78px 0 26px;
             pointer-events: none;
         }
         .hero-content > * { pointer-events: auto; }
@@ -47,39 +47,54 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px;
+            gap: 11px;
         }
         .hero-eyebrow {
             font-family: var(--font-mono);
-            font-size: 0.6rem;
-            letter-spacing: 0.26em;
+            font-size: 0.58rem;
+            font-weight: 500;
+            letter-spacing: 0.32em;
             text-transform: uppercase;
-            color: var(--text-mute);
+            color: var(--text-dim);
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
         .hero-eyebrow::before, .hero-eyebrow::after {
             content: "";
-            width: 28px; height: 1px;
-            background: rgba(255,255,255,0.3);
+            width: 32px; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(120,180,255,0.45));
+        }
+        .hero-eyebrow::after {
+            background: linear-gradient(90deg, rgba(120,180,255,0.45), transparent);
         }
         .hero-title {
             font-family: var(--font-display);
-            font-weight: 300;
-            font-size: clamp(1.5rem, 2.4vw, 2.1rem);
-            letter-spacing: -0.015em;
+            font-weight: 400;
+            font-size: clamp(1.7rem, 2.6vw, 2.4rem);
+            letter-spacing: 0.01em;
             line-height: 1;
             color: #f5f5fa;
-            text-shadow: 0 0 24px rgba(120,180,255,0.4);
+            text-shadow: 0 2px 30px rgba(7,7,26,0.9), 0 0 22px rgba(120,180,255,0.3);
         }
-        .hero-title em { font-style: italic; font-weight: 200; color: #c4d4f5; }
+        .hero-title em { font-style: italic; font-weight: 300; color: #c4d4f5; }
         .hero-sub {
-            font-size: 0.64rem;
-            letter-spacing: 0.22em;
+            font-family: var(--font-mono);
+            font-size: 0.58rem;
+            letter-spacing: 0.3em;
             text-transform: uppercase;
             color: var(--text-mute);
             font-weight: 400;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .hero-sub::before, .hero-sub::after {
+            content: "";
+            width: 4px; height: 4px;
+            border-radius: 50%;
+            background: rgba(120,180,255,0.55);
+            box-shadow: 0 0 8px rgba(120,180,255,0.6);
         }
 
         .hero-bottom {
