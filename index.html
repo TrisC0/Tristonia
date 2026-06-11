@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tristonia — Independent Android Studio</title>
-    <meta name="description" content="Tristonia is an independent Android studio crafting imaginative, privacy-first apps. The realm of Android app development.">
+    <meta name="description" content="Tristonia Ltd is an indie Android studio crafting imaginative, privacy-first apps. Android app development.">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -37,7 +37,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 84px 0 60px;
+            padding: 86px 0 26px;
             pointer-events: none;
         }
         .hero-content > * { pointer-events: auto; }
@@ -51,13 +51,13 @@
         }
         .hero-eyebrow {
             font-family: var(--font-mono);
-            font-size: 0.68rem;
-            letter-spacing: 0.28em;
+            font-size: 0.6rem;
+            letter-spacing: 0.26em;
             text-transform: uppercase;
             color: var(--text-mute);
             display: inline-flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
         .hero-eyebrow::before, .hero-eyebrow::after {
             content: "";
@@ -67,19 +67,16 @@
         .hero-title {
             font-family: var(--font-display);
             font-weight: 300;
-            font-size: clamp(1.8rem, 3.2vw, 2.8rem);
-            letter-spacing: -0.02em;
+            font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+            letter-spacing: -0.015em;
             line-height: 1;
-            background: linear-gradient(180deg, #ffffff 0%, #c4b5fd 60%, #78b4ff 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            filter: drop-shadow(0 0 24px rgba(120,180,255,0.35));
+            color: #f5f5fa;
+            text-shadow: 0 0 24px rgba(120,180,255,0.4);
         }
-        .hero-title em { font-style: italic; font-weight: 200; }
+        .hero-title em { font-style: italic; font-weight: 200; color: #c4d4f5; }
         .hero-sub {
-            font-size: 0.74rem;
-            letter-spacing: 0.24em;
+            font-size: 0.64rem;
+            letter-spacing: 0.22em;
             text-transform: uppercase;
             color: var(--text-mute);
             font-weight: 400;
@@ -87,19 +84,9 @@
 
         .hero-bottom {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: flex-end;
-            gap: 24px;
         }
-        .hero-meta {
-            font-family: var(--font-mono);
-            font-size: 0.74rem;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            color: var(--text-dim);
-            line-height: 2;
-        }
-        .hero-meta strong { color: var(--text-mute); font-weight: 500; }
         .scroll-hint {
             display: flex;
             flex-direction: column;
@@ -131,8 +118,7 @@
             100% { transform: translateY(400%); opacity: 0; }
         }
         @media (max-width: 640px) {
-            .hero-bottom { flex-direction: column; align-items: center; text-align: center; }
-            .hero-content { padding: 100px 0 40px; }
+            .hero-content { padding: 96px 0 22px; }
         }
 
         /* ===== Marquee ===== */
@@ -416,17 +402,9 @@
             </div>
 
             <div class="hero-bottom">
-                <div class="hero-meta">
-                    <div><strong>EST.</strong> &nbsp; 2024</div>
-                    <div><strong>BASE</strong> &nbsp; United Kingdom</div>
-                </div>
                 <div class="scroll-hint">
                     <span>Scroll</span>
                     <span class="line"></span>
-                </div>
-                <div class="hero-meta" style="text-align: right;">
-                    <div><strong>STATUS</strong> &nbsp; Shipping</div>
-                    <div><strong>MODE</strong> &nbsp; Solo Craft</div>
                 </div>
             </div>
         </div>
@@ -459,11 +437,11 @@
             </div>
             <div class="manifesto">
                 <p class="manifesto-quote reveal">
-                    Apps that <em>solve real problems</em> in creative ways. No team. No investors. No committees.
+                    Apps that <em>solve real problems</em> in creative ways. <em>Just craft.</em>
                 </p>
                 <div class="manifesto-detail reveal" data-delay="2">
-                    <p>Tristonia is one developer with a clear standard: every release has to be something I'd be proud to ship under my own name. That means tasteful design, thoughtful interactions, and an unshakeable respect for the person on the other side of the screen.</p>
-                    <p>I keep things simple. I keep things private. And I keep going only when the work is worth it.</p>
+                    <p>Tristonia Ltd is an indie Android studio with one clear standard: every release has to be worth shipping under the Tristonia name. That means tasteful design, thoughtful interactions, and an unshakeable respect for the person on the other side of the screen.</p>
+                    <p>We keep things simple. We keep things private. And we ship only when the work is worth it.</p>
                 </div>
             </div>
         </div>
@@ -535,7 +513,7 @@
                 </div>
                 <div class="stat">
                     <div class="stat__num" data-count="1">0</div>
-                    <div class="stat__label">Person, Always</div>
+                    <div class="stat__label">Standard: Worth Shipping</div>
                 </div>
             </div>
         </div>
@@ -936,14 +914,14 @@
         }
         function tower(x, z, w, d, h, color, setback) {
             const g = new THREE.Group();
-            const body = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), glassMat(color));
+            const body = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat(color, { roughness: 0.6, metalness: 0.2 }));
             body.position.set(x, GROUND + h / 2, z); body.castShadow = true; body.receiveShadow = true;
             g.add(body);
-            g.add(box(w + 0.5, 0.3, d + 0.5, '#2c3440', x, GROUND + 0.15, z, { roughness: 0.9 }));
+            g.add(box(w + 0.5, 0.3, d + 0.5, '#565e6a', x, GROUND + 0.15, z, { roughness: 0.9 }));
             towerWindows(x, z, w, d, h, GROUND);
             if (setback) {
                 const w2 = w * 0.62, d2 = d * 0.62, h2 = h * 0.5;
-                const up = new THREE.Mesh(new THREE.BoxGeometry(w2, h2, d2), glassMat(color));
+                const up = new THREE.Mesh(new THREE.BoxGeometry(w2, h2, d2), mat(color, { roughness: 0.6, metalness: 0.2 }));
                 up.position.set(x, GROUND + h + h2 / 2, z); up.castShadow = true;
                 g.add(up);
                 towerWindows(x, z, w2, d2, h2, GROUND + h);
@@ -957,14 +935,14 @@
             return g;
         }
         const towerSpecs = [
-            [-10.5, -8.5, 3.0, 3.0, 9.5, '#16324f', true],
-            [-7.0, -9.5, 2.6, 2.6, 12.5, '#1b3a5c', true],
-            [-3.5, -10.0, 3.2, 2.8, 8.5, '#143c4a', false],
-            [-12.8, -5.2, 2.4, 2.4, 7.5, '#0f2f44', false],
-            [-5.5, -12.5, 2.8, 2.4, 10.5, '#1b3a5c', true],
-            [-9.5, -12.0, 2.4, 2.8, 8.0, '#16324f', true],
-            [0.0, -10.5, 2.6, 2.6, 11.0, '#143c4a', true],
-            [-2.0, -13.5, 2.2, 2.2, 7.0, '#0f2f44', false],
+            [-10.5, -8.5, 3.0, 3.0, 9.5, '#8b939e', true],
+            [-7.0, -9.5, 2.6, 2.6, 12.5, '#9aa3ae', true],
+            [-3.5, -10.0, 3.2, 2.8, 8.5, '#7d8590', false],
+            [-12.8, -5.2, 2.4, 2.4, 7.5, '#6e7681', false],
+            [-5.5, -12.5, 2.8, 2.4, 10.5, '#9aa3ae', true],
+            [-9.5, -12.0, 2.4, 2.8, 8.0, '#8b939e', true],
+            [0.0, -10.5, 2.6, 2.6, 11.0, '#7d8590', true],
+            [-2.0, -13.5, 2.2, 2.2, 7.0, '#6e7681', false],
         ];
         towerSpecs.forEach(([x, z, w, d, h, c, s]) => cityGroup.add(tower(x, z, w, d, h, c, s)));
         const winGeoAll = new THREE.BufferGeometry();
