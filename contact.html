@@ -3,299 +3,467 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - Tristonia</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Contact — Tristonia</title>
+    <meta name="description" content="Get in touch with Tristonia — questions, feedback, ideas, or just a hello.">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/design/design.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        .contact-hero {
+            position: relative;
+            min-height: 80vh;
+            padding: 180px 0 80px;
+            overflow: hidden;
+        }
+        #contact-canvas {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            opacity: 0.7;
+        }
+        .contact-hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 0%, transparent 0%, rgba(7,7,26,0.5) 70%, var(--bg-0) 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+        .contact-hero .container { position: relative; z-index: 2; }
+        .contact-hero h1 {
+            font-family: var(--font-display);
+            font-weight: 300;
+            font-size: clamp(3rem, 9vw, 8rem);
+            line-height: 0.96;
+            letter-spacing: -0.035em;
+            margin: 24px 0 30px;
+        }
+        .contact-hero h1 em {
+            font-style: italic; font-weight: 300;
+            background: var(--grad-aurora);
+            -webkit-background-clip: text; background-clip: text;
+            color: transparent;
         }
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: #2c3e50;
-            background: #f8f9fa;
-            padding: 0;
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+        @media (max-width: 880px) {
+            .contact-grid { grid-template-columns: 1fr; gap: 40px; }
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            background: #ffffff;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        .form-card {
+            position: relative;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 44px;
+            backdrop-filter: blur(20px);
+            overflow: hidden;
+        }
+        .form-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: radial-gradient(800px circle at var(--mx, 50%) var(--my, 50%), rgba(120,180,255,0.10), transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s;
+            pointer-events: none;
+        }
+        .form-card:hover::before { opacity: 1; }
+
+        .coming-soon-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: rgba(255, 217, 125, 0.1);
+            border: 1px solid rgba(255, 217, 125, 0.3);
+            color: var(--accent-3);
+            border-radius: var(--radius-pill);
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+        .coming-soon-pill .pulse {
+            width: 6px; height: 6px;
+            background: var(--accent-3);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent-3);
+            animation: pulse 1.5s ease-in-out infinite;
         }
 
-        .header {
-            border-bottom: 2px solid #e9ecef;
-            padding-bottom: 30px;
-            margin-bottom: 40px;
+        .form-card h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
         }
-
-        .header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #1a1a1a;
-            margin-bottom: 10px;
-        }
-
-        .header p {
-            color: #6c757d;
+        .form-card p.intro {
+            color: var(--text-mute);
             font-size: 0.95rem;
+            margin-bottom: 32px;
         }
 
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: #4a90e2;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-        }
-
-        .back-link:hover {
-            text-decoration: underline;
-        }
-
-        h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-top: 35px;
-            margin-bottom: 15px;
-        }
-
-        p {
-            margin-bottom: 15px;
-            font-size: 1rem;
-            color: #495057;
-        }
-
-        .contact-form {
-            margin-top: 25px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
+        form { display: grid; gap: 22px; }
+        .form-group { position: relative; }
         .form-group label {
             display: block;
-            font-weight: 500;
-            margin-bottom: 6px;
-            color: #1a1a1a;
-            font-size: 0.95rem;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text-mute);
+            margin-bottom: 10px;
         }
-
         .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #dee2e6;
-            border-radius: 6px;
-            font-family: inherit;
-            font-size: 1rem;
-            color: #2c3e50;
-            background: #fff;
-            transition: border-color 0.2s;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #4a90e2;
-            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
-        }
-
+        .form-group select,
         .form-group textarea {
-            min-height: 150px;
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text);
+            font: inherit;
+            font-size: 0.98rem;
+            transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+        }
+        .form-group input::placeholder,
+        .form-group textarea::placeholder { color: var(--text-dim); }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(120, 180, 255, 0.05);
+            box-shadow: 0 0 0 4px rgba(120, 180, 255, 0.10);
+        }
+        .form-group textarea {
+            min-height: 140px;
             resize: vertical;
-        }
-
-        .submit-btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background: #4a90e2;
-            color: #fff;
-            border: none;
-            border-radius: 6px;
             font-family: inherit;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background 0.2s;
         }
+        .form-group select { appearance: none; cursor: pointer; }
 
-        .submit-btn:hover {
-            background: #3a7bd5;
-        }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 560px) { .form-row { grid-template-columns: 1fr; } }
 
-        .coming-soon-section {
-            position: relative;
-        }
-
-        .coming-soon-section .contact-form {
-            opacity: 0.4;
+        .form-disabled {
+            opacity: 0.55;
             pointer-events: none;
             user-select: none;
         }
 
-        .coming-soon-badge {
-            display: inline-block;
-            background: #ffc107;
-            color: #1a1a1a;
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            padding: 4px 12px;
-            border-radius: 20px;
-            margin-left: 10px;
-            vertical-align: middle;
-        }
-
-        .coming-soon-notice {
-            background: #fff3cd;
-            border: 1px solid #ffc107;
-            color: #664d03;
-            padding: 15px 20px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-            font-size: 0.95rem;
-        }
-
-        .success-message {
+        .success-toast {
             display: none;
-            background: #d4edda;
-            border: 1px solid #c3e6cb;
-            color: #155724;
-            padding: 15px 20px;
-            border-radius: 6px;
-            margin-top: 20px;
+            margin-top: 18px;
+            padding: 14px 18px;
+            background: rgba(114, 239, 221, 0.08);
+            border: 1px solid rgba(114, 239, 221, 0.3);
+            color: var(--accent-mint);
+            border-radius: var(--radius-sm);
             font-size: 0.95rem;
         }
+        .success-toast.is-visible { display: block; animation: slideIn 0.4s var(--ease-out-quart); }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-        .contact-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        /* ===== Contact methods ===== */
+        .contact-methods { display: grid; gap: 16px; }
+        .contact-method {
+            display: flex;
+            align-items: center;
             gap: 20px;
-            margin: 25px 0;
+            padding: 24px 28px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            transition: transform 0.5s var(--ease-out-quart), border-color 0.5s, background 0.5s;
         }
-
-        .info-card {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 25px;
-            border: 1px solid #e9ecef;
+        .contact-method:hover {
+            transform: translateY(-3px);
+            border-color: var(--border-strong);
+            background: var(--surface-strong);
         }
+        .contact-method__icon {
+            width: 52px; height: 52px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 10px 30px -10px rgba(120, 180, 255, 0.5);
+        }
+        .contact-method__icon svg { width: 22px; height: 22px; stroke: var(--bg-0); }
+        .contact-method__label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text-mute);
+            margin-bottom: 4px;
+        }
+        .contact-method__value {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            color: var(--text);
+        }
+        .contact-method__value:hover { color: var(--accent); }
 
-        .info-card h3 {
+        .response-info {
+            margin-top: 24px;
+            padding: 24px 28px;
+            background: rgba(120, 180, 255, 0.04);
+            border: 1px solid rgba(120, 180, 255, 0.18);
+            border-radius: var(--radius-md);
+        }
+        .response-info h4 {
+            font-family: var(--font-display);
             font-size: 1.1rem;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 10px;
+            font-weight: 500;
+            margin-bottom: 8px;
         }
-
-        .info-card p {
-            font-size: 0.95rem;
-            margin-bottom: 0;
-        }
-
-        .info-card a {
-            color: #4a90e2;
-            text-decoration: none;
-        }
-
-        .info-card a:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 25px 15px;
-            }
-
-            .header h1 {
-                font-size: 1.8rem;
-            }
-
-            h2 {
-                font-size: 1.3rem;
-            }
-
-            .contact-info {
-                grid-template-columns: 1fr;
-            }
+        .response-info p {
+            color: var(--text-mute);
+            font-size: 0.92rem;
+            line-height: 1.55;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="index.html" class="back-link">&larr; Back to Home</a>
-
-        <div class="header">
-            <h1>Contact Me</h1>
-            <p>I'd love to hear from you. Reach out with questions, feedback, or ideas.</p>
-        </div>
-
-        <h2>Send Me a Message <span class="coming-soon-badge">Coming Soon</span></h2>
-        <div class="coming-soon-section">
-        <div class="coming-soon-notice">This form is not yet active. I'm working on it, check back soon!</div>
-        <form class="contact-form" id="contactForm">
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" placeholder="Your name" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="your@email.com" required>
-            </div>
-            <div class="form-group">
-                <label for="subject">Subject</label>
-                <select id="subject" name="subject">
-                    <option value="general">General Inquiry</option>
-                    <option value="feedback">Feedback</option>
-                    <option value="bug">Bug Report</option>
-                    <option value="partnership">Partnership</option>
-                    <option value="other">Other</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="message">Message</label>
-                <textarea id="message" name="message" placeholder="Tell us what's on your mind..." required></textarea>
-            </div>
-            <button type="submit" class="submit-btn">Send Message</button>
-            <div class="success-message" id="successMessage">
-                Thank you for your message! I'll get back to you as soon as possible.
-            </div>
-        </form>
-        </div>
-
-        <h2>Other Ways to Reach Me</h2>
-        <div class="contact-info">
-            <div class="info-card">
-                <h3>Email</h3>
-                <p><a href="mailto:dev@tristonia.com">dev@tristonia.com</a></p>
-            </div>
-            <div class="info-card">
-                <h3>About Me</h3>
-                <p>Learn more about my story and values on the <a href="about.html">About Me</a> page.</p>
-            </div>
-        </div>
+    <div class="page-loader">
+        <div class="loader-mark"><span class="dot"></span><span>Tristonia</span></div>
     </div>
+    <div class="grain"></div>
 
-    <script>
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            document.getElementById('successMessage').style.display = 'block';
-            this.reset();
-            setTimeout(function() {
-                document.getElementById('successMessage').style.display = 'none';
-            }, 5000);
+    <nav class="t-nav">
+        <a href="index.html" class="t-nav__brand"><span class="brand-dot"></span> Tristonia</a>
+        <a href="index.html" class="t-nav__link"><span>Home</span></a>
+        <a href="about.html" class="t-nav__link"><span>About</span></a>
+        <a href="apps.html" class="t-nav__link"><span>Apps</span></a>
+        <a href="contact.html" class="t-nav__link"><span>Contact</span></a>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="contact-hero">
+        <canvas id="contact-canvas"></canvas>
+        <div class="container container--narrow">
+            <span class="eyebrow split-line" data-autoplay="true"><span>Say hello</span></span>
+            <h1>
+                <span class="split-line" data-autoplay="true"><span>Let's start</span></span>
+                <span class="split-line" data-autoplay="true"><span><em>a conversation.</em></span></span>
+            </h1>
+            <p class="lead reveal" data-delay="3">Got a question, a suggestion, or an idea worth chasing? I'd love to hear it. Drop a line below — or skip the form and email me directly.</p>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section style="padding-top: 40px;">
+        <div class="container">
+            <div class="contact-grid">
+                <!-- Form -->
+                <div class="form-card reveal">
+                    <span class="coming-soon-pill"><span class="pulse"></span> Coming soon</span>
+                    <h2>Send a message</h2>
+                    <p class="intro">The form isn't wired up just yet — but it will be. In the meantime, the email below works perfectly.</p>
+
+                    <form id="contactForm" class="form-disabled">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" placeholder="Your name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" placeholder="you@email.com" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <select id="subject" name="subject">
+                                <option value="general">General Inquiry</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="bug">Bug Report</option>
+                                <option value="partnership">Partnership</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" placeholder="Tell me what's on your mind…" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn--primary" data-magnetic data-magnetic-strength="0.2">
+                            Send Message
+                            <span class="arrow">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                            </span>
+                        </button>
+                    </form>
+                    <div class="success-toast" id="successToast">Thanks! I'll get back to you as soon as possible.</div>
+                </div>
+
+                <!-- Side: contact methods -->
+                <div class="reveal" data-delay="2">
+                    <div class="contact-methods">
+                        <a href="mailto:dev@tristonia.com" class="contact-method">
+                            <div class="contact-method__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            </div>
+                            <div>
+                                <div class="contact-method__label">Email</div>
+                                <div class="contact-method__value">dev@tristonia.com</div>
+                            </div>
+                        </a>
+                        <a href="about.html" class="contact-method">
+                            <div class="contact-method__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                            </div>
+                            <div>
+                                <div class="contact-method__label">More on me</div>
+                                <div class="contact-method__value">About the studio</div>
+                            </div>
+                        </a>
+                        <a href="apps.html" class="contact-method">
+                            <div class="contact-method__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                            </div>
+                            <div>
+                                <div class="contact-method__label">Curious about the apps?</div>
+                                <div class="contact-method__value">See the catalogue</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="response-info">
+                        <h4>Response time</h4>
+                        <p>I'm one person, so it might take a day or two — but I read every message that comes in.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="t-footer">
+        <div class="container">
+            <div class="t-footer__grid">
+                <div class="t-footer__brand">
+                    <div class="t-footer__mark">Tris<em>tonia</em></div>
+                    <p style="color: var(--text-mute); font-size: 0.95rem; max-width: 320px;">Independent Android studio. Imagination is the only limit.</p>
+                </div>
+                <div class="t-footer__col">
+                    <h4>Navigate</h4>
+                    <a href="about.html">About</a>
+                    <a href="apps.html">Apps</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="t-footer__col">
+                    <h4>Legal</h4>
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="shrinkray-privacy-policy.html">ShrinkRay Privacy</a>
+                </div>
+            </div>
+            <div class="t-footer__bottom">
+                <span>© <span id="footer-year">2026</span> Tristonia Ltd. All rights reserved.</span>
+                <span>Crafted with care · UK</span>
+            </div>
+        </div>
+    </footer>
+
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+        }
+    }
+    </script>
+    <script type="module">
+        import * as THREE from 'three';
+        const canvas = document.getElementById('contact-canvas');
+        const heroEl = document.querySelector('.contact-hero');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(60, heroEl.clientWidth / heroEl.clientHeight, 0.1, 100);
+        camera.position.z = 30;
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+        renderer.setSize(heroEl.clientWidth, heroEl.clientHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        // Lines / constellation effect
+        const pc = 90;
+        const pts = [];
+        for (let i = 0; i < pc; i++) {
+            pts.push(new THREE.Vector3(
+                (Math.random() - 0.5) * 60,
+                (Math.random() - 0.5) * 36,
+                (Math.random() - 0.5) * 20
+            ));
+        }
+        const pGeo = new THREE.BufferGeometry().setFromPoints(pts);
+        const points = new THREE.Points(pGeo, new THREE.PointsMaterial({
+            color: 0x78b4ff, size: 0.18, transparent: true, opacity: 0.7, sizeAttenuation: true,
+            blending: THREE.AdditiveBlending
+        }));
+        scene.add(points);
+
+        // Lines between near points
+        const lineVerts = [];
+        for (let i = 0; i < pc; i++) {
+            for (let j = i + 1; j < pc; j++) {
+                if (pts[i].distanceTo(pts[j]) < 8) {
+                    lineVerts.push(pts[i].x, pts[i].y, pts[i].z);
+                    lineVerts.push(pts[j].x, pts[j].y, pts[j].z);
+                }
+            }
+        }
+        const lGeo = new THREE.BufferGeometry();
+        lGeo.setAttribute('position', new THREE.Float32BufferAttribute(lineVerts, 3));
+        const lines = new THREE.LineSegments(lGeo, new THREE.LineBasicMaterial({
+            color: 0xc4b5fd, transparent: true, opacity: 0.18
+        }));
+        scene.add(lines);
+
+        let mx = 0, my = 0, tmx = 0, tmy = 0;
+        window.addEventListener('mousemove', e => {
+            tmx = (e.clientX / window.innerWidth - 0.5);
+            tmy = (e.clientY / window.innerHeight - 0.5);
+        });
+        const clock = new THREE.Clock();
+        function animate() {
+            requestAnimationFrame(animate);
+            const t = clock.getElapsedTime();
+            mx += (tmx - mx) * 0.03;
+            my += (tmy - my) * 0.03;
+            scene.rotation.y = t * 0.04 + mx * 0.4;
+            scene.rotation.x = my * 0.3;
+            renderer.render(scene, camera);
+        }
+        animate();
+        window.addEventListener('resize', () => {
+            camera.aspect = heroEl.clientWidth / heroEl.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(heroEl.clientWidth, heroEl.clientHeight);
         });
     </script>
+
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Form is disabled / coming soon
+        });
+    </script>
+    <script src="assets/design/design.js"></script>
 </body>
 </html>

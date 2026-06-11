@@ -3,138 +3,595 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tristonia.com</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Tristonia — Independent Android Studio</title>
+    <meta name="description" content="Tristonia is an independent Android studio crafting imaginative, privacy-first apps. The realm of Android app development.">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/design/design.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
+        /* ===== Hero — Three.js stage ===== */
+        body { background: #07071a; }
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
             overflow: hidden;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(160deg, #1a1a2e 0%, #16213e 30%, #0f3460 60%, #533483 100%);
+            background: radial-gradient(ellipse at 50% 30%, #1f1f55 0%, #0d0d24 45%, #07071a 100%);
         }
-        canvas { display: block; }
-
-        .title-container {
+        #hero-canvas {
             position: absolute;
-            top: 80px;
-            width: 100%;
-            text-align: center;
-            pointer-events: none;
-            z-index: 10;
-        }
-        .main-title {
-            font-size: 3rem;
-            font-weight: 700;
-            letter-spacing: 0.15em;
-            color: #fff;
-            text-shadow: 0 0 40px rgba(120, 180, 255, 0.5), 0 0 80px rgba(120, 180, 255, 0.2);
-            opacity: 0;
-            animation: title-fade-in 2s ease-out 0.5s forwards;
-        }
-        .main-subtitle {
-            font-size: 0.9rem;
-            font-weight: 300;
-            letter-spacing: 0.3em;
-            color: rgba(255, 255, 255, 0.5);
-            margin-top: 8px;
-            opacity: 0;
-            animation: title-fade-in 2s ease-out 1s forwards;
-        }
-        @keyframes title-fade-in {
-            from { opacity: 0; transform: translateY(-15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Modern glassmorphism nav */
-        .nav-bar {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000;
-            display: flex;
-            gap: 6px;
-            padding: 6px;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            opacity: 0;
-            animation: nav-fade-in 1s ease-out 0.3s forwards;
-        }
-        @keyframes nav-fade-in {
-            from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
-            to { opacity: 1; transform: translateX(-50%) translateY(0); }
-        }
-        .nav-link {
-            text-decoration: none;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.75rem;
-            font-weight: 500;
-            letter-spacing: 0.08em;
-            padding: 10px 22px;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-        }
-        .nav-link:hover {
-            color: #fff;
-            background: rgba(255, 255, 255, 0.12);
-        }
-
-        /* Loading overlay */
-        #loading {
-            position: fixed;
             inset: 0;
-            background: #1a1a2e;
+        }
+        .hero-vignette {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 100%, transparent 30%, rgba(7,7,26,0.5) 70%, var(--bg-0) 100%);
+            pointer-events: none;
+            z-index: 2;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 5;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 140px 0 60px;
+            pointer-events: none;
+        }
+        .hero-content > * { pointer-events: auto; }
+        .hero-top, .hero-bottom { width: 100%; }
+        .hero-mark {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+        .hero-eyebrow {
+            font-family: var(--font-mono);
+            font-size: 0.74rem;
+            letter-spacing: 0.32em;
+            text-transform: uppercase;
+            color: var(--text-mute);
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .hero-eyebrow::before, .hero-eyebrow::after {
+            content: "";
+            width: 28px; height: 1px;
+            background: rgba(255,255,255,0.3);
+        }
+        .hero-title {
+            font-family: var(--font-display);
+            font-weight: 300;
+            font-size: clamp(3.6rem, 11vw, 9.5rem);
+            letter-spacing: -0.04em;
+            line-height: 0.92;
+            background: linear-gradient(180deg, #ffffff 0%, #c4b5fd 60%, #78b4ff 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 80px rgba(120,180,255,0.25);
+        }
+        .hero-title em { font-style: italic; font-weight: 200; }
+        .hero-sub {
+            font-size: 0.92rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--text-mute);
+            font-weight: 400;
+        }
+
+        .hero-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 24px;
+        }
+        .hero-meta {
+            font-family: var(--font-mono);
+            font-size: 0.74rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            line-height: 2;
+        }
+        .hero-meta strong { color: var(--text-mute); font-weight: 500; }
+        .scroll-hint {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-mute);
+        }
+        .scroll-hint .line {
+            width: 1px; height: 50px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.5), transparent);
+            position: relative;
+            overflow: hidden;
+        }
+        .scroll-hint .line::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 25%;
+            background: var(--accent);
+            animation: scrollDown 2.4s var(--ease-out-quart) infinite;
+        }
+        @keyframes scrollDown {
+            0% { transform: translateY(-100%); opacity: 0; }
+            30% { opacity: 1; }
+            100% { transform: translateY(400%); opacity: 0; }
+        }
+        @media (max-width: 640px) {
+            .hero-bottom { flex-direction: column; align-items: center; text-align: center; }
+            .hero-content { padding: 100px 0 40px; }
+        }
+
+        /* ===== Marquee ===== */
+        .marquee {
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 22px 0;
+            overflow: hidden;
+            background: rgba(7,7,26,0.5);
+            position: relative;
+            z-index: 3;
+        }
+        .marquee-track {
+            display: flex;
+            gap: 60px;
+            white-space: nowrap;
+            animation: marquee 35s linear infinite;
+            width: max-content;
+        }
+        .marquee-item {
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: 1.6rem;
+            color: var(--text-mute);
+            display: inline-flex;
+            align-items: center;
+            gap: 60px;
+        }
+        .marquee-item::after {
+            content: "✦";
+            color: var(--accent);
+            font-size: 0.9rem;
+        }
+        @keyframes marquee {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* ===== Manifesto section ===== */
+        .manifesto {
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: 80px;
+            align-items: start;
+        }
+        .manifesto-quote {
+            font-family: var(--font-display);
+            font-size: clamp(1.6rem, 2.6vw, 2.3rem);
+            line-height: 1.18;
+            letter-spacing: -0.012em;
+            font-weight: 300;
+            color: var(--text);
+        }
+        .manifesto-quote em {
+            background: var(--grad-aurora);
+            -webkit-background-clip: text; background-clip: text;
+            color: transparent;
+            font-style: italic;
+        }
+        .manifesto-detail {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text-mute);
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        @media (max-width: 880px) {
+            .manifesto { grid-template-columns: 1fr; gap: 40px; }
+        }
+
+        /* ===== Apps featured grid ===== */
+        .apps-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        .app-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 36px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            backdrop-filter: blur(16px);
+            min-height: 360px;
+            overflow: hidden;
+            transition: transform 0.6s var(--ease-out-quart), border-color 0.6s, background 0.6s;
+        }
+        .app-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: radial-gradient(800px circle at var(--mx, 50%) var(--my, 50%), rgba(120, 180, 255, 0.14), transparent 55%);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s;
+        }
+        .app-card:hover::before { opacity: 1; }
+        .app-card:hover { transform: translateY(-6px); border-color: var(--border-strong); }
+        .app-card__top {
             display: flex;
             align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.8s ease;
+            gap: 16px;
+            margin-bottom: 24px;
         }
-        #loading.hidden { opacity: 0; pointer-events: none; }
-        .loader {
-            width: 40px;
-            height: 40px;
-            border: 3px solid rgba(255,255,255,0.1);
-            border-top-color: rgba(120, 180, 255, 0.8);
+        .app-card__icon {
+            width: 64px; height: 64px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px -10px rgba(120, 180, 255, 0.4);
+        }
+        .app-card__icon img { width: 100%; height: 100%; object-fit: cover; }
+        .app-card__name {
+            font-family: var(--font-display);
+            font-size: 1.7rem;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+        .app-card__platform {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--text-mute);
+        }
+        .app-card__tagline {
+            font-family: var(--font-display);
+            font-style: italic;
+            font-weight: 300;
+            font-size: 1.3rem;
+            color: var(--accent-2);
+            margin-bottom: 16px;
+            line-height: 1.25;
+        }
+        .app-card__desc {
+            color: var(--text-mute);
+            font-size: 0.96rem;
+            margin-bottom: 28px;
+            line-height: 1.65;
+        }
+        .app-card__cta {
+            margin-top: auto;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 0.92rem;
+            transition: gap 0.3s var(--ease-out-quart), color 0.3s;
+        }
+        .app-card__cta:hover { gap: 16px; color: var(--accent); }
+        .app-card__cta .circle {
+            width: 36px; height: 36px;
             border-radius: 50%;
-            animation: spin 0.8s linear infinite;
+            background: var(--surface-strong);
+            border: 1px solid var(--border-strong);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s, border-color 0.3s;
+        }
+        .app-card__cta:hover .circle { background: var(--accent); border-color: var(--accent); }
+        .app-card__cta:hover .circle svg { stroke: var(--bg-0); }
+
+        @media (max-width: 800px) {
+            .apps-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ===== Stats ===== */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 60px 0;
+        }
+        .stat__num {
+            font-family: var(--font-display);
+            font-size: clamp(2.4rem, 4vw, 3.6rem);
+            font-weight: 300;
+            line-height: 1;
+            letter-spacing: -0.02em;
+            background: var(--grad-aurora);
+            -webkit-background-clip: text; background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+        }
+        .stat__label {
+            font-family: var(--font-mono);
+            font-size: 0.74rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text-mute);
+        }
+        @media (max-width: 700px) {
+            .stats { grid-template-columns: 1fr 1fr; }
+        }
+
+        /* ===== CTA banner ===== */
+        .cta-banner {
+            position: relative;
+            border-radius: var(--radius-lg);
+            padding: 80px 60px;
+            background: linear-gradient(135deg, rgba(120,180,255,0.08), rgba(196,181,253,0.06));
+            border: 1px solid var(--border-strong);
+            overflow: hidden;
+            text-align: center;
+        }
+        .cta-banner::before {
+            content: "";
+            position: absolute;
+            inset: -50%;
+            background: conic-gradient(from 0deg, transparent, rgba(120,180,255,0.15), transparent 60%);
+            animation: spin 24s linear infinite;
+            opacity: 0.7;
+        }
+        .cta-banner::after {
+            content: "";
+            position: absolute;
+            inset: 1px;
+            border-radius: inherit;
+            background: linear-gradient(160deg, #0e0e2a 0%, #14143a 100%);
+        }
+        .cta-banner > * { position: relative; z-index: 2; }
+        .cta-banner h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4.4vw, 3.4rem);
+            font-weight: 300;
+            line-height: 1.05;
+            margin-bottom: 18px;
+            letter-spacing: -0.02em;
+        }
+        .cta-banner p {
+            color: var(--text-mute);
+            font-size: 1.05rem;
+            margin-bottom: 32px;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
         }
         @keyframes spin { to { transform: rotate(360deg); } }
-
-        @media (max-width: 600px) {
-            .main-title { font-size: 1.8rem; }
-            .main-subtitle { font-size: 0.7rem; }
-            .nav-link { font-size: 0.6rem; padding: 8px 14px; }
-            .nav-bar { gap: 2px; padding: 4px; }
+        @media (max-width: 640px) {
+            .cta-banner { padding: 50px 28px; }
         }
     </style>
 </head>
 <body>
-    <div id="loading"><div class="loader"></div></div>
-
-    <div class="title-container">
-        <div class="main-title">TRISTONIA</div>
-        <div class="main-subtitle">THE REALM OF ANDROID APP DEVELOPMENT</div>
+    <div class="page-loader">
+        <div class="loader-mark">
+            <span class="dot"></span>
+            <span>Tristonia</span>
+        </div>
     </div>
+    <div class="grain"></div>
 
-    <nav class="nav-bar">
-        <a href="about.html" class="nav-link">About</a>
-        <a href="apps.html" class="nav-link">Apps</a>
-        <a href="contact.html" class="nav-link">Contact</a>
-        <a href="privacy-policy.html" class="nav-link">Privacy</a>
+    <nav class="t-nav">
+        <a href="index.html" class="t-nav__brand"><span class="brand-dot"></span> Tristonia</a>
+        <a href="index.html" class="t-nav__link"><span>Home</span></a>
+        <a href="about.html" class="t-nav__link"><span>About</span></a>
+        <a href="apps.html" class="t-nav__link"><span>Apps</span></a>
+        <a href="contact.html" class="t-nav__link"><span>Contact</span></a>
     </nav>
 
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-vignette"></div>
+        <div class="hero-content container">
+            <div class="hero-top hero-mark">
+                <div class="hero-eyebrow">An Independent Android Studio</div>
+                <h1 class="hero-title">
+                    <span class="split-line" data-autoplay="true"><span>Tris<em>tonia</em></span></span>
+                </h1>
+                <div class="hero-sub">
+                    <span class="split-line" data-autoplay="true"><span>Android app development</span></span>
+                </div>
+            </div>
+
+            <div class="hero-bottom">
+                <div class="hero-meta">
+                    <div><strong>EST.</strong> &nbsp; 2024</div>
+                    <div><strong>BASE</strong> &nbsp; United Kingdom</div>
+                </div>
+                <div class="scroll-hint">
+                    <span>Scroll</span>
+                    <span class="line"></span>
+                </div>
+                <div class="hero-meta" style="text-align: right;">
+                    <div><strong>STATUS</strong> &nbsp; Shipping</div>
+                    <div><strong>MODE</strong> &nbsp; Solo Craft</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MARQUEE ===== -->
+    <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+            <span class="marquee-item">Privacy-first</span>
+            <span class="marquee-item">Hand-crafted</span>
+            <span class="marquee-item">On-device AI</span>
+            <span class="marquee-item">No ads. Ever.</span>
+            <span class="marquee-item">Real physics</span>
+            <span class="marquee-item">Made in the UK</span>
+            <!-- duplicate for seamless loop -->
+            <span class="marquee-item">Privacy-first</span>
+            <span class="marquee-item">Hand-crafted</span>
+            <span class="marquee-item">On-device AI</span>
+            <span class="marquee-item">No ads. Ever.</span>
+            <span class="marquee-item">Real physics</span>
+            <span class="marquee-item">Made in the UK</span>
+        </div>
+    </div>
+
+    <!-- ===== MANIFESTO ===== -->
+    <section id="manifesto">
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="eyebrow">Manifesto</span>
+            </div>
+            <div class="manifesto">
+                <p class="manifesto-quote reveal">
+                    Apps that <em>solve real problems</em> in creative ways. No team. No investors. No committees.
+                </p>
+                <div class="manifesto-detail reveal" data-delay="2">
+                    <p>Tristonia is one developer with a clear standard: every release has to be something I'd be proud to ship under my own name. That means tasteful design, thoughtful interactions, and an unshakeable respect for the person on the other side of the screen.</p>
+                    <p>I keep things simple. I keep things private. And I keep going only when the work is worth it.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FEATURED APPS ===== -->
+    <section id="apps">
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="eyebrow">Featured Work</span>
+                <h2 class="heading">Apps in the wild,<br><em style="background: var(--grad-aurora); -webkit-background-clip: text; background-clip: text; color: transparent; font-style: italic; font-weight: 300;">crafted to be lived with.</em></h2>
+            </div>
+
+            <div class="apps-grid">
+                <a href="apps.html#decision-spinner" class="app-card reveal" data-cursor="hover">
+                    <div class="app-card__top">
+                        <div class="app-card__icon"><img src="assets/decision-spinner/icon.png" alt="Decision Spinner"></div>
+                        <div>
+                            <div class="app-card__name">Decision Spinner</div>
+                            <div class="app-card__platform">Android · Royal Edition</div>
+                        </div>
+                    </div>
+                    <div class="app-card__tagline">The game-show wheel for everyday choices.</div>
+                    <p class="app-card__desc">Six hand-crafted themes, real game-show physics, a satisfying tick that lands just where it should. Turning indecision into a moment.</p>
+                    <div class="app-card__cta">
+                        Explore Decision Spinner
+                        <span class="circle">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <a href="apps.html#shrinkray" class="app-card reveal" data-delay="2" data-cursor="hover">
+                    <div class="app-card__top">
+                        <div class="app-card__icon"><img src="assets/shrinkray/icon.png" alt="ShrinkRay"></div>
+                        <div>
+                            <div class="app-card__name">ShrinkRay</div>
+                            <div class="app-card__platform">Android · On-device AI</div>
+                        </div>
+                    </div>
+                    <div class="app-card__tagline">Big tasks, shrunk down to doable.</div>
+                    <p class="app-card__desc">On-device AI breaks any task into smaller, doable steps. Everything runs on your phone — no cloud, no accounts, no compromise.</p>
+                    <div class="app-card__cta">
+                        Explore ShrinkRay
+                        <span class="circle">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                        </span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== STATS ===== -->
+    <section style="padding-top: 0;">
+        <div class="container">
+            <div class="stats reveal">
+                <div class="stat">
+                    <div class="stat__num" data-count="2">0</div>
+                    <div class="stat__label">Apps Shipped</div>
+                </div>
+                <div class="stat">
+                    <div class="stat__num" data-count="100">0<span>%</span></div>
+                    <div class="stat__label">On Device</div>
+                </div>
+                <div class="stat">
+                    <div class="stat__num">0<span class="px-zero">.00</span></div>
+                    <div class="stat__label">Trackers, Ever</div>
+                </div>
+                <div class="stat">
+                    <div class="stat__num" data-count="1">0</div>
+                    <div class="stat__label">Person, Always</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section>
+        <div class="container container--narrow">
+            <div class="cta-banner reveal">
+                <span class="eyebrow" style="justify-content: center; display: inline-flex;">Get In Touch</span>
+                <h2 style="margin-top: 14px;">Have an idea you can't shake?<br>I'd love to hear it.</h2>
+                <p>Questions, feedback, partnership ideas — or just a hello. The inbox is open.</p>
+                <a href="contact.html" class="btn btn--primary" data-magnetic data-magnetic-strength="0.2">
+                    Start a Conversation
+                    <span class="arrow">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="t-footer">
+        <div class="container">
+            <div class="t-footer__grid">
+                <div class="t-footer__brand">
+                    <div class="t-footer__mark">Tris<em>tonia</em></div>
+                    <p style="color: var(--text-mute); font-size: 0.95rem; max-width: 320px;">Independent Android studio. Imagination is the only limit.</p>
+                </div>
+                <div class="t-footer__col">
+                    <h4>Navigate</h4>
+                    <a href="about.html">About</a>
+                    <a href="apps.html">Apps</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="t-footer__col">
+                    <h4>Legal</h4>
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="shrinkray-privacy-policy.html">ShrinkRay Privacy</a>
+                </div>
+            </div>
+            <div class="t-footer__bottom">
+                <span>© <span id="footer-year">2026</span> Tristonia Ltd. All rights reserved.</span>
+                <span>Crafted with care · UK</span>
+            </div>
+        </div>
+    </footer>
+
     <script type="importmap">
-        {
-            "imports": {
-                "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-            }
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
         }
+    }
     </script>
     <script type="module">
         import * as THREE from 'three';
@@ -143,28 +600,28 @@
         import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
         import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 
+        const canvas = document.getElementById('hero-canvas');
+        const heroEl = document.querySelector('.hero');
+
         // --- Scene Setup ---
         const scene = new THREE.Scene();
-        scene.fog = new THREE.FogExp2(0x1a1a2e, 0.008);
+        scene.fog = new THREE.FogExp2(0x0d0d24, 0.009);
 
-        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 500);
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        const camera = new THREE.PerspectiveCamera(58, heroEl.clientWidth / heroEl.clientHeight, 0.1, 500);
+        const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+        renderer.setSize(heroEl.clientWidth, heroEl.clientHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         renderer.shadowMap.enabled = true;
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
         renderer.toneMappingExposure = 1.2;
-        document.body.appendChild(renderer.domElement);
 
         // --- Post Processing ---
         const composer = new EffectComposer(renderer);
         composer.addPass(new RenderPass(scene, camera));
         const bloomPass = new UnrealBloomPass(
-            new THREE.Vector2(window.innerWidth, window.innerHeight),
-            0.6,   // strength
-            0.8,   // radius
-            0.4    // threshold
+            new THREE.Vector2(heroEl.clientWidth, heroEl.clientHeight),
+            0.7, 0.85, 0.4
         );
         composer.addPass(bloomPass);
 
@@ -172,18 +629,17 @@
         const controls = new OrbitControls(camera, renderer.domElement);
         controls.enableDamping = true;
         controls.dampingFactor = 0.04;
-        controls.minDistance = 30;
+        controls.minDistance = 35;
         controls.maxDistance = 90;
         controls.maxPolarAngle = Math.PI / 1.9;
         controls.enablePan = false;
+        controls.enableZoom = false;
         controls.rotateSpeed = 0.5;
         controls.autoRotate = true;
         controls.autoRotateSpeed = 0.3;
 
         // --- Lighting ---
-        const hemiLight = new THREE.HemisphereLight(0x78b4ff, 0x3a1f5e, 0.6);
-        scene.add(hemiLight);
-
+        scene.add(new THREE.HemisphereLight(0x78b4ff, 0x3a1f5e, 0.6));
         const moonLight = new THREE.DirectionalLight(0xc4d4ff, 1.5);
         moonLight.position.set(25, 40, 20);
         moonLight.castShadow = true;
@@ -195,532 +651,316 @@
         moonLight.shadow.camera.far = 100;
         moonLight.shadow.bias = -0.001;
         scene.add(moonLight);
-
         const fillLight = new THREE.DirectionalLight(0xffa0d0, 0.3);
         fillLight.position.set(-20, 10, -15);
         scene.add(fillLight);
-
         const rimLight = new THREE.PointLight(0x78b4ff, 1, 60);
         rimLight.position.set(-15, 5, 20);
         scene.add(rimLight);
 
-        // --- Material Helpers ---
+        // --- Helpers ---
         function mat(color, opts = {}) {
-            return new THREE.MeshStandardMaterial({
-                color,
-                roughness: opts.roughness ?? 0.7,
-                metalness: opts.metalness ?? 0.0,
-                flatShading: false,
-                ...opts,
-            });
+            return new THREE.MeshStandardMaterial({ color, roughness: opts.roughness ?? 0.7, metalness: opts.metalness ?? 0.0, ...opts });
         }
-
         function glassMat(color) {
-            return new THREE.MeshPhysicalMaterial({
-                color,
-                roughness: 0.05,
-                metalness: 0.1,
-                transmission: 0.6,
-                thickness: 0.5,
-                transparent: true,
-                opacity: 0.85,
-            });
+            return new THREE.MeshPhysicalMaterial({ color, roughness: 0.05, metalness: 0.1, transmission: 0.6, thickness: 0.5, transparent: true, opacity: 0.85 });
         }
-
-        // --- Smooth Geometry Helpers ---
-        function createSmoothCylinder(rTop, rBot, h, color, x, y, z, opts = {}) {
-            const geo = new THREE.CylinderGeometry(rTop, rBot, h, opts.segments ?? 32);
-            const m = new THREE.Mesh(geo, mat(color, opts));
-            m.position.set(x, y, z);
-            m.castShadow = true;
-            m.receiveShadow = true;
+        function smoothCyl(rT, rB, h, color, x, y, z, o = {}) {
+            const g = new THREE.CylinderGeometry(rT, rB, h, o.segments ?? 32);
+            const m = new THREE.Mesh(g, mat(color, o));
+            m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true;
+            return m;
+        }
+        function sphere(r, color, x, y, z, o = {}) {
+            const g = new THREE.SphereGeometry(r, 32, 24);
+            const m = new THREE.Mesh(g, mat(color, o));
+            m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true;
+            return m;
+        }
+        function cone(r, h, color, x, y, z, o = {}) {
+            const g = new THREE.ConeGeometry(r, h, o.segments ?? 16);
+            const m = new THREE.Mesh(g, mat(color, o));
+            m.position.set(x, y, z); m.castShadow = true;
+            return m;
+        }
+        function box(w, h, d, color, x, y, z, o = {}) {
+            const g = new THREE.BoxGeometry(w, h, d);
+            const m = new THREE.Mesh(g, mat(color, o));
+            m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true;
             return m;
         }
 
-        function createSphere(r, color, x, y, z, opts = {}) {
-            const geo = new THREE.SphereGeometry(r, 32, 24);
-            const m = new THREE.Mesh(geo, mat(color, opts));
-            m.position.set(x, y, z);
-            m.castShadow = true;
-            m.receiveShadow = true;
-            return m;
-        }
-
-        function createCone(r, h, color, x, y, z, opts = {}) {
-            const geo = new THREE.ConeGeometry(r, h, opts.segments ?? 16);
-            const m = new THREE.Mesh(geo, mat(color, opts));
-            m.position.set(x, y, z);
-            m.castShadow = true;
-            return m;
-        }
-
-        function createBox(w, h, d, color, x, y, z, opts = {}) {
-            const geo = new THREE.BoxGeometry(w, h, d);
-            const m = new THREE.Mesh(geo, mat(color, opts));
-            m.position.set(x, y, z);
-            m.castShadow = true;
-            m.receiveShadow = true;
-            return m;
-        }
-
-        // --- Floating Island (Smooth Organic Shape) ---
+        // --- Floating Island ---
         const islandGroup = new THREE.Group();
-
-        // Top terrain - smooth rounded cylinder layers
-        const terrainTop = createSmoothCylinder(17, 16.5, 2.5, '#4a7c59', 0, 0, 0, { segments: 48, roughness: 0.85 });
-        islandGroup.add(terrainTop);
-
-        // Grass surface - slightly larger disc
-        const grassDisc = createSmoothCylinder(17.2, 17, 0.3, '#5a9e6f', 0, 1.3, 0, { segments: 48, roughness: 0.9 });
-        islandGroup.add(grassDisc);
-
-        // Rock layers tapering down — smooth organic
+        islandGroup.add(smoothCyl(17, 16.5, 2.5, '#4a7c59', 0, 0, 0, { segments: 48, roughness: 0.85 }));
+        islandGroup.add(smoothCyl(17.2, 17, 0.3, '#5a9e6f', 0, 1.3, 0, { segments: 48, roughness: 0.9 }));
         const rockColors = ['#8c6b50', '#7a5c42', '#6d4c3c', '#5e3f30', '#4a3225'];
-        const rockLayers = [
+        [
             { rT: 16.5, rB: 15, h: 3, y: -2.8 },
             { rT: 15, rB: 13, h: 3, y: -5.8 },
             { rT: 13, rB: 10.5, h: 3.5, y: -9 },
             { rT: 10.5, rB: 7, h: 4, y: -12.5 },
             { rT: 7, rB: 3, h: 5, y: -16.5 },
-        ];
-        rockLayers.forEach((l, i) => {
-            islandGroup.add(createSmoothCylinder(l.rT, l.rB, l.h, rockColors[i], 0, l.y, 0, { segments: 36, roughness: 0.9 }));
-        });
-
-        // Small floating rock fragments
-        const fragments = [
+        ].forEach((l, i) => islandGroup.add(smoothCyl(l.rT, l.rB, l.h, rockColors[i], 0, l.y, 0, { segments: 36, roughness: 0.9 })));
+        [
             { r: 1.2, x: 8, y: -20, z: 5 },
             { r: 1.5, x: -10, y: -21, z: -3 },
             { r: 1, x: -4, y: -23, z: 3 },
             { r: 0.8, x: 12, y: -22, z: -4 },
             { r: 1.3, x: -13, y: -24, z: 5 },
-        ];
-        fragments.forEach(f => {
-            islandGroup.add(createSphere(f.r, '#5e3f30', f.x, f.y, f.z, { roughness: 0.95 }));
-        });
-
+        ].forEach(f => islandGroup.add(sphere(f.r, '#5e3f30', f.x, f.y, f.z, { roughness: 0.95 })));
         scene.add(islandGroup);
 
-        // --- Modern Tree ---
-        function createTree(x, y, z, scale = 1) {
-            const tree = new THREE.Group();
-            // Trunk - smooth cylinder
-            tree.add(createSmoothCylinder(0.2 * scale, 0.35 * scale, 2.5 * scale, '#6b4c3b', 0, 1.25 * scale, 0, { segments: 12, roughness: 0.9 }));
-            // Canopy - layered spheres for organic look
-            const leafColor = '#3d8b5e';
-            const leafLight = '#52a872';
-            tree.add(createSphere(1.8 * scale, leafColor, 0, 3.5 * scale, 0, { roughness: 0.85 }));
-            tree.add(createSphere(1.4 * scale, leafLight, 0.5 * scale, 4.2 * scale, 0.3 * scale, { roughness: 0.85 }));
-            tree.add(createSphere(1.1 * scale, leafColor, -0.6 * scale, 3.8 * scale, -0.4 * scale, { roughness: 0.85 }));
-            tree.position.set(x, y, z);
-            return tree;
+        // --- Trees ---
+        function tree(x, y, z, s = 1) {
+            const t = new THREE.Group();
+            t.add(smoothCyl(0.2 * s, 0.35 * s, 2.5 * s, '#6b4c3b', 0, 1.25 * s, 0, { segments: 12, roughness: 0.9 }));
+            t.add(sphere(1.8 * s, '#3d8b5e', 0, 3.5 * s, 0, { roughness: 0.85 }));
+            t.add(sphere(1.4 * s, '#52a872', 0.5 * s, 4.2 * s, 0.3 * s, { roughness: 0.85 }));
+            t.add(sphere(1.1 * s, '#3d8b5e', -0.6 * s, 3.8 * s, -0.4 * s, { roughness: 0.85 }));
+            t.position.set(x, y, z); return t;
         }
-
-        // --- Modern Village House ---
-        function createVillageHouse(x, y, z, rotation = 0) {
-            const house = new THREE.Group();
-            // Walls - warm cream
-            house.add(createBox(2.2, 2, 2.8, '#f0e6d8', 0, 1, 0, { roughness: 0.8 }));
-            // Roof - gentle slope
+        // --- Villages ---
+        function village(x, y, z, rot = 0) {
+            const h = new THREE.Group();
+            h.add(box(2.2, 2, 2.8, '#f0e6d8', 0, 1, 0, { roughness: 0.8 }));
             const roofGeo = new THREE.ConeGeometry(2.4, 1.8, 4);
-            const roofMat = mat('#b85c3c', { roughness: 0.7 });
-            const roof = new THREE.Mesh(roofGeo, roofMat);
-            roof.position.set(0, 2.9, 0);
-            roof.rotation.y = Math.PI / 4;
-            roof.castShadow = true;
-            house.add(roof);
-            // Window - glowing
-            const windowGeo = new THREE.PlaneGeometry(0.5, 0.6);
-            const windowMat = new THREE.MeshStandardMaterial({ color: '#ffd97d', emissive: '#ffd97d', emissiveIntensity: 0.8, roughness: 0.2 });
-            const win1 = new THREE.Mesh(windowGeo, windowMat);
-            win1.position.set(0.5, 1.2, 1.41);
-            house.add(win1);
-            const win2 = win1.clone();
-            win2.position.set(-0.5, 1.2, 1.41);
-            house.add(win2);
-            // Door
-            house.add(createBox(0.5, 0.9, 0.1, '#6b4c3b', 0, 0.45, 1.41, { roughness: 0.9 }));
-            // Chimney
-            house.add(createSmoothCylinder(0.2, 0.25, 1.2, '#8d7a6e', 0.7, 3.4, -0.5, { segments: 8, roughness: 0.9 }));
-            house.position.set(x, y, z);
-            house.rotation.y = rotation;
-            return house;
+            const roof = new THREE.Mesh(roofGeo, mat('#b85c3c', { roughness: 0.7 }));
+            roof.position.set(0, 2.9, 0); roof.rotation.y = Math.PI / 4; roof.castShadow = true;
+            h.add(roof);
+            const winMat = new THREE.MeshStandardMaterial({ color: '#ffd97d', emissive: '#ffd97d', emissiveIntensity: 0.8, roughness: 0.2 });
+            const winGeo = new THREE.PlaneGeometry(0.5, 0.6);
+            const w1 = new THREE.Mesh(winGeo, winMat); w1.position.set(0.5, 1.2, 1.41); h.add(w1);
+            const w2 = w1.clone(); w2.position.set(-0.5, 1.2, 1.41); h.add(w2);
+            h.add(box(0.5, 0.9, 0.1, '#6b4c3b', 0, 0.45, 1.41, { roughness: 0.9 }));
+            h.add(smoothCyl(0.2, 0.25, 1.2, '#8d7a6e', 0.7, 3.4, -0.5, { segments: 8 }));
+            h.position.set(x, y, z); h.rotation.y = rot;
+            return h;
         }
-
-        // --- Modern Skyscraper ---
-        function createSkyscraper(w, h, d, color, x, y, z) {
-            const building = new THREE.Group();
-            // Main body with rounded edges
-            const geo = new THREE.BoxGeometry(w, h, d, 1, 1, 1);
-            const body = new THREE.Mesh(geo, glassMat(color));
-            body.position.y = h / 2;
-            body.castShadow = true;
-            body.receiveShadow = true;
-            building.add(body);
-
-            // Glowing window strips
+        // --- Skyscrapers ---
+        function tower(w, h, d, color, x, y, z) {
+            const b = new THREE.Group();
+            const body = new THREE.Mesh(new THREE.BoxGeometry(w, h, d, 1, 1, 1), glassMat(color));
+            body.position.y = h / 2; body.castShadow = true; body.receiveShadow = true;
+            b.add(body);
             const stripCount = Math.floor(h / 2);
             for (let i = 1; i < stripCount; i++) {
                 const yPos = i * 2;
                 if (yPos < h - 1) {
-                    const stripGeo = new THREE.PlaneGeometry(w * 0.85, 0.3);
-                    const stripMat = new THREE.MeshStandardMaterial({
-                        color: '#78b4ff',
-                        emissive: '#78b4ff',
-                        emissiveIntensity: 0.4 + Math.random() * 0.3,
-                        transparent: true,
-                        opacity: 0.7,
-                    });
-                    const strip = new THREE.Mesh(stripGeo, stripMat);
-                    strip.position.set(0, yPos, d / 2 + 0.01);
-                    building.add(strip);
-                    const strip2 = strip.clone();
-                    strip2.position.set(0, yPos, -d / 2 - 0.01);
-                    strip2.rotation.y = Math.PI;
-                    building.add(strip2);
+                    const sGeo = new THREE.PlaneGeometry(w * 0.85, 0.3);
+                    const sMat = new THREE.MeshStandardMaterial({ color: '#78b4ff', emissive: '#78b4ff', emissiveIntensity: 0.4 + Math.random() * 0.3, transparent: true, opacity: 0.7 });
+                    const s = new THREE.Mesh(sGeo, sMat); s.position.set(0, yPos, d / 2 + 0.01); b.add(s);
+                    const s2 = s.clone(); s2.position.set(0, yPos, -d / 2 - 0.01); s2.rotation.y = Math.PI; b.add(s2);
                 }
             }
-
-            // Rooftop accent light
-            const accentGeo = new THREE.SphereGeometry(0.3, 16, 12);
-            const accentMat = new THREE.MeshStandardMaterial({ color: '#ff6b6b', emissive: '#ff6b6b', emissiveIntensity: 1.5 });
-            const accent = new THREE.Mesh(accentGeo, accentMat);
-            accent.position.set(0, h + 0.5, 0);
-            building.add(accent);
-
-            building.position.set(x, y, z);
-            return building;
+            const accent = new THREE.Mesh(new THREE.SphereGeometry(0.3, 16, 12), new THREE.MeshStandardMaterial({ color: '#ff6b6b', emissive: '#ff6b6b', emissiveIntensity: 1.5 }));
+            accent.position.set(0, h + 0.5, 0); b.add(accent);
+            b.position.set(x, y, z); return b;
         }
-
-        // --- Modern Castle ---
-        function buildCastle() {
-            const castle = new THREE.Group();
-            const stoneColor = '#d4cfc8';
-            const roofColor = '#4a7ec2';
-            const darkStone = '#b5afa6';
-            const gold = '#ffd700';
-
-            // Main keep
-            castle.add(createSmoothCylinder(3.5, 3.8, 12, stoneColor, 8, 7, 0, { segments: 24, roughness: 0.85 }));
-            // Keep roof
-            castle.add(createCone(4, 5, roofColor, 8, 15.5, 0, { segments: 24, roughness: 0.4, metalness: 0.2 }));
-            // Flag pole + glow
-            castle.add(createSmoothCylinder(0.08, 0.08, 2, gold, 8, 18.5, 0, { segments: 8 }));
+        // --- Castle ---
+        function castle() {
+            const c = new THREE.Group();
+            const stone = '#d4cfc8', roofClr = '#4a7ec2', dark = '#b5afa6', gold = '#ffd700';
+            c.add(smoothCyl(3.5, 3.8, 12, stone, 8, 7, 0, { segments: 24, roughness: 0.85 }));
+            c.add(cone(4, 5, roofClr, 8, 15.5, 0, { segments: 24, roughness: 0.4, metalness: 0.2 }));
+            c.add(smoothCyl(0.08, 0.08, 2, gold, 8, 18.5, 0, { segments: 8 }));
             const flagGeo = new THREE.PlaneGeometry(1.2, 0.7);
-            const flagMat = new THREE.MeshStandardMaterial({ color: '#e63946', emissive: '#e63946', emissiveIntensity: 0.3, side: THREE.DoubleSide });
-            const flag = new THREE.Mesh(flagGeo, flagMat);
-            flag.position.set(8.7, 19.2, 0);
-            castle.add(flag);
-
-            // Front wall
-            castle.add(createBox(10, 6, 1.2, stoneColor, 8, 3, 6, { roughness: 0.85 }));
-            // Battlements
-            for (let i = -4; i <= 4; i += 2) {
-                castle.add(createBox(1, 1.2, 1.4, darkStone, 8 + i, 6.6, 6, { roughness: 0.9 }));
-            }
-
-            // Gate arch
-            const archGeo = new THREE.TorusGeometry(1.5, 0.3, 8, 16, Math.PI);
-            const archMat = mat('#8a7e72', { roughness: 0.85 });
-            const arch = new THREE.Mesh(archGeo, archMat);
-            arch.position.set(8, 3.5, 6.6);
-            arch.rotation.z = Math.PI;
-            castle.add(arch);
-            // Gate door
-            castle.add(createBox(2.5, 3.5, 0.3, '#4a3828', 8, 1.75, 6.6, { roughness: 0.95 }));
-
-            // Side towers
+            const flag = new THREE.Mesh(flagGeo, new THREE.MeshStandardMaterial({ color: '#e63946', emissive: '#e63946', emissiveIntensity: 0.3, side: THREE.DoubleSide }));
+            flag.position.set(8.7, 19.2, 0); c.add(flag);
+            c.add(box(10, 6, 1.2, stone, 8, 3, 6, { roughness: 0.85 }));
+            for (let i = -4; i <= 4; i += 2) c.add(box(1, 1.2, 1.4, dark, 8 + i, 6.6, 6, { roughness: 0.9 }));
+            const arch = new THREE.Mesh(new THREE.TorusGeometry(1.5, 0.3, 8, 16, Math.PI), mat('#8a7e72', { roughness: 0.85 }));
+            arch.position.set(8, 3.5, 6.6); arch.rotation.z = Math.PI; c.add(arch);
+            c.add(box(2.5, 3.5, 0.3, '#4a3828', 8, 1.75, 6.6, { roughness: 0.95 }));
             [4, 12].forEach(tx => {
-                castle.add(createSmoothCylinder(1.8, 2, 9, stoneColor, tx, 5.5, 5, { segments: 20, roughness: 0.85 }));
-                castle.add(createCone(2.2, 3.5, roofColor, tx, 11.5, 5, { segments: 20, roughness: 0.4, metalness: 0.2 }));
-                // Window glow
-                const winGeo = new THREE.CircleGeometry(0.4, 16);
-                const winMat = new THREE.MeshStandardMaterial({ color: '#ffd97d', emissive: '#ffd97d', emissiveIntensity: 0.9 });
-                const win = new THREE.Mesh(winGeo, winMat);
-                win.position.set(tx, 7, 6.1);
-                castle.add(win);
+                c.add(smoothCyl(1.8, 2, 9, stone, tx, 5.5, 5, { segments: 20, roughness: 0.85 }));
+                c.add(cone(2.2, 3.5, roofClr, tx, 11.5, 5, { segments: 20, roughness: 0.4, metalness: 0.2 }));
+                const w = new THREE.Mesh(new THREE.CircleGeometry(0.4, 16), new THREE.MeshStandardMaterial({ color: '#ffd97d', emissive: '#ffd97d', emissiveIntensity: 0.9 }));
+                w.position.set(tx, 7, 6.1); c.add(w);
             });
-
-            // Back tower
-            castle.add(createSmoothCylinder(2.5, 2.8, 15, stoneColor, 8, 8.5, -3, { segments: 24, roughness: 0.85 }));
-            castle.add(createCone(3, 4.5, roofColor, 8, 17.5, -3, { segments: 24, roughness: 0.4, metalness: 0.2 }));
-
-            // Side walls
-            castle.add(createBox(1.2, 6, 8, stoneColor, 3.5, 3, 2, { roughness: 0.85 }));
-            castle.add(createBox(1.2, 6, 8, stoneColor, 12.5, 3, 2, { roughness: 0.85 }));
-
-            return castle;
+            c.add(smoothCyl(2.5, 2.8, 15, stone, 8, 8.5, -3, { segments: 24, roughness: 0.85 }));
+            c.add(cone(3, 4.5, roofClr, 8, 17.5, -3, { segments: 24, roughness: 0.4, metalness: 0.2 }));
+            c.add(box(1.2, 6, 8, stone, 3.5, 3, 2, { roughness: 0.85 }));
+            c.add(box(1.2, 6, 8, stone, 12.5, 3, 2, { roughness: 0.85 }));
+            return c;
         }
-
-        const castleGroup = buildCastle();
+        const castleGroup = castle();
         scene.add(castleGroup);
 
-        // --- River & Water ---
+        // --- River ---
         const waterGroup = new THREE.Group();
-        // River path using a smooth curved mesh
-        const riverPoints = [
+        [
             [12, 1.55, -8], [10, 1.55, -4], [7, 1.55, -1], [4, 1.55, 2],
             [1, 1.55, 4], [-2, 1.55, 6], [-5, 1.55, 8], [-8, 1.55, 10],
             [3, 1.55, 7], [3, 1.55, 10],
-        ];
-        riverPoints.forEach(([x, y, z]) => {
-            const riverGeo = new THREE.CircleGeometry(2.2, 24);
-            const riverMat = new THREE.MeshPhysicalMaterial({
-                color: '#4da8da',
-                roughness: 0.1,
-                metalness: 0.1,
-                transmission: 0.4,
-                transparent: true,
-                opacity: 0.8,
-            });
-            const riverPatch = new THREE.Mesh(riverGeo, riverMat);
-            riverPatch.rotation.x = -Math.PI / 2;
-            riverPatch.position.set(x, y, z);
-            riverPatch.receiveShadow = true;
-            waterGroup.add(riverPatch);
+        ].forEach(([x, y, z]) => {
+            const r = new THREE.Mesh(new THREE.CircleGeometry(2.2, 24), new THREE.MeshPhysicalMaterial({ color: '#4da8da', roughness: 0.1, metalness: 0.1, transmission: 0.4, transparent: true, opacity: 0.8 }));
+            r.rotation.x = -Math.PI / 2; r.position.set(x, y, z); r.receiveShadow = true;
+            waterGroup.add(r);
         });
         scene.add(waterGroup);
 
-        // --- Landscape (Village & Trees) ---
-        const landscapeGroup = new THREE.Group();
-
-        // Village
-        landscapeGroup.add(createVillageHouse(-12, 1.3, 5, 0.2));
-        landscapeGroup.add(createVillageHouse(-14, 1.3, 2, -0.3));
-        landscapeGroup.add(createVillageHouse(-10.5, 1.3, 7.5, 0));
-        landscapeGroup.add(createVillageHouse(-9, 1.3, 4, 0.5));
-        landscapeGroup.add(createVillageHouse(-14, 1.3, 7, -0.1));
-        landscapeGroup.add(createVillageHouse(-14, 1.3, -1, 0.8));
-
-        // Trees — varying sizes
-        landscapeGroup.add(createTree(-6, 1.3, 6, 1));
-        landscapeGroup.add(createTree(-2, 1.3, 7, 0.8));
-        landscapeGroup.add(createTree(-9, 1.3, 8.5, 1.1));
-        landscapeGroup.add(createTree(-13, 1.3, -2, 0.9));
-        landscapeGroup.add(createTree(-15, 1.3, 4, 1.2));
-        landscapeGroup.add(createTree(14, 1.3, -5, 0.7));
-        landscapeGroup.add(createTree(-5, 1.3, -8, 1));
-        landscapeGroup.add(createTree(0, 1.3, -3, 0.6));
-
-        // Bushes — small smooth spheres
+        // --- Landscape ---
+        const landscape = new THREE.Group();
+        landscape.add(village(-12, 1.3, 5, 0.2));
+        landscape.add(village(-14, 1.3, 2, -0.3));
+        landscape.add(village(-10.5, 1.3, 7.5, 0));
+        landscape.add(village(-9, 1.3, 4, 0.5));
+        landscape.add(village(-14, 1.3, 7, -0.1));
+        landscape.add(village(-14, 1.3, -1, 0.8));
+        landscape.add(tree(-6, 1.3, 6, 1));
+        landscape.add(tree(-2, 1.3, 7, 0.8));
+        landscape.add(tree(-9, 1.3, 8.5, 1.1));
+        landscape.add(tree(-13, 1.3, -2, 0.9));
+        landscape.add(tree(-15, 1.3, 4, 1.2));
+        landscape.add(tree(14, 1.3, -5, 0.7));
+        landscape.add(tree(-5, 1.3, -8, 1));
+        landscape.add(tree(0, 1.3, -3, 0.6));
         for (let i = 0; i < 18; i++) {
-            const bx = -16 + Math.random() * 14;
-            const bz = -3 + Math.random() * 13;
-            landscapeGroup.add(createSphere(0.4 + Math.random() * 0.3, '#2d6a4f', bx, 1.5, bz, { roughness: 0.85 }));
+            landscape.add(sphere(0.4 + Math.random() * 0.3, '#2d6a4f', -16 + Math.random() * 14, 1.5, -3 + Math.random() * 13, { roughness: 0.85 }));
         }
-
-        // Small flowers — emissive dots
         for (let i = 0; i < 25; i++) {
-            const fx = -16 + Math.random() * 32;
-            const fz = -8 + Math.random() * 16;
-            const flowerColors = ['#ff6b6b', '#ffd97d', '#c77dff', '#72efdd'];
-            const fc = flowerColors[Math.floor(Math.random() * flowerColors.length)];
-            const flowerGeo = new THREE.SphereGeometry(0.12, 8, 8);
-            const flowerMat = new THREE.MeshStandardMaterial({ color: fc, emissive: fc, emissiveIntensity: 0.6 });
-            const flower = new THREE.Mesh(flowerGeo, flowerMat);
-            flower.position.set(fx, 1.55, fz);
-            landscapeGroup.add(flower);
+            const fc = ['#ff6b6b', '#ffd97d', '#c77dff', '#72efdd'][Math.floor(Math.random() * 4)];
+            const f = new THREE.Mesh(new THREE.SphereGeometry(0.12, 8, 8), new THREE.MeshStandardMaterial({ color: fc, emissive: fc, emissiveIntensity: 0.6 }));
+            f.position.set(-16 + Math.random() * 32, 1.55, -8 + Math.random() * 16);
+            landscape.add(f);
         }
+        scene.add(landscape);
 
-        // Path — subtle trail
-        const pathPositions = [
-            [-10, 1.42, 6.5], [-11, 1.42, 5], [-12, 1.42, 3.5], [-12.5, 1.42, 2],
-        ];
-        pathPositions.forEach(([x, y, z]) => {
-            const pathGeo = new THREE.CircleGeometry(0.7, 16);
-            const pathMat = mat('#a08060', { roughness: 0.95 });
-            const pathPatch = new THREE.Mesh(pathGeo, pathMat);
-            pathPatch.rotation.x = -Math.PI / 2;
-            pathPatch.position.set(x, y, z);
-            pathPatch.receiveShadow = true;
-            landscapeGroup.add(pathPatch);
-        });
-
-        scene.add(landscapeGroup);
-
-        // --- City (Modern Glass Skyscrapers) ---
+        // --- City ---
         const cityGroup = new THREE.Group();
-        cityGroup.add(createSkyscraper(3.5, 14, 4, '#4a6fa5', -10, 1.3, -5));
-        cityGroup.add(createSkyscraper(3, 18, 3.5, '#5a7fb5', -5, 1.3, -6));
-        cityGroup.add(createSkyscraper(3.5, 11, 3.5, '#6a8fc5', -1, 1.3, -5));
-        cityGroup.add(createSkyscraper(3, 16, 3, '#4a6fa5', -7, 1.3, -9));
-        cityGroup.add(createSkyscraper(3.5, 12, 3.5, '#3a5f95', -13, 1.3, -8));
-        cityGroup.add(createSkyscraper(2.5, 20, 2.5, '#5a7fb5', -3, 1.3, -10));
+        cityGroup.add(tower(3.5, 14, 4, '#4a6fa5', -10, 1.3, -5));
+        cityGroup.add(tower(3, 18, 3.5, '#5a7fb5', -5, 1.3, -6));
+        cityGroup.add(tower(3.5, 11, 3.5, '#6a8fc5', -1, 1.3, -5));
+        cityGroup.add(tower(3, 16, 3, '#4a6fa5', -7, 1.3, -9));
+        cityGroup.add(tower(3.5, 12, 3.5, '#3a5f95', -13, 1.3, -8));
+        cityGroup.add(tower(2.5, 20, 2.5, '#5a7fb5', -3, 1.3, -10));
         scene.add(cityGroup);
 
-        // --- Waterfalls (Smooth Particle System) ---
-        const particleCount = 10000;
-        const positions = new Float32Array(particleCount * 3);
-        const velocities = new Float32Array(particleCount);
-        const opacities = new Float32Array(particleCount);
-        const wf1x = -9.5, wf1z = 11;
-        const wf2x = 1, wf2z = 11.5;
-
-        for (let i = 0; i < particleCount; i++) {
-            const isWF1 = i < particleCount / 2;
-            positions[i * 3] = (isWF1 ? wf1x : wf2x) + Math.random() * 3;
+        // --- Waterfalls ---
+        const pc = 10000;
+        const positions = new Float32Array(pc * 3);
+        const velocities = new Float32Array(pc);
+        for (let i = 0; i < pc; i++) {
+            const isWF1 = i < pc / 2;
+            positions[i * 3] = (isWF1 ? -9.5 : 1) + Math.random() * 3;
             positions[i * 3 + 1] = 1.3 - Math.random() * 40;
-            positions[i * 3 + 2] = (isWF1 ? wf1z : wf2z) + Math.random() * 0.8;
+            positions[i * 3 + 2] = (isWF1 ? 11 : 11.5) + Math.random() * 0.8;
             velocities[i] = -0.15 - Math.random() * 0.2;
-            opacities[i] = 0.3 + Math.random() * 0.5;
         }
-
-        const particleGeo = new THREE.BufferGeometry();
-        particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        const particleMat = new THREE.PointsMaterial({
-            color: '#8ecae6',
-            size: 0.18,
-            transparent: true,
-            opacity: 0.6,
-            blending: THREE.AdditiveBlending,
-            sizeAttenuation: true,
-        });
-        const waterfalls = new THREE.Points(particleGeo, particleMat);
+        const pGeo = new THREE.BufferGeometry();
+        pGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        const waterfalls = new THREE.Points(pGeo, new THREE.PointsMaterial({ color: '#8ecae6', size: 0.18, transparent: true, opacity: 0.6, blending: THREE.AdditiveBlending, sizeAttenuation: true }));
         scene.add(waterfalls);
 
-        // --- Clouds (Soft Spheres) ---
+        // --- Clouds ---
         const clouds = [];
-        function createCloud() {
-            const cloud = new THREE.Group();
-            const numPuffs = 5 + Math.floor(Math.random() * 5);
-            for (let i = 0; i < numPuffs; i++) {
+        function cloud() {
+            const cl = new THREE.Group();
+            const n = 5 + Math.floor(Math.random() * 5);
+            for (let i = 0; i < n; i++) {
                 const r = 2 + Math.random() * 3;
-                const geo = new THREE.SphereGeometry(r, 20, 16);
-                const m = new THREE.MeshStandardMaterial({
-                    color: '#e8edf5',
-                    roughness: 1,
-                    transparent: true,
-                    opacity: 0.25 + Math.random() * 0.15,
-                });
-                const puff = new THREE.Mesh(geo, m);
-                puff.position.set(
-                    (Math.random() - 0.5) * 10,
-                    (Math.random() - 0.5) * 2,
-                    (Math.random() - 0.5) * 6
-                );
-                puff.scale.y = 0.5 + Math.random() * 0.3;
-                cloud.add(puff);
+                const p = new THREE.Mesh(new THREE.SphereGeometry(r, 20, 16), new THREE.MeshStandardMaterial({ color: '#e8edf5', roughness: 1, transparent: true, opacity: 0.25 + Math.random() * 0.15 }));
+                p.position.set((Math.random() - 0.5) * 10, (Math.random() - 0.5) * 2, (Math.random() - 0.5) * 6);
+                p.scale.y = 0.5 + Math.random() * 0.3;
+                cl.add(p);
             }
-            cloud.position.set(
-                (Math.random() - 0.5) * 140,
-                22 + Math.random() * 15,
-                (Math.random() - 0.5) * 70
-            );
-            cloud.speed = 0.015 + Math.random() * 0.03;
-            return cloud;
+            cl.position.set((Math.random() - 0.5) * 140, 22 + Math.random() * 15, (Math.random() - 0.5) * 70);
+            cl.speed = 0.015 + Math.random() * 0.03;
+            return cl;
         }
+        for (let i = 0; i < 18; i++) { const c = cloud(); clouds.push(c); scene.add(c); }
 
-        for (let i = 0; i < 18; i++) {
-            const cloud = createCloud();
-            clouds.push(cloud);
-            scene.add(cloud);
-        }
-
-        // --- Floating Particles (Ambient Magic) ---
-        const floatingCount = 300;
-        const floatPositions = new Float32Array(floatingCount * 3);
-        for (let i = 0; i < floatingCount; i++) {
-            floatPositions[i * 3] = (Math.random() - 0.5) * 80;
-            floatPositions[i * 3 + 1] = -5 + Math.random() * 40;
-            floatPositions[i * 3 + 2] = (Math.random() - 0.5) * 60;
+        // --- Floating particles ---
+        const floatCount = 300;
+        const floatPos = new Float32Array(floatCount * 3);
+        for (let i = 0; i < floatCount; i++) {
+            floatPos[i * 3] = (Math.random() - 0.5) * 80;
+            floatPos[i * 3 + 1] = -5 + Math.random() * 40;
+            floatPos[i * 3 + 2] = (Math.random() - 0.5) * 60;
         }
         const floatGeo = new THREE.BufferGeometry();
-        floatGeo.setAttribute('position', new THREE.BufferAttribute(floatPositions, 3));
-        const floatMat = new THREE.PointsMaterial({
-            color: '#c4b5fd',
-            size: 0.15,
-            transparent: true,
-            opacity: 0.6,
-            blending: THREE.AdditiveBlending,
-            sizeAttenuation: true,
-        });
-        const floatingParticles = new THREE.Points(floatGeo, floatMat);
-        scene.add(floatingParticles);
+        floatGeo.setAttribute('position', new THREE.BufferAttribute(floatPos, 3));
+        const floating = new THREE.Points(floatGeo, new THREE.PointsMaterial({ color: '#c4b5fd', size: 0.15, transparent: true, opacity: 0.6, blending: THREE.AdditiveBlending, sizeAttenuation: true }));
+        scene.add(floating);
 
-        // --- Stars Background ---
+        // --- Stars ---
         const starCount = 500;
-        const starPositions = new Float32Array(starCount * 3);
+        const starPos = new Float32Array(starCount * 3);
         for (let i = 0; i < starCount; i++) {
-            starPositions[i * 3] = (Math.random() - 0.5) * 300;
-            starPositions[i * 3 + 1] = 30 + Math.random() * 100;
-            starPositions[i * 3 + 2] = (Math.random() - 0.5) * 300;
+            starPos[i * 3] = (Math.random() - 0.5) * 300;
+            starPos[i * 3 + 1] = 30 + Math.random() * 100;
+            starPos[i * 3 + 2] = (Math.random() - 0.5) * 300;
         }
         const starGeo = new THREE.BufferGeometry();
-        starGeo.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
-        const starMat = new THREE.PointsMaterial({
-            color: '#ffffff',
-            size: 0.3,
-            transparent: true,
-            opacity: 0.8,
-            sizeAttenuation: true,
-        });
-        scene.add(new THREE.Points(starGeo, starMat));
+        starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+        scene.add(new THREE.Points(starGeo, new THREE.PointsMaterial({ color: '#ffffff', size: 0.3, transparent: true, opacity: 0.8, sizeAttenuation: true })));
 
-        // --- Camera ---
         camera.position.set(5, 25, 55);
         camera.lookAt(0, 2, 0);
 
-        // --- Animation ---
         const clock = new THREE.Clock();
-
         function animate() {
             requestAnimationFrame(animate);
             const t = clock.getElapsedTime();
-
-            // Gentle island float
-            islandGroup.position.y = Math.sin(t * 0.4) * 0.8;
-            castleGroup.position.y = Math.sin(t * 0.4) * 0.8;
-            landscapeGroup.position.y = Math.sin(t * 0.4) * 0.8;
-            cityGroup.position.y = Math.sin(t * 0.4) * 0.8;
-            waterGroup.position.y = Math.sin(t * 0.4) * 0.8;
-            waterfalls.position.y = Math.sin(t * 0.4) * 0.8;
-
-            // Waterfall particles
+            const yOff = Math.sin(t * 0.4) * 0.8;
+            [islandGroup, castleGroup, landscape, cityGroup, waterGroup, waterfalls].forEach(g => g.position.y = yOff);
             const wfPos = waterfalls.geometry.attributes.position.array;
-            for (let i = 0; i < particleCount; i++) {
+            for (let i = 0; i < pc; i++) {
                 wfPos[i * 3 + 1] += velocities[i];
-                if (wfPos[i * 3 + 1] < -35) {
-                    wfPos[i * 3 + 1] = 1.3;
-                }
+                if (wfPos[i * 3 + 1] < -35) wfPos[i * 3 + 1] = 1.3;
             }
             waterfalls.geometry.attributes.position.needsUpdate = true;
-
-            // Cloud drift
-            clouds.forEach(cloud => {
-                cloud.position.x += cloud.speed;
-                if (cloud.position.x > 100) cloud.position.x = -100;
-            });
-
-            // Floating particles gentle drift
-            const fpArr = floatingParticles.geometry.attributes.position.array;
-            for (let i = 0; i < floatingCount; i++) {
-                fpArr[i * 3 + 1] += Math.sin(t + i) * 0.003;
-                fpArr[i * 3] += Math.cos(t * 0.5 + i * 0.1) * 0.002;
+            clouds.forEach(c => { c.position.x += c.speed; if (c.position.x > 100) c.position.x = -100; });
+            const fp = floating.geometry.attributes.position.array;
+            for (let i = 0; i < floatCount; i++) {
+                fp[i * 3 + 1] += Math.sin(t + i) * 0.003;
+                fp[i * 3] += Math.cos(t * 0.5 + i * 0.1) * 0.002;
             }
-            floatingParticles.geometry.attributes.position.needsUpdate = true;
-
-            // Flag wave
+            floating.geometry.attributes.position.needsUpdate = true;
             const flagMesh = castleGroup.children.find(c => c.geometry && c.geometry.type === 'PlaneGeometry');
-            if (flagMesh) {
-                flagMesh.rotation.y = Math.sin(t * 3) * 0.15;
-            }
-
+            if (flagMesh) flagMesh.rotation.y = Math.sin(t * 3) * 0.15;
             controls.update();
             composer.render();
         }
-
-        // --- Resize ---
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
+        function resize() {
+            camera.aspect = heroEl.clientWidth / heroEl.clientHeight;
             camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            composer.setSize(window.innerWidth, window.innerHeight);
-        });
-
-        // --- Hide loading screen ---
-        document.getElementById('loading').classList.add('hidden');
-
+            renderer.setSize(heroEl.clientWidth, heroEl.clientHeight);
+            composer.setSize(heroEl.clientWidth, heroEl.clientHeight);
+        }
+        window.addEventListener('resize', resize);
         animate();
     </script>
+
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+        // Animate counters when stats reveal
+        const counters = document.querySelectorAll('[data-count]');
+        const counterObs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const target = parseInt(el.dataset.count, 10);
+                    const suffix = el.querySelector('span') ? el.querySelector('span').textContent : '';
+                    let cur = 0;
+                    const dur = 1400;
+                    const start = performance.now();
+                    function step(t) {
+                        const p = Math.min(1, (t - start) / dur);
+                        cur = Math.floor(target * (1 - Math.pow(1 - p, 3)));
+                        el.innerHTML = cur + (suffix ? `<span>${suffix}</span>` : '');
+                        if (p < 1) requestAnimationFrame(step);
+                        else el.innerHTML = target + (suffix ? `<span>${suffix}</span>` : '');
+                    }
+                    requestAnimationFrame(step);
+                    counterObs.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+        counters.forEach(c => counterObs.observe(c));
+    </script>
+    <script src="assets/design/design.js"></script>
 </body>
 </html>
