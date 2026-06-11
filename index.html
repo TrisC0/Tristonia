@@ -37,7 +37,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 140px 0 60px;
+            padding: 100px 0 60px;
             pointer-events: none;
         }
         .hero-content > * { pointer-events: auto; }
@@ -47,17 +47,17 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
         }
         .hero-eyebrow {
             font-family: var(--font-mono);
-            font-size: 0.74rem;
-            letter-spacing: 0.32em;
+            font-size: 0.68rem;
+            letter-spacing: 0.28em;
             text-transform: uppercase;
             color: var(--text-mute);
             display: inline-flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
         }
         .hero-eyebrow::before, .hero-eyebrow::after {
             content: "";
@@ -67,19 +67,19 @@
         .hero-title {
             font-family: var(--font-display);
             font-weight: 300;
-            font-size: clamp(2.2rem, 5.2vw, 4.4rem);
-            letter-spacing: -0.03em;
-            line-height: 0.95;
+            font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+            letter-spacing: -0.02em;
+            line-height: 1;
             background: linear-gradient(180deg, #ffffff 0%, #c4b5fd 60%, #78b4ff 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            filter: drop-shadow(0 0 30px rgba(120,180,255,0.35));
+            filter: drop-shadow(0 0 24px rgba(120,180,255,0.35));
         }
         .hero-title em { font-style: italic; font-weight: 200; }
         .hero-sub {
-            font-size: 0.92rem;
-            letter-spacing: 0.28em;
+            font-size: 0.74rem;
+            letter-spacing: 0.24em;
             text-transform: uppercase;
             color: var(--text-mute);
             font-weight: 400;
