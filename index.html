@@ -75,9 +75,16 @@
             letter-spacing: 0.01em;
             line-height: 1;
             color: #f5f5fa;
-            text-shadow: 0 2px 30px rgba(7,7,26,0.9), 0 0 22px rgba(120,180,255,0.3);
+            filter: drop-shadow(0 2px 16px rgba(7,7,26,0.95));
         }
-        .hero-title em { font-style: italic; font-weight: 300; color: #c4d4f5; }
+        .hero-title em {
+            font-style: italic;
+            font-weight: 300;
+            background: var(--grad-aurora);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
         .hero-sub {
             font-family: var(--font-mono);
             font-size: 0.58rem;
