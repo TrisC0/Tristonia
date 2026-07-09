@@ -5,6 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact — Tristonia</title>
     <meta name="description" content="Get in touch with Tristonia: questions, feedback, ideas, or just a hello.">
+    <link rel="canonical" href="https://tristonia.com/contact.html">
+    <link rel="icon" href="assets/design/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="assets/design/favicon-32.png" sizes="32x32" type="image/png">
+    <link rel="apple-touch-icon" href="assets/design/favicon-180.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tristonia.com/contact.html">
+    <meta property="og:title" content="Contact — Tristonia">
+    <meta property="og:description" content="Get in touch with Tristonia: questions, feedback, ideas, or just a hello.">
+    <meta property="og:image" content="https://tristonia.com/assets/design/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Contact — Tristonia">
+    <meta name="twitter:description" content="Get in touch with Tristonia: questions, feedback, ideas, or just a hello.">
+    <meta name="twitter:image" content="https://tristonia.com/assets/design/og-image.png">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -265,7 +280,7 @@
                 <span class="split-line" data-autoplay="true"><span>Let's start</span></span>
                 <span class="split-line" data-autoplay="true"><span><em>a conversation.</em></span></span>
             </h1>
-            <p class="lead reveal" data-delay="3">Got a question, a suggestion, or an idea worth chasing? I'd love to hear it. Drop a line below, or skip the form and email me directly.</p>
+            <p class="lead reveal" data-delay="3">Got a question, a suggestion, or a half-formed idea? Drop a line below, or skip the form and email me directly.</p>
         </div>
     </section>
 
@@ -275,11 +290,10 @@
             <div class="contact-grid">
                 <!-- Form -->
                 <div class="form-card reveal">
-                    <span class="coming-soon-pill"><span class="pulse"></span> Coming soon</span>
                     <h2>Send a message</h2>
-                    <p class="intro">The form isn't wired up just yet, but it's on the list. For now, the email below works perfectly.</p>
+                    <p class="intro">Fill this in and it'll open a pre-filled email in your mail app, ready to send.</p>
 
-                    <form id="contactForm" class="form-disabled">
+                    <form id="contactForm">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="name">Name</label>
@@ -296,7 +310,6 @@
                                 <option value="general">General Inquiry</option>
                                 <option value="feedback">Feedback</option>
                                 <option value="bug">Bug Report</option>
-                                <option value="partnership">Partnership</option>
                                 <option value="other">Other</option>
                             </select>
                         </div>
@@ -311,7 +324,7 @@
                             </span>
                         </button>
                     </form>
-                    <div class="success-toast" id="successToast">Thanks! I'll get back to you as soon as possible.</div>
+                    <div class="success-toast" id="successToast">Opening your email app now. Just hit send.</div>
                 </div>
 
                 <!-- Side: contact methods -->
@@ -391,6 +404,9 @@
     </script>
     <script type="module">
         import * as THREE from 'three';
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const isSmallScreen = window.matchMedia('(max-width: 760px)').matches;
+        if (!prefersReducedMotion && !isSmallScreen) {
         const canvas = document.getElementById('contact-canvas');
         const heroEl = document.querySelector('.contact-hero');
         const scene = new THREE.Scene();
@@ -455,13 +471,27 @@
             camera.updateProjectionMatrix();
             renderer.setSize(heroEl.clientWidth, heroEl.clientHeight);
         });
+        }
     </script>
 
     <script>
         document.getElementById('footer-year').textContent = new Date().getFullYear();
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            // Form is disabled / coming soon
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const subjectSelect = document.getElementById('subject');
+            const subjectLabel = subjectSelect.options[subjectSelect.selectedIndex].text;
+            const message = document.getElementById('message').value.trim();
+
+            const mailSubject = `Tristonia contact: ${subjectLabel}`;
+            const mailBody = `${message}\n\n— ${name} (${email})`;
+            const mailtoLink = `mailto:dev@tristonia.com?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
+
+            window.location.href = mailtoLink;
+
+            document.getElementById('successToast').classList.add('is-visible');
+            this.reset();
         });
     </script>
     <script src="assets/design/design.js"></script>

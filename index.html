@@ -5,6 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tristonia — Independent Android Studio</title>
     <meta name="description" content="Tristonia Ltd is a one-person Android studio building imaginative, privacy-first apps. No trackers, no shortcuts.">
+    <link rel="canonical" href="https://tristonia.com/">
+    <link rel="icon" href="assets/design/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="assets/design/favicon-32.png" sizes="32x32" type="image/png">
+    <link rel="apple-touch-icon" href="assets/design/favicon-180.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tristonia.com/">
+    <meta property="og:title" content="Tristonia — Independent Android Studio">
+    <meta property="og:description" content="Tristonia Ltd is a one-person Android studio building imaginative, privacy-first apps. No trackers, no shortcuts.">
+    <meta property="og:image" content="https://tristonia.com/assets/design/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Tristonia — Independent Android Studio">
+    <meta name="twitter:description" content="Tristonia Ltd is a one-person Android studio building imaginative, privacy-first apps. No trackers, no shortcuts.">
+    <meta name="twitter:image" content="https://tristonia.com/assets/design/og-image.png">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -442,14 +457,14 @@
             <span class="marquee-item">Privacy-first</span>
             <span class="marquee-item">Hand-crafted</span>
             <span class="marquee-item">On-device AI</span>
-            <span class="marquee-item">No ads. Ever.</span>
+            <span class="marquee-item">Solo-built</span>
             <span class="marquee-item">Real physics</span>
             <span class="marquee-item">Made in the UK</span>
             <!-- duplicate for seamless loop -->
             <span class="marquee-item">Privacy-first</span>
             <span class="marquee-item">Hand-crafted</span>
             <span class="marquee-item">On-device AI</span>
-            <span class="marquee-item">No ads. Ever.</span>
+            <span class="marquee-item">Solo-built</span>
             <span class="marquee-item">Real physics</span>
             <span class="marquee-item">Made in the UK</span>
         </div>
@@ -463,7 +478,7 @@
             </div>
             <div class="manifesto">
                 <p class="manifesto-quote reveal">
-                    Apps that <em>solve real problems</em> in creative ways. <em>Just craft.</em>
+                    Apps that <em>solve real problems</em> in creative ways, not <em>more of the same</em>.
                 </p>
                 <div class="manifesto-detail reveal" data-delay="2">
                     <p>Tristonia Ltd is an indie Android studio with one clear standard: every release has to be worth shipping under the Tristonia name. That means tasteful design, thoughtful interactions, and real respect for whoever's on the other side of the screen.</p>
@@ -491,7 +506,7 @@
                         </div>
                     </div>
                     <div class="app-card__tagline">The game-show wheel for everyday choices.</div>
-                    <p class="app-card__desc">Six hand-crafted themes, real game-show physics, a satisfying tick that lands just where it should. Turning indecision into a moment.</p>
+                    <p class="app-card__desc">Six hand-crafted themes, real game-show physics, and a satisfying tick that lands just where it should. Spin it whenever you can't decide.</p>
                     <div class="app-card__cta">
                         Explore Decision Spinner
                         <span class="circle">
@@ -509,7 +524,7 @@
                         </div>
                     </div>
                     <div class="app-card__tagline">Big tasks, shrunk down to doable.</div>
-                    <p class="app-card__desc">On-device AI breaks any task into smaller, doable steps. Everything runs on your phone. No cloud, no accounts, no compromise.</p>
+                    <p class="app-card__desc">Turns any overwhelming task into a clear list of next steps, entirely on your phone. No cloud, no accounts, no compromise.</p>
                     <div class="app-card__cta">
                         Explore ShrinkRay
                         <span class="circle">
@@ -568,8 +583,8 @@
         <div class="container container--narrow">
             <div class="cta-banner reveal">
                 <span class="eyebrow" style="justify-content: center; display: inline-flex;">Get In Touch</span>
-                <h2 style="margin-top: 14px;">Have an idea you can't shake?<br>I'd love to hear it.</h2>
-                <p>Questions, feedback, partnership ideas, or just a hello. The inbox is open.</p>
+                <h2 style="margin-top: 14px;">Spotted a bug? Got an idea?<br>Let's talk.</h2>
+                <p>If something's broken, missing, or just occurred to you at 2am, tell me about it.</p>
                 <a href="contact.html" class="btn btn--primary" data-magnetic data-magnetic-strength="0.2">
                     Start a Conversation
                     <span class="arrow">
@@ -621,6 +636,10 @@
         import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
         import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
         import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const isSmallScreen = window.matchMedia('(max-width: 760px)').matches;
+        if (!prefersReducedMotion && !isSmallScreen) {
 
         const canvas = document.getElementById('hero-canvas');
         const heroEl = document.querySelector('.hero');
@@ -1251,6 +1270,7 @@
         }
         window.addEventListener('resize', resize);
         animate();
+        }
     </script>
 
     <script>
