@@ -216,7 +216,7 @@
         /* ===== Apps featured grid ===== */
         .apps-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(3, 1fr);
             gap: 24px;
         }
         .app-card {
@@ -309,6 +309,9 @@
         .app-card__cta:hover .circle { background: var(--accent); border-color: var(--accent); }
         .app-card__cta:hover .circle svg { stroke: var(--bg-0); }
 
+        @media (max-width: 1080px) {
+            .apps-grid { grid-template-columns: 1fr 1fr; }
+        }
         @media (max-width: 800px) {
             .apps-grid { grid-template-columns: 1fr; }
         }
@@ -514,6 +517,24 @@
                         </span>
                     </div>
                 </a>
+
+                <a href="apps.html#trivia-together" class="app-card reveal" data-delay="3" data-cursor="hover">
+                    <div class="app-card__top">
+                        <div class="app-card__icon"><img src="assets/trivia-together/icon.png" alt="Trivia Together"></div>
+                        <div>
+                            <div class="app-card__name">Trivia Together</div>
+                            <div class="app-card__platform">Android · Closed Testing</div>
+                        </div>
+                    </div>
+                    <div class="app-card__tagline">The 1-v-1 trivia duel you play on your own time.</div>
+                    <p class="app-card__desc">Spin the wheel, answer your questions, then pass the turn back. No waiting for your opponent to be online at the same time as you.</p>
+                    <div class="app-card__cta">
+                        Explore Trivia Together
+                        <span class="circle">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                        </span>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
@@ -523,7 +544,7 @@
         <div class="container">
             <div class="stats reveal">
                 <div class="stat">
-                    <div class="stat__num" data-count="2">0</div>
+                    <div class="stat__num" data-count="3">0</div>
                     <div class="stat__label">Apps Shipped</div>
                 </div>
                 <div class="stat">
