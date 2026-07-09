@@ -5,6 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tristonia — Independent Android Studio</title>
     <meta name="description" content="Tristonia Ltd is a one-person Android studio building imaginative, privacy-first apps. No trackers, no shortcuts.">
+    <link rel="canonical" href="https://tristonia.com/">
+    <link rel="icon" href="assets/design/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="assets/design/favicon-32.png" sizes="32x32" type="image/png">
+    <link rel="apple-touch-icon" href="assets/design/favicon-180.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tristonia.com/">
+    <meta property="og:title" content="Tristonia — Independent Android Studio">
+    <meta property="og:description" content="Tristonia Ltd is a one-person Android studio building imaginative, privacy-first apps. No trackers, no shortcuts.">
+    <meta property="og:image" content="https://tristonia.com/assets/design/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Tristonia — Independent Android Studio">
+    <meta name="twitter:description" content="Tristonia Ltd is a one-person Android studio building imaginative, privacy-first apps. No trackers, no shortcuts.">
+    <meta name="twitter:image" content="https://tristonia.com/assets/design/og-image.png">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -621,6 +636,10 @@
         import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
         import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
         import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const isSmallScreen = window.matchMedia('(max-width: 760px)').matches;
+        if (!prefersReducedMotion && !isSmallScreen) {
 
         const canvas = document.getElementById('hero-canvas');
         const heroEl = document.querySelector('.hero');
@@ -1251,6 +1270,7 @@
         }
         window.addEventListener('resize', resize);
         animate();
+        }
     </script>
 
     <script>

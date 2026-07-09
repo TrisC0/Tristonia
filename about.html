@@ -5,6 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About — Tristonia</title>
     <meta name="description" content="Tristonia Ltd: an indie Android studio. If it's not worth shipping, it doesn't ship.">
+    <link rel="canonical" href="https://tristonia.com/about.html">
+    <link rel="icon" href="assets/design/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="assets/design/favicon-32.png" sizes="32x32" type="image/png">
+    <link rel="apple-touch-icon" href="assets/design/favicon-180.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tristonia.com/about.html">
+    <meta property="og:title" content="About — Tristonia">
+    <meta property="og:description" content="Tristonia Ltd: an indie Android studio. If it's not worth shipping, it doesn't ship.">
+    <meta property="og:image" content="https://tristonia.com/assets/design/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="About — Tristonia">
+    <meta name="twitter:description" content="Tristonia Ltd: an indie Android studio. If it's not worth shipping, it doesn't ship.">
+    <meta name="twitter:image" content="https://tristonia.com/assets/design/og-image.png">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -319,6 +334,9 @@
     </script>
     <script type="module">
         import * as THREE from 'three';
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const isSmallScreen = window.matchMedia('(max-width: 760px)').matches;
+        if (!prefersReducedMotion && !isSmallScreen) {
         // Ambient warp-field background: gentle particle blobs + drifting orbs
         const canvas = document.getElementById('about-canvas');
         const heroEl = document.querySelector('.about-hero');
@@ -398,6 +416,7 @@
             camera.updateProjectionMatrix();
             renderer.setSize(heroEl.clientWidth, heroEl.clientHeight);
         });
+        }
     </script>
     <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
     <script src="assets/design/design.js"></script>
