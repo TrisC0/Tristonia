@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tristonia — Independent Android Studio</title>
-    <meta name="description" content="Tristonia Ltd is an indie Android studio crafting imaginative, privacy-first apps. Android app development.">
+    <meta name="description" content="Tristonia Ltd is a one-person Android studio building imaginative, privacy-first apps. No trackers, no shortcuts.">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -216,7 +216,7 @@
         /* ===== Apps featured grid ===== */
         .apps-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(3, 1fr);
             gap: 24px;
         }
         .app-card {
@@ -309,6 +309,9 @@
         .app-card__cta:hover .circle { background: var(--accent); border-color: var(--accent); }
         .app-card__cta:hover .circle svg { stroke: var(--bg-0); }
 
+        @media (max-width: 1080px) {
+            .apps-grid { grid-template-columns: 1fr 1fr; }
+        }
         @media (max-width: 800px) {
             .apps-grid { grid-template-columns: 1fr; }
         }
@@ -463,8 +466,8 @@
                     Apps that <em>solve real problems</em> in creative ways. <em>Just craft.</em>
                 </p>
                 <div class="manifesto-detail reveal" data-delay="2">
-                    <p>Tristonia Ltd is an indie Android studio with one clear standard: every release has to be worth shipping under the Tristonia name. That means tasteful design, thoughtful interactions, and an unshakeable respect for the person on the other side of the screen.</p>
-                    <p>We keep things simple. We keep things private. And we ship only when the work is worth it.</p>
+                    <p>Tristonia Ltd is an indie Android studio with one clear standard: every release has to be worth shipping under the Tristonia name. That means tasteful design, thoughtful interactions, and real respect for whoever's on the other side of the screen.</p>
+                    <p>I keep things simple, I keep things private, and I ship only when the work is worth it.</p>
                 </div>
             </div>
         </div>
@@ -506,9 +509,27 @@
                         </div>
                     </div>
                     <div class="app-card__tagline">Big tasks, shrunk down to doable.</div>
-                    <p class="app-card__desc">On-device AI breaks any task into smaller, doable steps. Everything runs on your phone — no cloud, no accounts, no compromise.</p>
+                    <p class="app-card__desc">On-device AI breaks any task into smaller, doable steps. Everything runs on your phone. No cloud, no accounts, no compromise.</p>
                     <div class="app-card__cta">
                         Explore ShrinkRay
+                        <span class="circle">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <a href="apps.html#trivia-together" class="app-card reveal" data-delay="3" data-cursor="hover">
+                    <div class="app-card__top">
+                        <div class="app-card__icon"><img src="assets/trivia-together/icon.png" alt="Trivia Together"></div>
+                        <div>
+                            <div class="app-card__name">Trivia Together</div>
+                            <div class="app-card__platform">Android · Closed Testing</div>
+                        </div>
+                    </div>
+                    <div class="app-card__tagline">The 1-v-1 trivia duel you play on your own time.</div>
+                    <p class="app-card__desc">Spin the wheel, answer your questions, then pass the turn back. No waiting for your opponent to be online at the same time as you.</p>
+                    <div class="app-card__cta">
+                        Explore Trivia Together
                         <span class="circle">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                         </span>
@@ -523,7 +544,7 @@
         <div class="container">
             <div class="stats reveal">
                 <div class="stat">
-                    <div class="stat__num" data-count="2">0</div>
+                    <div class="stat__num" data-count="3">0</div>
                     <div class="stat__label">Apps Shipped</div>
                 </div>
                 <div class="stat">
@@ -548,7 +569,7 @@
             <div class="cta-banner reveal">
                 <span class="eyebrow" style="justify-content: center; display: inline-flex;">Get In Touch</span>
                 <h2 style="margin-top: 14px;">Have an idea you can't shake?<br>I'd love to hear it.</h2>
-                <p>Questions, feedback, partnership ideas — or just a hello. The inbox is open.</p>
+                <p>Questions, feedback, partnership ideas, or just a hello. The inbox is open.</p>
                 <a href="contact.html" class="btn btn--primary" data-magnetic data-magnetic-strength="0.2">
                     Start a Conversation
                     <span class="arrow">
@@ -565,7 +586,7 @@
             <div class="t-footer__grid">
                 <div class="t-footer__brand">
                     <div class="t-footer__mark">Tris<em>tonia</em></div>
-                    <p style="color: var(--text-mute); font-size: 0.95rem; max-width: 320px;">Independent Android studio. Imagination is the only limit.</p>
+                    <p style="color: var(--text-mute); font-size: 0.95rem; max-width: 320px;">Independent Android studio. If it's not worth shipping, it doesn't ship.</p>
                 </div>
                 <div class="t-footer__col">
                     <h4>Navigate</h4>

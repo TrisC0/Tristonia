@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apps — Tristonia</title>
-    <meta name="description" content="Apps crafted with care by Tristonia — Decision Spinner, ShrinkRay, and more.">
+    <meta name="description" content="Apps crafted with care by Tristonia: Decision Spinner, ShrinkRay, Trivia Together, and more.">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -244,6 +244,34 @@
             background: linear-gradient(160deg, rgba(114,239,221,0.05), rgba(120,180,255,0.04));
         }
         .app-feature--shrinkray .app-feature__tagline { color: var(--accent-mint); }
+
+        /* Trivia Together accent variant */
+        .app-feature--trivia-together {
+            background: linear-gradient(160deg, rgba(120,180,255,0.07), rgba(198,242,62,0.05));
+        }
+        .app-feature--trivia-together .feature-item__dot { background: #c6f23e; box-shadow: 0 0 12px #c6f23e; }
+        .app-feature--trivia-together .app-feature__tagline { color: var(--accent); }
+        .app-feature--trivia-together .gallery-shot { aspect-ratio: 1320 / 2346; }
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background: var(--surface);
+            border: 1px solid var(--border-strong);
+            border-radius: var(--radius-pill);
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--text-mute);
+        }
+        .status-pill .dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: #c6f23e;
+            box-shadow: 0 0 8px #c6f23e;
+        }
     </style>
 </head>
 <body>
@@ -268,7 +296,7 @@
                 <span class="split-line" data-autoplay="true"><span>Apps with</span></span>
                 <span class="split-line" data-autoplay="true"><span><em>character.</em></span></span>
             </h1>
-            <p class="lead reveal" data-delay="3">Two apps so far. Each one started as a problem I couldn't shake, and ended up as something I'd be proud to install on my own phone.</p>
+            <p class="lead reveal" data-delay="3">Three apps so far. Each one started as a problem I couldn't shake, and ended up as something I'd be proud to install on my own phone.</p>
         </div>
     </section>
 
@@ -282,13 +310,13 @@
                         <div class="app-feature__name">Decision Spinner</div>
                         <div class="app-feature__platform">Android · Royal Edition</div>
                     </div>
-                    <div class="app-feature__index">01 / 02</div>
+                    <div class="app-feature__index">01 / 03</div>
                 </div>
 
                 <p class="app-feature__tagline">"The game-show wheel for everyday choices."</p>
 
                 <p class="app-feature__desc">
-                    Can't decide what to eat? Who's washing up? Where to go next weekend? Decision Spinner is a beautifully crafted spinning wheel that turns indecision into a moment. Tap the wheel, watch it spin, hear the satisfying ticks slow down, and let the winner land where it lands.
+                    Can't decide what to eat? Who's washing up? Where to go next weekend? Decision Spinner is a beautifully crafted spinning wheel that turns indecision into a moment. Tap it, watch it spin, listen to the ticks slow down, and let it make the call.
                 </p>
 
                 <div class="gallery">
@@ -299,12 +327,12 @@
 
                 <h3 style="font-family: var(--font-display); font-size: 1.3rem; font-weight: 500; margin-bottom: 18px; color: var(--text-mute); letter-spacing: 0.02em;">Inside the build</h3>
                 <div class="features-grid">
-                    <div class="feature-item"><span class="feature-item__dot"></span><p>Six hand-crafted themes — Game Show, Roulette, Alloy Wheel, Carnival, Cartwheel, Minimal</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Six hand-crafted themes: Game Show, Roulette, Alloy Wheel, Carnival, Cartwheel, Minimal</p></div>
                     <div class="feature-item"><span class="feature-item__dot"></span><p>Real game-show physics with a flapper peg that ticks every slice</p></div>
                     <div class="feature-item"><span class="feature-item__dot"></span><p>Wood-on-wood tick sound and a C-major arpeggio win chime</p></div>
                     <div class="feature-item"><span class="feature-item__dot"></span><p>220-particle confetti burst in the theme's palette</p></div>
                     <div class="feature-item"><span class="feature-item__dot"></span><p>Weight options 1× to 5×, tournament mode, history of the last 25 winners</p></div>
-                    <div class="feature-item"><span class="feature-item__dot"></span><p>No ads, no accounts, no tracking — everything stays on your device</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>No ads, no accounts, no tracking. Everything stays on your device</p></div>
                 </div>
 
                 <div class="app-feature__cta-row">
@@ -323,7 +351,7 @@
                         <div class="app-feature__name">ShrinkRay</div>
                         <div class="app-feature__platform">Android · On-device AI</div>
                     </div>
-                    <div class="app-feature__index">02 / 02</div>
+                    <div class="app-feature__index">02 / 03</div>
                 </div>
 
                 <p class="app-feature__tagline">"Big tasks, shrunk down to doable."</p>
@@ -343,9 +371,9 @@
                     <div class="feature-item feature-item--mint"><span class="feature-item__dot"></span><p>On-device AI breaks big goals into clear, doable steps</p></div>
                     <div class="feature-item feature-item--mint"><span class="feature-item__dot"></span><p>Tap any step to break it down even smaller</p></div>
                     <div class="feature-item feature-item--mint"><span class="feature-item__dot"></span><p>Runs fully on your phone, private and offline</p></div>
-                    <div class="feature-item feature-item--mint"><span class="feature-item__dot"></span><p>Free breakdowns daily, optional one-time Pro unlock — no subscription</p></div>
+                    <div class="feature-item feature-item--mint"><span class="feature-item__dot"></span><p>Free breakdowns daily, optional one-time Pro unlock, no subscription</p></div>
                     <div class="feature-item feature-item--mint"><span class="feature-item__dot"></span><p>Built-in content safety filters</p></div>
-                    <div class="feature-item feature-item--mint"><span class="feature-item__dot"></span><p>No ads, no tracking — your data never leaves your device</p></div>
+                    <div class="feature-item feature-item--mint"><span class="feature-item__dot"></span><p>No ads, no tracking. Your data never leaves your device</p></div>
                 </div>
 
                 <div class="app-feature__cta-row">
@@ -354,6 +382,47 @@
                         Get it on Google Play
                     </a>
                     <a href="shrinkray-privacy-policy.html" class="text-link">Privacy Policy</a>
+                </div>
+            </article>
+
+            <!-- ===== TRIVIA TOGETHER ===== -->
+            <article id="trivia-together" class="app-feature app-feature--trivia-together reveal">
+                <div class="app-feature__top">
+                    <div class="app-feature__icon"><img src="assets/trivia-together/icon.png" alt="Trivia Together"></div>
+                    <div>
+                        <div class="app-feature__name">Trivia Together</div>
+                        <div class="app-feature__platform">Android · Closed Testing</div>
+                    </div>
+                    <div class="app-feature__index">03 / 03</div>
+                </div>
+
+                <p class="app-feature__tagline">"The 1-v-1 trivia duel you play on your own time."</p>
+
+                <p class="app-feature__desc">
+                    Wish trivia night didn't need everyone online at once? Trivia Together turns head-to-head quizzing into a game you play on your own schedule. Spin the wheel for a category, answer your questions, then pass the turn to your opponent, whether that's a random rival or a friend you've challenged with a code.
+                </p>
+
+                <div class="gallery">
+                    <div class="gallery-shot"><img src="assets/trivia-together/screenshot_wheel.png" alt="Spinning the category wheel in a match"></div>
+                    <div class="gallery-shot"><img src="assets/trivia-together/screenshot_matches.png" alt="Finding an opponent or inviting a friend by code"></div>
+                    <div class="gallery-shot"><img src="assets/trivia-together/screenshot_awards.png" alt="Achievements earned as you play"></div>
+                    <div class="gallery-shot"><img src="assets/trivia-together/screenshot_shop.png" alt="Spending coins on power-ups in the shop"></div>
+                    <div class="gallery-shot"><img src="assets/trivia-together/screenshot_profile.png" alt="Profile screen with level and match stats"></div>
+                </div>
+
+                <h3 style="font-family: var(--font-display); font-size: 1.3rem; font-weight: 500; margin-bottom: 18px; color: var(--text-mute); letter-spacing: 0.02em;">Inside the build</h3>
+                <div class="features-grid">
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Asynchronous 1-v-1 duels: take your turn whenever it suits you, no waiting on your opponent</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Spin the wheel across six categories: Science, History, Sport, Geography, Entertainment, and more</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Earn coins and unlock achievements: win streaks, perfect matches, category mastery</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Spend coins in the shop on power-ups like Extra Time, 50/50, and Skip</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Track your level and stats, then climb the global leaderboard</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Solo practice works fully offline, no sign-in required</p></div>
+                </div>
+
+                <div class="app-feature__cta-row">
+                    <span class="status-pill"><span class="dot"></span>Closed testing on Google Play</span>
+                    <a href="https://trivia-together.web.app" class="text-link" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
                 </div>
             </article>
         </div>
@@ -365,7 +434,7 @@
             <div class="card reveal" style="text-align: center; padding: 60px 40px;">
                 <span class="eyebrow" style="justify-content: center; display: inline-flex;">In the workshop</span>
                 <h2 class="heading" style="margin-top: 16px;">More apps,<br><em style="background: var(--grad-aurora); -webkit-background-clip: text; background-clip: text; color: transparent; font-style: italic; font-weight: 300;">in good time.</em></h2>
-                <p class="lead" style="margin: 18px auto 0;">New ideas are always brewing. I'll release them when they're worth releasing — and not a moment before.</p>
+                <p class="lead" style="margin: 18px auto 0;">New ideas are always brewing. I'll release them when they're worth releasing, and not a moment before.</p>
             </div>
         </div>
     </section>
@@ -376,7 +445,7 @@
             <div class="t-footer__grid">
                 <div class="t-footer__brand">
                     <div class="t-footer__mark">Tris<em>tonia</em></div>
-                    <p style="color: var(--text-mute); font-size: 0.95rem; max-width: 320px;">Independent Android studio. Imagination is the only limit.</p>
+                    <p style="color: var(--text-mute); font-size: 0.95rem; max-width: 320px;">Independent Android studio. If it's not worth shipping, it doesn't ship.</p>
                 </div>
                 <div class="t-footer__col">
                     <h4>Navigate</h4>
