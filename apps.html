@@ -267,6 +267,14 @@
         .app-feature--trivia-together .feature-item__dot { background: #c6f23e; box-shadow: 0 0 12px #c6f23e; }
         .app-feature--trivia-together .app-feature__tagline { color: var(--accent); }
         .app-feature--trivia-together .gallery-shot { aspect-ratio: 1320 / 2346; }
+
+        /* Chockablock accent variant */
+        .app-feature--chockablock {
+            background: linear-gradient(160deg, rgba(224,164,79,0.08), rgba(123,74,45,0.05));
+        }
+        .app-feature--chockablock .feature-item__dot { background: #e0a44f; box-shadow: 0 0 12px #e0a44f; }
+        .app-feature--chockablock .app-feature__tagline { color: #e0a44f; }
+        .app-feature--chockablock .gallery-shot { aspect-ratio: 1080 / 2210; }
         .status-pill {
             display: inline-flex;
             align-items: center;
@@ -311,13 +319,56 @@
                 <span class="split-line" data-autoplay="true"><span>Apps with</span></span>
                 <span class="split-line" data-autoplay="true"><span><em>character.</em></span></span>
             </h1>
-            <p class="lead reveal" data-delay="3">Three apps so far. Each one started as a problem I couldn't shake, and ended up as something I'd be proud to install on my own phone.</p>
+            <p class="lead reveal" data-delay="3">Four apps so far. Each one started as a problem I couldn't shake, and ended up as something I'd be proud to install on my own phone.</p>
         </div>
     </section>
 
-    <!-- ===== DECISION SPINNER ===== -->
+    <!-- ===== APP FEATURES ===== -->
     <section style="padding-top: 0;">
         <div class="container">
+            <!-- ===== CHOCKABLOCK ===== -->
+            <article id="chockablock" class="app-feature app-feature--chockablock reveal">
+                <div class="app-feature__top">
+                    <div class="app-feature__icon"><img src="assets/chockablock/icon.png" alt="Chockablock"></div>
+                    <div>
+                        <div class="app-feature__name">Chockablock</div>
+                        <div class="app-feature__platform">Android · Block Puzzle</div>
+                    </div>
+                    <div class="app-feature__index">01 / 04</div>
+                </div>
+
+                <p class="app-feature__tagline">"A calm 8×8 block puzzle — no timers, play offline."</p>
+
+                <p class="app-feature__desc">
+                    Chockablock is a clean, relaxing block puzzle on a classic 8×8 grid. Drag bright candy-shell pieces onto the warm cream board, fill full rows or columns to clear them, and chain clears together for big combo scores. No timers, no pressure — the round only ends when nothing fits.
+                </p>
+
+                <div class="gallery">
+                    <div class="gallery-shot"><img src="assets/chockablock/screenshot_combo.png" alt="A four-combo clear in progress"></div>
+                    <div class="gallery-shot"><img src="assets/chockablock/screenshot_board.png" alt="The candy-shell board mid-game"></div>
+                    <div class="gallery-shot"><img src="assets/chockablock/screenshot_gameover.png" alt="Game over with the option to undo the last move"></div>
+                </div>
+
+                <h3 style="font-family: var(--font-display); font-size: 1.3rem; font-weight: 500; margin-bottom: 18px; color: var(--text-mute); letter-spacing: 0.02em;">Inside the build</h3>
+                <div class="features-grid">
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Combo multiplier — clear on consecutive moves to multiply your line bonus</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Punchy line-clear callouts that celebrate every double, triple and combo streak</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Hold slot to stash a piece, plus undo to rescue a tricky move</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Play Games achievements and leaderboards to chase</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Colour-blind-friendly candy palette, haptics, and fully playable offline</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Free to play — one optional Pro purchase removes ads, no subscriptions</p></div>
+                </div>
+
+                <div class="app-feature__cta-row">
+                    <a href="https://play.google.com/store/apps/details?id=com.tristonia.octogrid&hl=en" class="store-btn" target="_blank" rel="noopener noreferrer" data-magnetic data-magnetic-strength="0.15">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.732l-2.302 1.33-2.542-2.546 2.542-2.546zM5.864 3.658L16.8 9.99l-2.302 2.302L5.864 3.658z"/></svg>
+                        Get it on Google Play
+                    </a>
+                    <a href="https://trisc0.github.io/octogrid-privacy/" class="text-link" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+                </div>
+            </article>
+
+            <!-- ===== DECISION SPINNER ===== -->
             <article id="decision-spinner" class="app-feature app-feature--decision-spinner reveal">
                 <div class="app-feature__top">
                     <div class="app-feature__icon"><img src="assets/decision-spinner/icon.png" alt="Decision Spinner"></div>
@@ -325,7 +376,7 @@
                         <div class="app-feature__name">Decision Spinner</div>
                         <div class="app-feature__platform">Android · Royal Edition</div>
                     </div>
-                    <div class="app-feature__index">01 / 03</div>
+                    <div class="app-feature__index">02 / 04</div>
                 </div>
 
                 <p class="app-feature__tagline">"The game-show wheel for everyday choices."</p>
@@ -367,7 +418,7 @@
                         <div class="app-feature__name">ShrinkRay</div>
                         <div class="app-feature__platform">Android · On-device AI</div>
                     </div>
-                    <div class="app-feature__index">02 / 03</div>
+                    <div class="app-feature__index">03 / 04</div>
                 </div>
 
                 <p class="app-feature__tagline">"Big tasks, shrunk down to doable."</p>
@@ -409,7 +460,7 @@
                         <div class="app-feature__name">Trivia Together</div>
                         <div class="app-feature__platform">Android · Closed Testing</div>
                     </div>
-                    <div class="app-feature__index">03 / 03</div>
+                    <div class="app-feature__index">04 / 04</div>
                 </div>
 
                 <p class="app-feature__tagline">"The 1-v-1 trivia duel you play on your own time."</p>
