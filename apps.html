@@ -268,6 +268,14 @@
         .app-feature--trivia-together .app-feature__tagline { color: var(--accent); }
         .app-feature--trivia-together .gallery-shot { aspect-ratio: 1320 / 2346; }
 
+        /* Kudos Cards accent variant */
+        .app-feature--kudoscards {
+            background: linear-gradient(160deg, rgba(67,56,202,0.08), rgba(201,151,31,0.05));
+        }
+        .app-feature--kudoscards .feature-item__dot { background: #c9971f; box-shadow: 0 0 12px #c9971f; }
+        .app-feature--kudoscards .app-feature__tagline { color: #8b85ff; }
+        .app-feature--kudoscards .gallery-shot { aspect-ratio: 1080 / 2400; }
+
         /* Epafi accent variant */
         .app-feature--epafi {
             background: linear-gradient(160deg, rgba(196,98,63,0.08), rgba(31,95,139,0.05));
@@ -335,13 +343,56 @@
                 <span class="split-line" data-autoplay="true"><span>Apps with</span></span>
                 <span class="split-line" data-autoplay="true"><span><em>character.</em></span></span>
             </h1>
-            <p class="lead reveal" data-delay="3">Six apps so far. Each one started as a problem I couldn't shake, and ended up as something I'd be proud to install on my own phone.</p>
+            <p class="lead reveal" data-delay="3">Seven apps so far. Each one started as a problem I couldn't shake, and ended up as something I'd be proud to install on my own phone.</p>
         </div>
     </section>
 
     <!-- ===== APP FEATURES ===== -->
     <section style="padding-top: 0;">
         <div class="container">
+            <!-- ===== KUDOS CARDS ===== -->
+            <article id="kudoscards" class="app-feature app-feature--kudoscards reveal">
+                <div class="app-feature__top">
+                    <div class="app-feature__icon"><img src="assets/kudoscards/icon.png" alt="Kudos Cards"></div>
+                    <div>
+                        <div class="app-feature__name">Kudos Cards</div>
+                        <div class="app-feature__platform">Android · Team Rewards</div>
+                    </div>
+                    <div class="app-feature__index">01 / 07</div>
+                </div>
+
+                <p class="app-feature__tagline">"Get things done. Collect the cards."</p>
+
+                <p class="app-feature__desc">
+                    Kudos Cards is a task board for a team that pays out. Finish a task and the points go to whoever did the work. Earn enough and you collect a Bronze, Silver or Gold card, and each card opens up perks your team chooses, like a free coffee or a training course.
+                </p>
+
+                <div class="gallery">
+                    <div class="gallery-shot"><img src="assets/kudoscards/screenshot_cards.png" alt="A silver performance card in the wallet with lifetime points and progress to gold"></div>
+                    <div class="gallery-shot"><img src="assets/kudoscards/screenshot_reveal.png" alt="A new silver card flipping into the wallet"></div>
+                    <div class="gallery-shot"><img src="assets/kudoscards/screenshot_board.png" alt="The team task board showing tasks ready for action"></div>
+                    <div class="gallery-shot"><img src="assets/kudoscards/screenshot_perks.png" alt="Perks for each card, ready to redeem"></div>
+                </div>
+
+                <h3 style="font-family: var(--font-display); font-size: 1.3rem; font-weight: 500; margin-bottom: 18px; color: var(--text-mute); letter-spacing: 0.02em;">Inside the build</h3>
+                <div class="features-grid">
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Five-stage board: new request, refinement, ready, in review and done, with reviewers approving the work</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Points for every task, bonuses for milestones hit on time, weekly kudos and team sprint goals</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Bronze, Silver and Gold cards drawn in code, with a metal shine that follows the tilt of your phone</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Perks set by the team's admin, redeemed with a code and handed over in person</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Share a new card or a win to any app on your phone</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Completely free. No ads, no account, no sign-in, and your team's data stays on the device</p></div>
+                </div>
+
+                <div class="app-feature__cta-row">
+                    <a href="https://play.google.com/store/apps/details?id=com.tristonia.kudoscards&hl=en" class="store-btn" target="_blank" rel="noopener noreferrer" data-magnetic data-magnetic-strength="0.15">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.732l-2.302 1.33-2.542-2.546 2.542-2.546zM5.864 3.658L16.8 9.99l-2.302 2.302L5.864 3.658z"/></svg>
+                        Get it on Google Play
+                    </a>
+                    <a href="kudoscards-privacy-policy.html" class="text-link">Privacy Policy</a>
+                </div>
+            </article>
+
             <!-- ===== EPAFI ===== -->
             <article id="epafi" class="app-feature app-feature--epafi reveal">
                 <div class="app-feature__top">
@@ -350,7 +401,7 @@
                         <div class="app-feature__name">Epafi</div>
                         <div class="app-feature__platform">Android · Keep in Touch</div>
                     </div>
-                    <div class="app-feature__index">01 / 06</div>
+                    <div class="app-feature__index">02 / 07</div>
                 </div>
 
                 <p class="app-feature__tagline">"A kind little nudge to keep in touch."</p>
@@ -393,7 +444,7 @@
                         <div class="app-feature__name">Shelfie</div>
                         <div class="app-feature__platform">Android · Book Tracker</div>
                     </div>
-                    <div class="app-feature__index">02 / 06</div>
+                    <div class="app-feature__index">03 / 07</div>
                 </div>
 
                 <p class="app-feature__tagline">"Your real bookshelf, on your phone."</p>
@@ -436,7 +487,7 @@
                         <div class="app-feature__name">Chockablock</div>
                         <div class="app-feature__platform">Android · Block Puzzle</div>
                     </div>
-                    <div class="app-feature__index">03 / 06</div>
+                    <div class="app-feature__index">04 / 07</div>
                 </div>
 
                 <p class="app-feature__tagline">"A calm 8×8 block puzzle — no timers, play offline."</p>
@@ -478,7 +529,7 @@
                         <div class="app-feature__name">Decision Spinner</div>
                         <div class="app-feature__platform">Android · Royal Edition</div>
                     </div>
-                    <div class="app-feature__index">04 / 06</div>
+                    <div class="app-feature__index">05 / 07</div>
                 </div>
 
                 <p class="app-feature__tagline">"The game-show wheel for everyday choices."</p>
@@ -520,7 +571,7 @@
                         <div class="app-feature__name">ShrinkRay</div>
                         <div class="app-feature__platform">Android · On-device AI</div>
                     </div>
-                    <div class="app-feature__index">05 / 06</div>
+                    <div class="app-feature__index">06 / 07</div>
                 </div>
 
                 <p class="app-feature__tagline">"Big tasks, shrunk down to doable."</p>
@@ -562,7 +613,7 @@
                         <div class="app-feature__name">Trivia Together</div>
                         <div class="app-feature__platform">Android · Closed Testing</div>
                     </div>
-                    <div class="app-feature__index">06 / 06</div>
+                    <div class="app-feature__index">07 / 07</div>
                 </div>
 
                 <p class="app-feature__tagline">"The 1-v-1 trivia duel you play on your own time."</p>
