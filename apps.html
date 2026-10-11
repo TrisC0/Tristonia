@@ -268,6 +268,14 @@
         .app-feature--trivia-together .app-feature__tagline { color: var(--accent); }
         .app-feature--trivia-together .gallery-shot { aspect-ratio: 1320 / 2346; }
 
+        /* Shelfie accent variant */
+        .app-feature--shelfie {
+            background: linear-gradient(160deg, rgba(200,85,61,0.08), rgba(201,164,92,0.05));
+        }
+        .app-feature--shelfie .feature-item__dot { background: #c9a45c; box-shadow: 0 0 12px #c9a45c; }
+        .app-feature--shelfie .app-feature__tagline { color: #e07a5f; }
+        .app-feature--shelfie .gallery-shot { aspect-ratio: 1080 / 2400; }
+
         /* Chockablock accent variant */
         .app-feature--chockablock {
             background: linear-gradient(160deg, rgba(224,164,79,0.08), rgba(123,74,45,0.05));
@@ -319,13 +327,56 @@
                 <span class="split-line" data-autoplay="true"><span>Apps with</span></span>
                 <span class="split-line" data-autoplay="true"><span><em>character.</em></span></span>
             </h1>
-            <p class="lead reveal" data-delay="3">Four apps so far. Each one started as a problem I couldn't shake, and ended up as something I'd be proud to install on my own phone.</p>
+            <p class="lead reveal" data-delay="3">Five apps so far. Each one started as a problem I couldn't shake, and ended up as something I'd be proud to install on my own phone.</p>
         </div>
     </section>
 
     <!-- ===== APP FEATURES ===== -->
     <section style="padding-top: 0;">
         <div class="container">
+            <!-- ===== SHELFIE ===== -->
+            <article id="shelfie" class="app-feature app-feature--shelfie reveal">
+                <div class="app-feature__top">
+                    <div class="app-feature__icon"><img src="assets/shelfie/icon.png" alt="Shelfie"></div>
+                    <div>
+                        <div class="app-feature__name">Shelfie</div>
+                        <div class="app-feature__platform">Android · Book Tracker</div>
+                    </div>
+                    <div class="app-feature__index">01 / 05</div>
+                </div>
+
+                <p class="app-feature__tagline">"Your real bookshelf, on your phone."</p>
+
+                <p class="app-feature__desc">
+                    Shelfie turns the books on your shelves into a cosy bookcase on your phone. Scan the barcode on the back of a book and it slides onto the shelf with its own spine, coloured from its cover, sized by its page count. Tap a spine to take the book down, mark it as read and keep a few notes.
+                </p>
+
+                <div class="gallery">
+                    <div class="gallery-shot"><img src="assets/shelfie/screenshot_shelf.png" alt="A classic wooden bookcase filled with scanned books"></div>
+                    <div class="gallery-shot"><img src="assets/shelfie/screenshot_detail.png" alt="A book taken down from the shelf, showing its cover and reading status"></div>
+                    <div class="gallery-shot"><img src="assets/shelfie/screenshot_library.png" alt="The library bookcase style with a rolling ladder"></div>
+                    <div class="gallery-shot"><img src="assets/shelfie/screenshot_covers.png" alt="Picking a different cover from other editions of the same book"></div>
+                </div>
+
+                <h3 style="font-family: var(--font-display); font-size: 1.3rem; font-weight: 500; margin-bottom: 18px; color: var(--text-mute); letter-spacing: 0.02em;">Inside the build</h3>
+                <div class="features-grid">
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Barcode scanning that runs on your phone, with type-it-in for books without one</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Four bookcases drawn in code: classic wooden, floating shelves, library and crates</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Every spine is generated: colour from the cover, height and thickness from the book</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Wrong cover? Pick another from other editions, or fix the title and author</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Separate bookcases, sorting by colour or height, and a spreadsheet export</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Completely free. No ads, no purchases, no account, and your library stays on your phone</p></div>
+                </div>
+
+                <div class="app-feature__cta-row">
+                    <a href="https://play.google.com/store/apps/details?id=com.tristonia.shelfie&hl=en" class="store-btn" target="_blank" rel="noopener noreferrer" data-magnetic data-magnetic-strength="0.15">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.732l-2.302 1.33-2.542-2.546 2.542-2.546zM5.864 3.658L16.8 9.99l-2.302 2.302L5.864 3.658z"/></svg>
+                        Get it on Google Play
+                    </a>
+                    <a href="shelfie-privacy-policy.html" class="text-link">Privacy Policy</a>
+                </div>
+            </article>
+
             <!-- ===== CHOCKABLOCK ===== -->
             <article id="chockablock" class="app-feature app-feature--chockablock reveal">
                 <div class="app-feature__top">
@@ -334,7 +385,7 @@
                         <div class="app-feature__name">Chockablock</div>
                         <div class="app-feature__platform">Android · Block Puzzle</div>
                     </div>
-                    <div class="app-feature__index">01 / 04</div>
+                    <div class="app-feature__index">02 / 05</div>
                 </div>
 
                 <p class="app-feature__tagline">"A calm 8×8 block puzzle — no timers, play offline."</p>
@@ -376,7 +427,7 @@
                         <div class="app-feature__name">Decision Spinner</div>
                         <div class="app-feature__platform">Android · Royal Edition</div>
                     </div>
-                    <div class="app-feature__index">02 / 04</div>
+                    <div class="app-feature__index">03 / 05</div>
                 </div>
 
                 <p class="app-feature__tagline">"The game-show wheel for everyday choices."</p>
@@ -418,7 +469,7 @@
                         <div class="app-feature__name">ShrinkRay</div>
                         <div class="app-feature__platform">Android · On-device AI</div>
                     </div>
-                    <div class="app-feature__index">03 / 04</div>
+                    <div class="app-feature__index">04 / 05</div>
                 </div>
 
                 <p class="app-feature__tagline">"Big tasks, shrunk down to doable."</p>
@@ -460,7 +511,7 @@
                         <div class="app-feature__name">Trivia Together</div>
                         <div class="app-feature__platform">Android · Closed Testing</div>
                     </div>
-                    <div class="app-feature__index">04 / 04</div>
+                    <div class="app-feature__index">05 / 05</div>
                 </div>
 
                 <p class="app-feature__tagline">"The 1-v-1 trivia duel you play on your own time."</p>
