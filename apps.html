@@ -301,6 +301,14 @@
         .app-feature--bigheads .gallery-shot { aspect-ratio: 1024 / 500; }
         .store-btn--soon { opacity: 0.6; cursor: default; pointer-events: none; }
 
+        /* Cubby accent variant */
+        .app-feature--cubby {
+            background: linear-gradient(160deg, rgba(242,156,180,0.09), rgba(158,217,196,0.05));
+        }
+        .app-feature--cubby .feature-item__dot { background: #f29cb4; box-shadow: 0 0 12px #f29cb4; }
+        .app-feature--cubby .app-feature__tagline { color: #f29cb4; }
+        .app-feature--cubby .gallery-shot { aspect-ratio: 1024 / 500; }
+
         /* Shelfie accent variant */
         .app-feature--shelfie {
             background: linear-gradient(160deg, rgba(200,85,61,0.08), rgba(201,164,92,0.05));
@@ -375,7 +383,7 @@
                         <div class="app-feature__name">Cartridge</div>
                         <div class="app-feature__platform">Android · Game Collection</div>
                     </div>
-                    <div class="app-feature__index">01 / 09</div>
+                    <div class="app-feature__index">01 / 10</div>
                 </div>
 
                 <p class="app-feature__tagline">"Your game shelf, lit up like a shop."</p>
@@ -418,7 +426,7 @@
                         <div class="app-feature__name">Big Heads</div>
                         <div class="app-feature__platform">Android · Vinyl Figure Collection · Coming soon</div>
                     </div>
-                    <div class="app-feature__index">02 / 09</div>
+                    <div class="app-feature__index">02 / 10</div>
                 </div>
 
                 <p class="app-feature__tagline">"Your vinyl figures, in a lit display cabinet."</p>
@@ -447,6 +455,43 @@
                 </div>
             </article>
 
+            <!-- ===== CUBBY ===== -->
+            <article id="cubby" class="app-feature app-feature--cubby reveal">
+                <div class="app-feature__top">
+                    <div class="app-feature__icon"><img src="assets/cubby/icon.png" alt="Cubby"></div>
+                    <div>
+                        <div class="app-feature__name">Cubby</div>
+                        <div class="app-feature__platform">Android · Plush Collection · Coming soon</div>
+                    </div>
+                    <div class="app-feature__index">03 / 10</div>
+                </div>
+
+                <p class="app-feature__tagline">"Your plush collection, on a cosy cubby wall."</p>
+
+                <p class="app-feature__desc">
+                    Cubby gives your soft toys a home on your phone: a wall of little wooden cubby holes, one for each plush, with its name on a tag. Scan the barcode on the swing tag to look up its name, take your own photo and pop it into the next empty cubby. Tap a plush to keep track of the name you gave it, its size, its adoption day, whether it's retired, and what you paid.
+                </p>
+
+                <div class="gallery">
+                    <div class="gallery-shot"><img src="assets/cubby/feature-graphic.png" alt="A wooden cubby wall of drawn plush toys with name tags, with the Cubby name"></div>
+                </div>
+
+                <h3 style="font-family: var(--font-display); font-size: 1.3rem; font-weight: 500; margin-bottom: 18px; color: var(--text-mute); letter-spacing: 0.02em;">Inside the build</h3>
+                <div class="features-grid">
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Scan the tag's barcode to look up the name, or type it in by hand</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Your own photo of every plush, never a shop picture</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>A cubby wall drawn in code, in pine, painted white, pastel rainbow or the night shop</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>A wishlist, with confetti when you adopt one and bring it home</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>What you paid and what it's worth now, plus a backup of the whole collection and its photos</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Completely free. No ads, no purchases, no account, and your collection stays on your phone</p></div>
+                </div>
+
+                <div class="app-feature__cta-row">
+                    <span class="store-btn store-btn--soon">Coming soon to Google Play</span>
+                    <a href="cubby-privacy-policy.html" class="text-link">Privacy Policy</a>
+                </div>
+            </article>
+
             <!-- ===== KUDOS CARDS ===== -->
             <article id="kudoscards" class="app-feature app-feature--kudoscards reveal">
                 <div class="app-feature__top">
@@ -455,7 +500,7 @@
                         <div class="app-feature__name">Kudos Cards</div>
                         <div class="app-feature__platform">Android · Team Rewards</div>
                     </div>
-                    <div class="app-feature__index">03 / 09</div>
+                    <div class="app-feature__index">04 / 10</div>
                 </div>
 
                 <p class="app-feature__tagline">"Get things done. Collect the cards."</p>
@@ -498,7 +543,7 @@
                         <div class="app-feature__name">Epafi</div>
                         <div class="app-feature__platform">Android · Keep in Touch</div>
                     </div>
-                    <div class="app-feature__index">04 / 09</div>
+                    <div class="app-feature__index">05 / 10</div>
                 </div>
 
                 <p class="app-feature__tagline">"A kind little nudge to keep in touch."</p>
@@ -541,7 +586,7 @@
                         <div class="app-feature__name">Shelfie</div>
                         <div class="app-feature__platform">Android · Book Tracker</div>
                     </div>
-                    <div class="app-feature__index">05 / 09</div>
+                    <div class="app-feature__index">06 / 10</div>
                 </div>
 
                 <p class="app-feature__tagline">"Your real bookshelf, on your phone."</p>
@@ -584,7 +629,7 @@
                         <div class="app-feature__name">Chockablock</div>
                         <div class="app-feature__platform">Android · Block Puzzle</div>
                     </div>
-                    <div class="app-feature__index">06 / 09</div>
+                    <div class="app-feature__index">07 / 10</div>
                 </div>
 
                 <p class="app-feature__tagline">"A calm 8×8 block puzzle — no timers, play offline."</p>
@@ -626,7 +671,7 @@
                         <div class="app-feature__name">Decision Spinner</div>
                         <div class="app-feature__platform">Android · Royal Edition</div>
                     </div>
-                    <div class="app-feature__index">07 / 09</div>
+                    <div class="app-feature__index">08 / 10</div>
                 </div>
 
                 <p class="app-feature__tagline">"The game-show wheel for everyday choices."</p>
@@ -668,7 +713,7 @@
                         <div class="app-feature__name">ShrinkRay</div>
                         <div class="app-feature__platform">Android · On-device AI</div>
                     </div>
-                    <div class="app-feature__index">08 / 09</div>
+                    <div class="app-feature__index">09 / 10</div>
                 </div>
 
                 <p class="app-feature__tagline">"Big tasks, shrunk down to doable."</p>
@@ -710,7 +755,7 @@
                         <div class="app-feature__name">Trivia Together</div>
                         <div class="app-feature__platform">Android · Closed Testing</div>
                     </div>
-                    <div class="app-feature__index">09 / 09</div>
+                    <div class="app-feature__index">10 / 10</div>
                 </div>
 
                 <p class="app-feature__tagline">"The 1-v-1 trivia duel you play on your own time."</p>
