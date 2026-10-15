@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tristonia — Independent Android Studio</title>
-    <meta name="description" content="Tristonia Ltd is a one-person Android studio building imaginative, privacy-first apps. No trackers, no shortcuts.">
+    <title>Tristonia | Indie Android apps</title>
+    <meta name="description" content="Tristonia is a one-person Android studio in the UK. Collection apps, puzzle games and little helpers, most of them free with no ads.">
     <link rel="canonical" href="https://tristonia.com/">
     <link rel="icon" href="assets/design/favicon.svg" type="image/svg+xml">
     <link rel="icon" href="assets/design/favicon-32.png" sizes="32x32" type="image/png">
     <link rel="apple-touch-icon" href="assets/design/favicon-180.png">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://tristonia.com/">
-    <meta property="og:title" content="Tristonia — Independent Android Studio">
-    <meta property="og:description" content="Tristonia Ltd is a one-person Android studio building imaginative, privacy-first apps. No trackers, no shortcuts.">
+    <meta property="og:title" content="Tristonia | Indie Android apps">
+    <meta property="og:description" content="Tristonia is a one-person Android studio in the UK. Collection apps, puzzle games and little helpers, most of them free with no ads.">
     <meta property="og:image" content="https://tristonia.com/assets/design/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Tristonia — Independent Android Studio">
-    <meta name="twitter:description" content="Tristonia Ltd is a one-person Android studio building imaginative, privacy-first apps. No trackers, no shortcuts.">
+    <meta name="twitter:title" content="Tristonia | Indie Android apps">
+    <meta name="twitter:description" content="Tristonia is a one-person Android studio in the UK. Collection apps, puzzle games and little helpers, most of them free with no ads.">
     <meta name="twitter:image" content="https://tristonia.com/assets/design/og-image.png">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,6 +39,20 @@
             position: absolute;
             inset: 0;
         }
+        #island-tip {
+            position: fixed; left: 0; top: 0; z-index: 20;
+            pointer-events: none; opacity: 0;
+            display: flex; flex-direction: column; gap: 2px;
+            max-width: 260px; padding: 10px 14px;
+            background: rgba(13, 13, 36, 0.88); border: 1px solid rgba(196, 181, 253, 0.3);
+            border-radius: 12px; backdrop-filter: blur(8px);
+            font-size: 0.85rem; color: var(--text-mute, #b8b8d0);
+            transition: opacity 0.15s ease;
+        }
+        .island-hint { font-family: var(--font-mono, monospace); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-mute, #b8b8d0); opacity: 0.75; text-align: center; margin-top: 18px; }
+        @media (max-width: 760px) { .island-hint { display: none; } }
+        #island-tip strong { color: #fff; font-family: var(--font-display); font-size: 1.05rem; font-weight: 500; }
+        #island-tip.is-on { opacity: 1; }
         .hero-vignette {
             position: absolute;
             inset: 0;
@@ -430,16 +444,18 @@
     <!-- ===== HERO ===== -->
     <section class="hero">
         <canvas id="hero-canvas"></canvas>
+        <div id="island-tip" role="tooltip"></div>
         <div class="hero-vignette"></div>
         <div class="hero-content container">
             <div class="hero-top hero-mark">
-                <div class="hero-eyebrow">An Independent Android Studio</div>
+                <div class="hero-eyebrow">Indie Android apps</div>
                 <h1 class="hero-title">
                     <span class="split-line" data-autoplay="true"><span>Tris<em>tonia</em></span></span>
                 </h1>
                 <div class="hero-sub">
-                    <span class="split-line" data-autoplay="true"><span>Android app development</span></span>
+                    <span class="split-line" data-autoplay="true"><span>Made in the UK</span></span>
                 </div>
+                <div class="island-hint">Click a building to see its app</div>
             </div>
 
             <div class="hero-bottom">
@@ -454,19 +470,19 @@
     <!-- ===== MARQUEE ===== -->
     <div class="marquee" aria-hidden="true">
         <div class="marquee-track">
-            <span class="marquee-item">Privacy-first</span>
-            <span class="marquee-item">Hand-crafted</span>
-            <span class="marquee-item">On-device AI</span>
-            <span class="marquee-item">Solo-built</span>
-            <span class="marquee-item">Real physics</span>
+            <span class="marquee-item">Built by one person</span>
             <span class="marquee-item">Made in the UK</span>
+            <span class="marquee-item">Collection apps</span>
+            <span class="marquee-item">Puzzle games</span>
+            <span class="marquee-item">Little helpers</span>
+            <span class="marquee-item">Privacy first</span>
             <!-- duplicate for seamless loop -->
-            <span class="marquee-item">Privacy-first</span>
-            <span class="marquee-item">Hand-crafted</span>
-            <span class="marquee-item">On-device AI</span>
-            <span class="marquee-item">Solo-built</span>
-            <span class="marquee-item">Real physics</span>
+            <span class="marquee-item">Built by one person</span>
             <span class="marquee-item">Made in the UK</span>
+            <span class="marquee-item">Collection apps</span>
+            <span class="marquee-item">Puzzle games</span>
+            <span class="marquee-item">Little helpers</span>
+            <span class="marquee-item">Privacy first</span>
         </div>
     </div>
 
@@ -474,15 +490,15 @@
     <section id="manifesto">
         <div class="container">
             <div class="section-head reveal">
-                <span class="eyebrow">Manifesto</span>
+                <span class="eyebrow">Why I make these</span>
             </div>
             <div class="manifesto">
                 <p class="manifesto-quote reveal">
-                    Apps that <em>solve real problems</em> in creative ways, not <em>more of the same</em>.
+                    I make the apps I <em>want on my own phone</em>, then put them out there for <em>anyone else who wants them</em>.
                 </p>
                 <div class="manifesto-detail reveal" data-delay="2">
-                    <p>Tristonia Ltd is an indie Android studio with one clear standard: every release has to be worth shipping under the Tristonia name. That means tasteful design, thoughtful interactions, and real respect for whoever's on the other side of the screen.</p>
-                    <p>I keep things simple, I keep things private, and I ship only when the work is worth it.</p>
+                    <p>Most of them start the same way. I go looking for an app to do something, and the ones I find are full of ads, want me to sign up before I can do anything, or just don't look very nice. So I build my own version, and I keep at it until I would happily use it every day.</p>
+                    <p>Most of the apps are completely free with no ads and no account, and wherever I can, your data stays on your phone.</p>
                 </div>
             </div>
         </div>
@@ -492,59 +508,57 @@
     <section id="apps">
         <div class="container">
             <div class="section-head reveal">
-                <span class="eyebrow">Featured Work</span>
-                <h2 class="heading">Apps in the wild,<br><em style="background: var(--grad-aurora); -webkit-background-clip: text; background-clip: text; color: transparent; font-style: italic; font-weight: 300;">crafted to be lived with.</em></h2>
+                <span class="eyebrow">Latest apps</span>
+                <h2 class="heading">The latest<br><em style="background: var(--grad-aurora); -webkit-background-clip: text; background-clip: text; color: transparent; font-style: italic; font-weight: 300;">ones.</em></h2>
             </div>
 
             <div class="apps-grid">
-                <a href="apps.html#decision-spinner" class="app-card reveal" data-cursor="hover">
+                <a href="apps.html#ninepocket" class="app-card reveal" data-cursor="hover">
                     <div class="app-card__top">
-                        <div class="app-card__icon"><img src="assets/decision-spinner/icon.png" alt="Decision Spinner"></div>
+                        <div class="app-card__icon"><img src="assets/ninepocket/icon.png" alt="Nine Pocket"></div>
                         <div>
-                            <div class="app-card__name">Decision Spinner</div>
-                            <div class="app-card__platform">Android · Royal Edition</div>
+                            <div class="app-card__name">Nine Pocket</div>
+                            <div class="app-card__platform">Android · MTG Binders</div>
                         </div>
                     </div>
-                    <div class="app-card__tagline">The game-show wheel for everyday choices.</div>
-                    <p class="app-card__desc">Six hand-crafted themes, real game-show physics, and a satisfying tick that lands just where it should. Spin it whenever you can't decide.</p>
+                    <div class="app-card__tagline">Your Magic cards, in binders on your phone.</div>
+                    <p class="app-card__desc">Scan a card and it finds the exact printing, slides it into a sleeve and tells you what it's worth. Build your decks right next to your binders.</p>
                     <div class="app-card__cta">
-                        Explore Decision Spinner
+                        Have a look at Nine Pocket
                         <span class="circle">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                         </span>
                     </div>
                 </a>
-
-                <a href="apps.html#shrinkray" class="app-card reveal" data-delay="2" data-cursor="hover">
+                <a href="apps.html#cartridge" class="app-card reveal" data-delay="2" data-cursor="hover">
                     <div class="app-card__top">
-                        <div class="app-card__icon"><img src="assets/shrinkray/icon.png" alt="ShrinkRay"></div>
+                        <div class="app-card__icon"><img src="assets/cartridge/icon.png" alt="Cartridge"></div>
                         <div>
-                            <div class="app-card__name">ShrinkRay</div>
-                            <div class="app-card__platform">Android · On-device AI</div>
+                            <div class="app-card__name">Cartridge</div>
+                            <div class="app-card__platform">Android · Game Collection</div>
                         </div>
                     </div>
-                    <div class="app-card__tagline">Big tasks, shrunk down to doable.</div>
-                    <p class="app-card__desc">Turns any overwhelming task into a clear list of next steps, entirely on your phone. No cloud, no accounts, no compromise.</p>
+                    <div class="app-card__tagline">Your game shelf, lit up like a shop.</div>
+                    <p class="app-card__desc">Scan the barcode on a case and it stands the game on a neon-lit shelf, spine and all. Over 60 platforms, from the ZX Spectrum to the Switch 2.</p>
                     <div class="app-card__cta">
-                        Explore ShrinkRay
+                        Have a look at Cartridge
                         <span class="circle">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                         </span>
                     </div>
                 </a>
-
-                <a href="apps.html#trivia-together" class="app-card reveal" data-delay="3" data-cursor="hover">
+                <a href="apps.html#littlethings" class="app-card reveal" data-delay="3" data-cursor="hover">
                     <div class="app-card__top">
-                        <div class="app-card__icon"><img src="assets/trivia-together/icon.png" alt="Trivia Together"></div>
+                        <div class="app-card__icon"><img src="assets/littlethings/icon.png" alt="The Little Things"></div>
                         <div>
-                            <div class="app-card__name">Trivia Together</div>
-                            <div class="app-card__platform">Android · Closed Testing</div>
+                            <div class="app-card__name">The Little Things</div>
+                            <div class="app-card__platform">Android · Mindfulness</div>
                         </div>
                     </div>
-                    <div class="app-card__tagline">The 1-v-1 trivia duel you play on your own time.</div>
-                    <p class="app-card__desc">Spin the wheel, answer your questions, then pass the turn back. No waiting for your opponent to be online at the same time as you.</p>
+                    <div class="app-card__tagline">Meditation for people who can't sit still.</div>
+                    <p class="app-card__desc">One small thing to go and notice each day, and a little journal for the moments you want to keep. No streaks and no scores.</p>
                     <div class="app-card__cta">
-                        Explore Trivia Together
+                        Have a look at The Little Things
                         <span class="circle">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                         </span>
@@ -559,20 +573,20 @@
         <div class="container">
             <div class="stats reveal">
                 <div class="stat">
-                    <div class="stat__num" data-count="3">0</div>
-                    <div class="stat__label">Apps Shipped</div>
+                    <div class="stat__num" data-count="13">0</div>
+                    <div class="stat__label">Apps Built</div>
                 </div>
                 <div class="stat">
-                    <div class="stat__num" data-count="100">0<span>%</span></div>
-                    <div class="stat__label">On Device</div>
+                    <div class="stat__num" data-count="11">0</div>
+                    <div class="stat__label">On Google Play</div>
                 </div>
                 <div class="stat">
-                    <div class="stat__num">0<span class="px-zero">.00</span></div>
-                    <div class="stat__label">Trackers, Ever</div>
+                    <div class="stat__num" data-count="5">0</div>
+                    <div class="stat__label">Collection Apps</div>
                 </div>
                 <div class="stat">
                     <div class="stat__num" data-count="1">0</div>
-                    <div class="stat__label">Standard: Worth Shipping</div>
+                    <div class="stat__label">Person Building Them</div>
                 </div>
             </div>
         </div>
@@ -582,11 +596,11 @@
     <section>
         <div class="container container--narrow">
             <div class="cta-banner reveal">
-                <span class="eyebrow" style="justify-content: center; display: inline-flex;">Get In Touch</span>
-                <h2 style="margin-top: 14px;">Spotted a bug? Got an idea?<br>Let's talk.</h2>
-                <p>If something's broken, missing, or just occurred to you at 2am, tell me about it.</p>
+                <span class="eyebrow" style="justify-content: center; display: inline-flex;">Get in touch</span>
+                <h2 style="margin-top: 14px;">Found a bug? Got an idea?<br>Let me know.</h2>
+                <p>If something's broken, missing, or you've thought of a way to make one of the apps better, please send it over. I read every message myself.</p>
                 <a href="contact.html" class="btn btn--primary" data-magnetic data-magnetic-strength="0.2">
-                    Start a Conversation
+                    Get in touch
                     <span class="arrow">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                     </span>
@@ -601,7 +615,7 @@
             <div class="t-footer__grid">
                 <div class="t-footer__brand">
                     <div class="t-footer__mark">Tris<em>tonia</em></div>
-                    <p style="color: var(--text-mute); font-size: 0.95rem; max-width: 320px;">Independent Android studio. If it's not worth shipping, it doesn't ship.</p>
+                    <p style="color: var(--text-mute); font-size: 0.95rem; max-width: 320px;">Indie Android apps, built by one person in the UK.</p>
                 </div>
                 <div class="t-footer__col">
                     <h4>Navigate</h4>
@@ -617,7 +631,7 @@
             </div>
             <div class="t-footer__bottom">
                 <span>© <span id="footer-year">2026</span> Tristonia Ltd. All rights reserved.</span>
-                <span>Crafted with care · UK</span>
+                <span>Made with care in the UK</span>
             </div>
         </div>
     </footer>
@@ -670,7 +684,7 @@
         const controls = new OrbitControls(camera, renderer.domElement);
         controls.enableDamping = true;
         controls.dampingFactor = 0.04;
-        controls.minDistance = 35;
+        controls.minDistance = 30;
         controls.maxDistance = 90;
         controls.maxPolarAngle = Math.PI / 1.9;
         controls.enablePan = false;
@@ -680,7 +694,7 @@
         controls.autoRotateSpeed = 0.3;
 
         // --- Lighting ---
-        scene.add(new THREE.HemisphereLight(0x78b4ff, 0x3a1f5e, 0.6));
+        scene.add(new THREE.HemisphereLight(0x9cc4ff, 0x3a1f5e, 0.85));
         const moonLight = new THREE.DirectionalLight(0xc4d4ff, 1.5);
         moonLight.position.set(25, 40, 20);
         moonLight.castShadow = true;
@@ -852,175 +866,282 @@
         riverGroup.add(new THREE.Mesh(ribbonGeo(riverCurve, 1.05, 40, 1.515), waterMat()));
         scene.add(riverGroup);
 
-        // --- Village cottages (gable roofs, palettes) ---
-        const buildingsGroup = new THREE.Group();
-        const palettes = [
-            { wall: '#f0e6d8', roof: '#b85c3c', door: '#6b4c3b' },
-            { wall: '#e8d8c3', roof: '#8d5a97', door: '#4a3828' },
-            { wall: '#dce8e0', roof: '#5a7fb5', door: '#7a4a2b' },
-            { wall: '#f5e0c8', roof: '#a04848', door: '#3d5a40' },
-            { wall: '#e0d5e8', roof: '#46695a', door: '#8a4a32' },
-        ];
-        function cottage(p, x, z, rot, s = 1) {
-            const h = new THREE.Group();
-            h.add(box(2.6, 0.26, 2.2, '#9a958c', 0, 0.13, 0, { roughness: 0.9 }));
-            h.add(box(2.3, 1.5, 1.9, p.wall, 0, 1.0, 0, { roughness: 0.85 }));
-            const tri = new THREE.Shape([new THREE.Vector2(-1.35, 0), new THREE.Vector2(1.35, 0), new THREE.Vector2(0, 0.95)]);
-            const roof = new THREE.Mesh(new THREE.ExtrudeGeometry(tri, { depth: 2.2, bevelEnabled: false }), mat(p.roof, { roughness: 0.75 }));
-            roof.position.set(0, 1.74, -1.1); roof.castShadow = true; roof.receiveShadow = true;
-            h.add(roof);
-            h.add(box(0.5, 0.85, 0.08, p.door, 0.55, 0.68, 0.96, { roughness: 0.9 }));
-            const winMat = new THREE.MeshStandardMaterial({ color: '#ffd97d', emissive: '#ffd97d', emissiveIntensity: 0.8, roughness: 0.2 });
-            const winGeo = new THREE.PlaneGeometry(0.4, 0.5);
-            const w1 = new THREE.Mesh(winGeo, winMat); w1.position.set(-0.55, 1.15, 0.97); h.add(w1);
-            const w2 = new THREE.Mesh(winGeo, winMat); w2.position.set(1.16, 1.15, 0.3); w2.rotation.y = Math.PI / 2; h.add(w2);
-            const w3 = new THREE.Mesh(winGeo, winMat); w3.position.set(-1.16, 1.15, -0.2); w3.rotation.y = -Math.PI / 2; h.add(w3);
-            const w4 = new THREE.Mesh(winGeo, winMat); w4.position.set(0.4, 1.15, -0.96); w4.rotation.y = Math.PI; h.add(w4);
-            h.add(box(0.3, 1.0, 0.3, '#8d7a6e', 0.6, 2.55, -0.45, { roughness: 0.9 }));
-            h.position.set(x, GROUND, z); h.rotation.y = rot; h.scale.setScalar(s);
-            return h;
-        }
-        const cottages = [
-            [-6.8, 8.0, 2.6, 1.0],
-            [-10.2, 8.2, 2.9, 0.95],
-            [-13.2, 6.3, 2.3, 1.05],
-            [-14.8, 5.2, 2.1, 0.9],
-            [-15.0, 2.6, 1.6, 1.0],
-            [-14.6, -1.0, 1.2, 0.95],
-            [-4.5, 7.2, -2.9, 0.9],
-            [-12.0, 9.8, 2.8, 1.0],
-            [-8.3, 10.7, 3.0, 0.85],
-        ];
-        cottages.forEach(([x, z, r, s], i) => buildingsGroup.add(cottage(palettes[i % 5], x, z, r, s)));
-        scene.add(buildingsGroup);
-
-        // --- Castle: grounded keep + courtyard walls + gate facing road ---
-        const castleGroup = new THREE.Group();
-        {
-            const c = new THREE.Group();
-            const stone = '#d4cfc8', roofClr = '#4a7ec2';
-            const keepWinMat = new THREE.MeshStandardMaterial({ color: '#ffd97d', emissive: '#ffd97d', emissiveIntensity: 0.9 });
-            c.add(smoothCyl(2.2, 2.5, 8, stone, 0, 4, -0.6, { segments: 24, roughness: 0.85 }));
-            c.add(cone(2.9, 3.4, roofClr, 0, 9.6, -0.6, { segments: 24, roughness: 0.4, metalness: 0.2 }));
-            c.add(smoothCyl(0.06, 0.06, 1.8, '#ffd700', 0, 12.1, -0.6, { segments: 8 }));
-            const flag = new THREE.Mesh(new THREE.PlaneGeometry(1.1, 0.6), new THREE.MeshStandardMaterial({ color: '#e63946', emissive: '#e63946', emissiveIntensity: 0.3, side: THREE.DoubleSide }));
-            flag.position.set(0.58, 12.55, -0.6); flag.name = 'flag'; c.add(flag);
-            [0, Math.PI / 2, -Math.PI / 2, Math.PI].forEach((a, i) => {
-                const w = new THREE.Mesh(new THREE.PlaneGeometry(0.34, 0.55), keepWinMat);
-                const rr = 2.32, hy = 4.5 + (i % 2) * 1.4;
-                w.position.set(Math.sin(a) * rr, hy, -0.6 + Math.cos(a) * rr);
-                w.rotation.y = a;
-                c.add(w);
-            });
-            const wallH = 2.6, half = 3.5;
-            c.add(box(half * 2 + 0.5, wallH, 0.5, stone, 0, wallH / 2, -half, { roughness: 0.9 }));
-            c.add(box(0.5, wallH, half * 2, stone, -half, wallH / 2, 0, { roughness: 0.9 }));
-            c.add(box(0.5, wallH, half * 2, stone, half, wallH / 2, 0, { roughness: 0.9 }));
-            c.add(box(2.35, wallH, 0.5, stone, -2.325, wallH / 2, half, { roughness: 0.9 }));
-            c.add(box(2.35, wallH, 0.5, stone, 2.325, wallH / 2, half, { roughness: 0.9 }));
-            c.add(box(2.3, 0.7, 0.5, stone, 0, 2.25, half, { roughness: 0.9 }));
-            for (let i = -3; i <= 3; i++) {
-                const cx = i * 1.05;
-                c.add(box(0.45, 0.45, 0.55, stone, cx, wallH + 0.22, -half, { roughness: 0.9 }));
-                c.add(box(0.45, 0.45, 0.55, stone, cx, wallH + 0.22, half, { roughness: 0.9 }));
-                c.add(box(0.55, 0.45, 0.45, stone, -half, wallH + 0.22, cx, { roughness: 0.9 }));
-                c.add(box(0.55, 0.45, 0.45, stone, half, wallH + 0.22, cx, { roughness: 0.9 }));
-            }
-            const arch = new THREE.Mesh(new THREE.TorusGeometry(1.15, 0.18, 8, 18, Math.PI), mat('#8a7e72', { roughness: 0.85 }));
-            arch.position.set(0, 1.9, half + 0.28); c.add(arch);
-            c.add(box(2.0, 1.9, 0.14, '#4a3828', 0, 0.95, half + 0.2, { roughness: 0.95 }));
-            [-half, half].forEach(tx => {
-                c.add(smoothCyl(0.95, 1.1, 4.2, stone, tx, 2.1, -half, { segments: 18, roughness: 0.85 }));
-                c.add(cone(1.35, 1.9, roofClr, tx, 5.2, -half, { segments: 18, roughness: 0.4, metalness: 0.2 }));
-                const w = new THREE.Mesh(new THREE.CircleGeometry(0.22, 14), keepWinMat);
-                w.position.set(tx, 3.1, -half - 1.0); w.rotation.y = Math.PI; c.add(w);
-            });
-            c.position.set(11.3, GROUND, -2.5);
-            c.rotation.y = Math.atan2(6.5 - 11.3, -2.4 - (-2.5)); // gate (+z) faces road
-            castleGroup.add(c);
-        }
-        scene.add(castleGroup);
-
-        // --- City: varied towers, window grids, setbacks, blinking antennas ---
-        const cityGroup = new THREE.Group();
+        // --- App landmarks: one little build per app, each one links to its card on the Apps page ---
+        const appsGroup = new THREE.Group();
+        const landmarks = [];
         const blinkMats = [];
-        const winPosArr = [], winColArr = [];
-        const litColors = [new THREE.Color('#ffd97d'), new THREE.Color('#9ed2ff'), new THREE.Color('#fff3c4')];
-        const darkColor = new THREE.Color('#101e30');
-        function pushWin(cx, cy, cz, w, h, face) {
-            const hw = w / 2, hh = h / 2;
-            let v;
-            if (face === 0) v = [[cx - hw, cy - hh, cz], [cx + hw, cy - hh, cz], [cx + hw, cy + hh, cz], [cx - hw, cy + hh, cz]];
-            else if (face === 1) v = [[cx + hw, cy - hh, cz], [cx - hw, cy - hh, cz], [cx - hw, cy + hh, cz], [cx + hw, cy + hh, cz]];
-            else if (face === 2) v = [[cx, cy - hh, cz + hw], [cx, cy - hh, cz - hw], [cx, cy + hh, cz - hw], [cx, cy + hh, cz + hw]];
-            else v = [[cx, cy - hh, cz - hw], [cx, cy - hh, cz + hw], [cx, cy + hh, cz + hw], [cx, cy + hh, cz - hw]];
-            const col = Math.random() < 0.55 ? litColors[Math.floor(Math.random() * 3)] : darkColor;
-            [0, 1, 2, 0, 2, 3].forEach(k => { winPosArr.push(...v[k]); winColArr.push(col.r, col.g, col.b); });
+        const spinners = [];
+        const glow = (c, i = 1.6) => new THREE.MeshStandardMaterial({ color: c, emissive: c, emissiveIntensity: i, roughness: 0.4 });
+        function add(g, geo, material, x, y, z) {
+            const m = new THREE.Mesh(geo, material);
+            m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true;
+            g.add(m);
+            return m;
         }
-        function towerWindows(x, z, w, d, h, yBase) {
-            const rows = Math.floor((h - 1.2) / 1.15);
-            for (let r = 0; r < rows; r++) {
-                const wy = yBase + 1.0 + r * 1.15;
-                const ncx = Math.max(2, Math.floor(w / 0.8));
-                for (let ci = 0; ci < ncx; ci++) {
-                    const wx = x - w / 2 + (ci + 0.5) * (w / ncx);
-                    pushWin(wx, wy, z + d / 2 + 0.02, 0.4, 0.55, 0);
-                    pushWin(wx, wy, z - d / 2 - 0.02, 0.4, 0.55, 1);
+        function plinth(g, w, d, color = '#9a958c') { g.add(box(w, 0.22, d, color, 0, 0.11, 0, { roughness: 0.9 })); }
+        function shop(g, w, h, d, wall, roof, win = '#ffd97d') {
+            plinth(g, w + 0.4, d + 0.4);
+            g.add(box(w, h, d, wall, 0, 0.22 + h / 2, 0, { roughness: 0.8 }));
+            g.add(box(w + 0.24, 0.18, d + 0.24, roof, 0, 0.22 + h + 0.09, 0, { roughness: 0.7 }));
+            add(g, new THREE.PlaneGeometry(w * 0.62, h * 0.38), glow(win, 0.7), 0, 0.22 + h * 0.42, d / 2 + 0.01);
+            add(g, new THREE.PlaneGeometry(0.42, h * 0.55), mat('#4a3828'), w * 0.36, 0.22 + h * 0.275, d / 2 + 0.012);
+            return 0.22 + h + 0.18;
+        }
+
+        const builders = {
+            // Cartridge: a late-night game shop with neon strips and a CRT on the roof
+            cartridge(g) {
+                const top = shop(g, 2.6, 1.6, 2, '#1d1b2e', '#2a2840', '#3ddcff');
+                add(g, new THREE.BoxGeometry(2.3, 0.1, 0.06), glow('#ff3d7f', 2.2), 0, 1.6, 1.03);
+                add(g, new THREE.BoxGeometry(2.3, 0.06, 0.06), glow('#3ddcff', 2), 0, 0.42, 1.03);
+                g.add(box(1.0, 0.78, 0.75, '#5a5f6e', 0, top + 0.39, -0.1, { roughness: 0.6 }));
+                add(g, new THREE.PlaneGeometry(0.76, 0.56), glow('#3ddcff', 1.4), 0, top + 0.41, 0.28);
+                return top + 0.8;
+            },
+            // Shelfie: a little bookshop with giant spines on the roof
+            shelfie(g) {
+                const top = shop(g, 2.4, 1.5, 2, '#f0e6d8', '#7a4a2b');
+                const spines = ['#b85c3c', '#3d5a80', '#e9c46a', '#5a8f6a', '#8d5a97', '#c8553d', '#264653'];
+                let x = -0.95;
+                spines.forEach((c, i) => {
+                    const h = 0.6 + ((i * 37) % 5) * 0.09, w = 0.2 + ((i * 13) % 3) * 0.04;
+                    g.add(box(w, h, 0.62, c, x + w / 2, top + h / 2, 0, { roughness: 0.75 }));
+                    x += w + 0.04;
+                });
+                return top + 1.0;
+            },
+            // Nine Pocket: a leather binder page on an easel, nine sleeved cards
+            ninepocket(g) {
+                plinth(g, 2.4, 1.4);
+                const page = new THREE.Group();
+                page.add(box(2.0, 2.5, 0.12, '#3b2418', 0, 0, 0, { roughness: 0.6 }));
+                page.add(box(2.08, 2.58, 0.06, '#d4af55', 0, 0, -0.04, { roughness: 0.3, metalness: 0.7 }));
+                const cardClr = ['#c8553d', '#3d7ab8', '#5a8f6a', '#e9c46a', '#8d5a97', '#d9d4c7', '#2b2d42', '#c8553d', '#3d7ab8'];
+                for (let r = 0; r < 3; r++) for (let c = 0; c < 3; c++) {
+                    const card = add(page, new THREE.BoxGeometry(0.5, 0.7, 0.04), mat(cardClr[r * 3 + c], { roughness: 0.25, metalness: 0.2, emissive: cardClr[r * 3 + c], emissiveIntensity: 0.15 }), (c - 1) * 0.6, (1 - r) * 0.78, 0.08);
+                    card.castShadow = false;
                 }
-                const ncz = Math.max(2, Math.floor(d / 0.8));
-                for (let ci = 0; ci < ncz; ci++) {
-                    const wz = z - d / 2 + (ci + 0.5) * (d / ncz);
-                    pushWin(x + w / 2 + 0.02, wy, wz, 0.4, 0.55, 2);
-                    pushWin(x - w / 2 - 0.02, wy, wz, 0.4, 0.55, 3);
+                page.position.set(0, 1.62, 0); page.rotation.x = -0.12;
+                g.add(page);
+                g.add(box(0.08, 1.6, 0.08, '#6b4c3b', -0.6, 0.8, -0.35));
+                g.add(box(0.08, 1.6, 0.08, '#6b4c3b', 0.6, 0.8, -0.35));
+                return 3.0;
+            },
+            // Big Heads: a lit glass display case with one big-headed figure inside
+            bigheads(g) {
+                plinth(g, 1.8, 1.8, '#5b3a24');
+                g.add(box(1.5, 0.25, 1.5, '#7a4f2e', 0, 0.35, 0, { roughness: 0.6 }));
+                const fig = new THREE.Group();
+                fig.add(box(0.36, 0.5, 0.26, '#3d7ab8', 0, 0.25, 0));
+                fig.add(sphere(0.42, '#f0c8a0', 0, 0.86, 0, { roughness: 0.5 }));
+                fig.add(sphere(0.43, '#4a3225', 0, 1.0, -0.05, { roughness: 0.8 }));
+                [-0.15, 0.15].forEach(ex => add(fig, new THREE.SphereGeometry(0.07, 10, 8), mat('#111'), ex, 0.86, 0.38));
+                fig.position.set(0, 0.48, 0);
+                g.add(fig);
+                const glass = new THREE.Mesh(new THREE.BoxGeometry(1.4, 1.9, 1.4), glassMat('#cfe8ff'));
+                glass.position.set(0, 1.43, 0); g.add(glass);
+                g.add(box(1.5, 0.12, 1.5, '#7a4f2e', 0, 2.44, 0));
+                add(g, new THREE.BoxGeometry(1.2, 0.04, 0.06), glow('#e8b04a', 2), 0, 2.36, 0.66);
+                return 2.6;
+            },
+            // Cubby: a wooden cubby wall with a plush in each hole
+            cubby(g) {
+                plinth(g, 2.6, 1.2, '#b08a5b');
+                const wall = new THREE.Group();
+                wall.add(box(2.3, 2.3, 0.7, '#e7c9a0', 0, 0, 0, { roughness: 0.85 }));
+                const pastel = ['#f29cb4', '#9ed9c4', '#ffd97d', '#c4b5fd', '#f7b267', '#a8d8ff', '#f29cb4', '#b5e48c', '#ffc8dd'];
+                for (let r = 0; r < 3; r++) for (let c = 0; c < 3; c++) {
+                    const x = (c - 1) * 0.72, y = (1 - r) * 0.72;
+                    wall.add(box(0.6, 0.6, 0.5, '#8a6440', x, y, 0.12, { roughness: 0.9 }));
+                    const p = pastel[r * 3 + c];
+                    wall.add(sphere(0.21, p, x, y - 0.06, 0.32, { roughness: 0.95 }));
+                    wall.add(sphere(0.07, p, x - 0.13, y + 0.13, 0.32, { roughness: 0.95 }));
+                    wall.add(sphere(0.07, p, x + 0.13, y + 0.13, 0.32, { roughness: 0.95 }));
                 }
-            }
-        }
-        function tower(x, z, w, d, h, color, setback) {
-            const g = new THREE.Group();
-            const body = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat(color, { roughness: 0.6, metalness: 0.2 }));
-            body.position.set(x, GROUND + h / 2, z); body.castShadow = true; body.receiveShadow = true;
-            g.add(body);
-            g.add(box(w + 0.5, 0.3, d + 0.5, '#565e6a', x, GROUND + 0.15, z, { roughness: 0.9 }));
-            towerWindows(x, z, w, d, h, GROUND);
-            if (setback) {
-                const w2 = w * 0.62, d2 = d * 0.62, h2 = h * 0.5;
-                const up = new THREE.Mesh(new THREE.BoxGeometry(w2, h2, d2), mat(color, { roughness: 0.6, metalness: 0.2 }));
-                up.position.set(x, GROUND + h + h2 / 2, z); up.castShadow = true;
-                g.add(up);
-                towerWindows(x, z, w2, d2, h2, GROUND + h);
-                g.add(smoothCyl(0.04, 0.07, 1.6, '#aab4c4', x, GROUND + h + h2 + 0.8, z, { segments: 8, metalness: 0.6 }));
-                const bm = new THREE.MeshStandardMaterial({ color: '#ff4040', emissive: '#ff4040', emissiveIntensity: 2 });
-                blinkMats.push(bm);
-                const tip = new THREE.Mesh(new THREE.SphereGeometry(0.13, 10, 8), bm);
-                tip.position.set(x, GROUND + h + h2 + 1.6, z);
-                g.add(tip);
-            }
-            return g;
-        }
-        const towerSpecs = [
-            [-10.5, -8.5, 3.0, 3.0, 9.5, '#8b939e', true],
-            [-7.0, -9.5, 2.6, 2.6, 12.5, '#9aa3ae', true],
-            [-3.5, -10.0, 3.2, 2.8, 8.5, '#7d8590', false],
-            [-12.8, -5.2, 2.4, 2.4, 7.5, '#6e7681', false],
-            [-5.5, -12.5, 2.8, 2.4, 10.5, '#9aa3ae', true],
-            [-9.5, -12.0, 2.4, 2.8, 8.0, '#8b939e', true],
-            [0.0, -10.5, 2.6, 2.6, 11.0, '#7d8590', true],
-            [-2.0, -13.5, 2.2, 2.2, 7.0, '#6e7681', false],
+                wall.position.set(0, 1.37, 0);
+                g.add(wall);
+                return 2.6;
+            },
+            // Decision Spinner: the game-show wheel, spinning on its stand
+            decisionspinner(g) {
+                plinth(g, 2.4, 1.4, '#3d2a5c');
+                g.add(box(0.14, 2.0, 0.14, '#c9a227', -0.35, 1.2, -0.25, { metalness: 0.7, roughness: 0.3 }));
+                g.add(box(0.14, 2.0, 0.14, '#c9a227', 0.35, 1.2, -0.25, { metalness: 0.7, roughness: 0.3 }));
+                const wheel = new THREE.Group();
+                const sl = ['#e63946', '#ffd97d', '#2a9d8f', '#9b5de5', '#f4a261', '#00bbf9', '#f15bb5', '#b5e48c'];
+                sl.forEach((c, i) => {
+                    const seg = new THREE.Mesh(new THREE.CylinderGeometry(1.4, 1.4, 0.14, 8, 1, false, (i / 8) * Math.PI * 2, Math.PI * 2 / 8), mat(c, { roughness: 0.45, emissive: c, emissiveIntensity: 0.15 }));
+                    seg.castShadow = true; wheel.add(seg);
+                });
+                const rim = new THREE.Mesh(new THREE.TorusGeometry(1.42, 0.07, 10, 48), mat('#d4af55', { metalness: 0.8, roughness: 0.25 }));
+                rim.rotation.x = Math.PI / 2; wheel.add(rim);
+                for (let i = 0; i < 16; i++) {
+                    const a = (i / 16) * Math.PI * 2;
+                    const bulb = add(wheel, new THREE.SphereGeometry(0.05, 8, 6), glow('#fff3b0', 1.8), Math.cos(a) * 1.42, 0.09, Math.sin(a) * 1.42);
+                    bulb.castShadow = false;
+                }
+                wheel.add(smoothCyl(0.16, 0.16, 0.24, '#d4af55', 0, 0, 0, { metalness: 0.8, roughness: 0.25 }));
+                const holder = new THREE.Group();
+                holder.add(wheel);
+                holder.rotation.x = Math.PI / 2;
+                holder.position.set(0, 2.25, 0);
+                g.add(holder);
+                const pointer = cone(0.14, 0.32, '#d4af55', 0, 3.82, 0.1, { metalness: 0.8, roughness: 0.25 });
+                pointer.rotation.x = Math.PI; g.add(pointer);
+                spinners.push({ obj: wheel, axis: 'y', speed: 0.9 });
+                return 3.9;
+            },
+            // Chockablock: candy-coloured blocks stacked on a cream board
+            chockablock(g) {
+                g.add(box(2.3, 0.24, 2.3, '#f3e6c8', 0, 0.12, 0, { roughness: 0.8 }));
+                const cc = ['#ff6b6b', '#ffd166', '#06d6a0', '#118ab2', '#c77dff', '#ff9f1c'];
+                const hmap = [[1, 2, 1, 0], [2, 3, 2, 1], [1, 2, 4, 2], [0, 1, 2, 1]];
+                hmap.forEach((row, r) => row.forEach((h, c) => {
+                    for (let k = 0; k < h; k++) g.add(box(0.48, 0.48, 0.48, cc[(r * 4 + c + k) % 6], (c - 1.5) * 0.52, 0.48 + k * 0.5, (r - 1.5) * 0.52, { roughness: 0.3, metalness: 0.05 }));
+                }));
+                return 2.5;
+            },
+            // Trivia Together: two quiz podiums with buzzers and a question mark between them
+            trivia(g) {
+                plinth(g, 2.8, 1.4, '#2b2d42');
+                [[-0.9, '#457b9d'], [0.9, '#e63946']].forEach(([x, c], i) => {
+                    g.add(box(0.8, 1.0, 0.8, c, x, 0.72, 0, { roughness: 0.5 }));
+                    const bm = glow(i ? '#ff8da1' : '#78b4ff', 2);
+                    blinkMats.push(bm);
+                    add(g, new THREE.SphereGeometry(0.2, 16, 10, 0, Math.PI * 2, 0, Math.PI / 2), bm, x, 1.22, 0);
+                });
+                const q = new THREE.Group();
+                const qm = glow('#ffd97d', 1.4);
+                const arc = new THREE.Mesh(new THREE.TorusGeometry(0.34, 0.1, 10, 24, Math.PI * 1.4), qm);
+                arc.rotation.z = -Math.PI * 0.2; arc.position.y = 0.5; q.add(arc);
+                add(q, new THREE.CylinderGeometry(0.1, 0.1, 0.32, 10), qm, 0, 0.05, 0);
+                add(q, new THREE.SphereGeometry(0.12, 12, 10), qm, 0, -0.32, 0);
+                q.position.set(0, 2.1, 0);
+                g.add(q);
+                spinners.push({ obj: q, axis: 'y', speed: 1.2, bob: 2.1 });
+                return 3.0;
+            },
+            // The Little Things: a bench under a lantern, a little flower bed and a mug of tea
+            littlethings(g) {
+                plinth(g, 2.4, 1.6, '#7c9a6a');
+                g.add(box(1.6, 0.1, 0.5, '#a0714f', 0, 0.62, 0));
+                g.add(box(1.6, 0.42, 0.08, '#a0714f', 0, 0.95, -0.22));
+                [[-0.7, 0.18], [0.7, 0.18], [-0.7, -0.18], [0.7, -0.18]].forEach(([x, z]) => g.add(box(0.08, 0.42, 0.08, '#5e4433', x, 0.4, z)));
+                g.add(smoothCyl(0.07, 0.07, 0.16, '#f2f0ea', 0.35, 0.75, 0.05, { segments: 12 }));
+                g.add(smoothCyl(0.04, 0.05, 2.2, '#3c424d', 1.0, 1.3, -0.4, { segments: 8, metalness: 0.4 }));
+                const lamp = add(g, new THREE.BoxGeometry(0.26, 0.32, 0.26), glow('#ffd59e', 2.2), 1.0, 2.5, -0.4);
+                lamp.castShadow = false;
+                ['#ff6b6b', '#ffd97d', '#c77dff', '#72efdd', '#ff8da1'].forEach((c, i) => add(g, new THREE.SphereGeometry(0.09, 8, 8), glow(c, 0.6), -0.9 + i * 0.32, 0.3, 0.6));
+                return 2.8;
+            },
+            // Kudos Cards: a giant foil reward card turning on a pedestal
+            kudoscards(g) {
+                plinth(g, 1.6, 1.6, '#3a3570');
+                g.add(smoothCyl(0.45, 0.55, 0.5, '#c9971f', 0, 0.47, 0, { metalness: 0.8, roughness: 0.3 }));
+                const card = new THREE.Group();
+                card.add(box(1.3, 1.9, 0.08, '#c9971f', 0, 0, 0, { metalness: 0.9, roughness: 0.2 }));
+                [0.045, -0.045].forEach(z => add(card, new THREE.PlaneGeometry(1.1, 1.7), mat('#4338ca', { metalness: 0.6, roughness: 0.25, emissive: '#4338ca', emissiveIntensity: 0.35, side: THREE.DoubleSide }), 0, 0, z));
+                add(card, new THREE.OctahedronGeometry(0.3), glow('#ffd97d', 1.2), 0, 0.1, 0);
+                card.position.set(0, 1.8, 0);
+                g.add(card);
+                spinners.push({ obj: card, axis: 'y', speed: 0.7 });
+                return 2.9;
+            },
+            // ShrinkRay: a ray gun on a stand shrinking a big box down to size
+            shrinkray(g) {
+                plinth(g, 2.8, 1.4, '#2f3b52');
+                g.add(box(0.12, 1.2, 0.12, '#3c424d', -0.8, 0.82, 0, { metalness: 0.5 }));
+                const gun = new THREE.Group();
+                const body = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.26, 0.8, 16), mat('#c4b5fd', { metalness: 0.6, roughness: 0.3 }));
+                body.rotation.z = Math.PI / 2; gun.add(body);
+                const nose = new THREE.Mesh(new THREE.ConeGeometry(0.22, 0.4, 16), mat('#78b4ff', { metalness: 0.6, roughness: 0.3 }));
+                nose.rotation.z = -Math.PI / 2; nose.position.x = 0.6; gun.add(nose);
+                add(gun, new THREE.SphereGeometry(0.09, 10, 8), glow('#72efdd', 2.4), 0.82, 0, 0);
+                gun.position.set(-0.7, 1.55, 0);
+                g.add(gun);
+                const beam = add(g, new THREE.CylinderGeometry(0.03, 0.08, 0.7, 8), new THREE.MeshBasicMaterial({ color: '#72efdd', transparent: true, opacity: 0.6 }), 0.45, 1.5, 0);
+                beam.rotation.z = Math.PI / 2 + 0.12; beam.castShadow = false;
+                const target = box(0.7, 0.7, 0.7, '#ff8da1', 1.05, 0.57, 0, { roughness: 0.5 });
+                g.add(target);
+                spinners.push({ obj: target, shrink: true });
+                return 2.4;
+            },
+            // Epafi: a red post box with letters floating out of it
+            epafi(g) {
+                plinth(g, 1.6, 1.6, '#8a7a6a');
+                g.add(smoothCyl(0.45, 0.48, 1.4, '#c8102e', 0, 0.92, 0, { segments: 24, roughness: 0.4 }));
+                add(g, new THREE.SphereGeometry(0.47, 24, 12, 0, Math.PI * 2, 0, Math.PI / 2), mat('#c8102e', { roughness: 0.4 }), 0, 1.62, 0);
+                g.add(box(0.46, 0.06, 0.06, '#1a1a1f', 0, 1.35, 0.45));
+                g.add(box(0.98, 0.08, 0.98, '#1a1a1f', 0, 0.25, 0));
+                const letters = new THREE.Group();
+                [[0, 0], [0.45, 0.4], [-0.4, 0.75]].forEach(([x, y], i) => {
+                    const env = box(0.46, 0.3, 0.03, '#f7f1e3', x, y, 0.1 * i, { roughness: 0.7 });
+                    env.rotation.z = (i - 1) * 0.25;
+                    letters.add(env);
+                    add(letters, new THREE.SphereGeometry(0.05, 8, 6), glow('#e07a55', 1.2), x, y, 0.1 * i + 0.03);
+                });
+                letters.position.set(0, 2.45, 0);
+                g.add(letters);
+                spinners.push({ obj: letters, axis: 'y', speed: 0.5, bob: 2.45 });
+                return 3.5;
+            },
+            // Intelligent Receipt Scanner: a shop till printing out a long receipt
+            receipt(g) {
+                plinth(g, 2.2, 1.6, '#8a8f99');
+                g.add(box(1.9, 0.9, 1.1, '#e8e2d6', 0, 0.67, 0, { roughness: 0.8 }));
+                const till = box(0.9, 0.5, 0.7, '#3b3f4a', -0.3, 1.37, 0, { roughness: 0.5 });
+                till.rotation.x = -0.2; g.add(till);
+                add(g, new THREE.PlaneGeometry(0.6, 0.28), glow('#38bd94', 1.4), -0.3, 1.45, 0.33).rotation.x = -0.2;
+                let y = 1.2, z = -0.1;
+                for (let i = 0; i < 6; i++) {
+                    const seg = box(0.4, 0.3, 0.015, '#fbfaf5', 0.55, y, z, { roughness: 0.9 });
+                    seg.rotation.x = -0.15 * i; g.add(seg);
+                    y += 0.27 - i * 0.02; z += 0.04 * i;
+                }
+                return 2.9;
+            },
+        };
+
+        const APPS = [
+            { id: 'decision-spinner', b: 'decisionspinner', name: 'Decision Spinner', tag: 'The game-show wheel for everyday choices.', x: -6.0, z: 0.0 },
+            { id: 'trivia-together', b: 'trivia', name: 'Trivia Together', tag: 'The 1-v-1 trivia duel you play on your own time.', x: -1.2, z: -2.4 },
+            { id: 'kudoscards', b: 'kudoscards', name: 'Kudos Cards', tag: 'Get things done. Collect the cards.', x: -1.0, z: 1.4 },
+            { id: 'shelfie', b: 'shelfie', name: 'Shelfie', tag: 'Your bookshelf, on your phone.', x: -6.5, z: 9.4 },
+            { id: 'cubby', b: 'cubby', name: 'Cubby', tag: 'Your plush collection, on a cosy cubby wall.', x: -11.0, z: 8.8 },
+            { id: 'littlethings', b: 'littlethings', name: 'The Little Things', tag: "Meditation for people who can't sit still.", x: 3.0, z: 8.6 },
+            { id: 'cartridge', b: 'cartridge', name: 'Cartridge', tag: 'Your game shelf, lit up like a shop.', x: -4.0, z: -10.2 },
+            { id: 'ninepocket', b: 'ninepocket', name: 'Nine Pocket', tag: 'Every card in a sleeved pocket, in binders on your phone.', x: 1.0, z: -10.0 },
+            { id: 'bigheads', b: 'bigheads', name: 'Big Heads', tag: 'Your vinyl figures, in a lit display cabinet.', x: -9.2, z: -9.4 },
+            { id: 'chockablock', b: 'chockablock', name: 'Chockablock', tag: 'A calm 8×8 block puzzle with no timers.', x: 5.6, z: -8.6 },
+            { id: 'receipt-scanner', b: 'receipt', name: 'Intelligent Receipt Scanner', tag: 'Tells you before you lose the chance to take something back.', x: 11.0, z: -4.4 },
+            { id: 'epafi', b: 'epafi', name: 'Epafi', tag: 'A kind little nudge to keep in touch.', x: 10.2, z: 1.2 },
+            { id: 'shrinkray', b: 'shrinkray', name: 'ShrinkRay', tag: 'Big tasks, shrunk down to doable.', x: 13.2, z: -1.0 },
         ];
-        towerSpecs.forEach(([x, z, w, d, h, c, s]) => cityGroup.add(tower(x, z, w, d, h, c, s)));
-        const winGeoAll = new THREE.BufferGeometry();
-        winGeoAll.setAttribute('position', new THREE.Float32BufferAttribute(winPosArr, 3));
-        winGeoAll.setAttribute('color', new THREE.Float32BufferAttribute(winColArr, 3));
-        cityGroup.add(new THREE.Mesh(winGeoAll, new THREE.MeshBasicMaterial({ vertexColors: true, side: THREE.DoubleSide })));
-        scene.add(cityGroup);
+        const texLoader = new THREE.TextureLoader();
+        const LOOK = new THREE.Vector2(-3, 0); // middle of the road loop
+        APPS.forEach((a, i) => {
+            const g = new THREE.Group();
+            const top = builders[a.b](g);
+            g.position.set(a.x, GROUND, a.z);
+            g.rotation.y = Math.atan2(LOOK.x - a.x, LOOK.y - a.z);
+            g.scale.setScalar(1.1);
+            g.userData = { app: a };
+            const tex = texLoader.load(`assets/${a.id}/icon.png`);
+            tex.colorSpace = THREE.SRGBColorSpace;
+            const pin = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, color: '#d8d8d8', toneMapped: false }));
+            pin.scale.setScalar(1.5);
+            pin.position.y = top + 0.9;
+            g.add(pin);
+            appsGroup.add(g);
+            landmarks.push({ group: g, pin, pinY: top + 0.9, phase: i * 0.7, hover: 0 });
+        });
+        scene.add(appsGroup);
 
         // --- Greenery with forbidden-zone placement ---
         const roadSamples = roadCurve.getPoints(200);
         const riverSamples = riverCurve.getPoints(50);
         const footprints = [
-            ...cottages.map(([x, z]) => [x, z, 2.2]),
-            ...towerSpecs.map(([x, z, w, d]) => [x, z, Math.max(w, d) / 2 + 1.4]),
-            [11.3, -2.5, 6.2],
+            ...APPS.map(a => [a.x, a.z, 2.9]),
         ];
         function forbidden(x, z, roadMargin = 1.3) {
             if (x * x + z * z > 256) return true;
@@ -1062,11 +1183,11 @@
         }
         const greeneryGroup = new THREE.Group();
         let nTrees = 0, nBushes = 0, nFlowers = 0;
-        for (let i = 0; i < 600 && (nTrees < 50 || nBushes < 25 || nFlowers < 30); i++) {
+        for (let i = 0; i < 600 && (nTrees < 30 || nBushes < 25 || nFlowers < 40); i++) {
             const a = Math.random() * Math.PI * 2, rr = Math.sqrt(Math.random()) * 15.6;
             const x = Math.cos(a) * rr, z = Math.sin(a) * rr;
             if (forbidden(x, z)) continue;
-            if (nTrees < 50) {
+            if (nTrees < 30) {
                 if (forbidden(x, z, 2.4)) continue; // trees need extra clearance from the road
                 const s = 0.42 + Math.random() * 0.55;
                 const tr = Math.random() < 0.45 ? pine(s) : broadleaf(s);
@@ -1214,20 +1335,53 @@
         starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
         scene.add(new THREE.Points(starGeo, new THREE.PointsMaterial({ color: '#ffffff', size: 0.3, transparent: true, opacity: 0.8, sizeAttenuation: true })));
 
-        camera.position.set(5, 22, 55);
-        controls.target.set(0, 10, 0);
+        camera.position.set(4, 26, 40);
+        controls.target.set(0, 3, 0);
         controls.update();
+
+        // --- Hover a landmark to see the app, click to jump to its card ---
+        const raycaster = new THREE.Raycaster();
+        const pointer = new THREE.Vector2();
+        const tip = document.getElementById('island-tip');
+        let hovered = null, downAt = null;
+        function pick(e) {
+            const rect = canvas.getBoundingClientRect();
+            pointer.set(((e.clientX - rect.left) / rect.width) * 2 - 1, -((e.clientY - rect.top) / rect.height) * 2 + 1);
+            raycaster.setFromCamera(pointer, camera);
+            const hit = raycaster.intersectObjects(appsGroup.children, true)[0];
+            if (!hit) return null;
+            let o = hit.object;
+            while (o && !o.userData.app) o = o.parent;
+            return o ? landmarks.find(l => l.group === o) : null;
+        }
+        canvas.addEventListener('pointermove', e => {
+            hovered = pick(e);
+            canvas.style.cursor = hovered ? 'pointer' : '';
+            controls.autoRotate = !hovered;
+            if (hovered) {
+                const a = hovered.group.userData.app;
+                tip.innerHTML = `<strong>${a.name}</strong><span>${a.tag}</span>`;
+                tip.style.transform = `translate(${e.clientX + 16}px, ${e.clientY + 16}px)`;
+                tip.classList.add('is-on');
+            } else tip.classList.remove('is-on');
+        });
+        canvas.addEventListener('pointerleave', () => { hovered = null; tip.classList.remove('is-on'); controls.autoRotate = true; });
+        canvas.addEventListener('pointerdown', e => { downAt = [e.clientX, e.clientY]; });
+        canvas.addEventListener('pointerup', e => {
+            if (!downAt || Math.hypot(e.clientX - downAt[0], e.clientY - downAt[1]) > 6) return;
+            const l = pick(e);
+            if (l) window.location.href = `apps.html#${l.group.userData.app.id}`;
+        });
 
         const clock = new THREE.Clock();
         let prevT = 0;
-        const flagMesh = castleGroup.getObjectByName('flag');
         function animate() {
             requestAnimationFrame(animate);
             const t = clock.getElapsedTime();
             const dt = Math.min(t - prevT, 0.1);
             prevT = t;
             const yOff = Math.sin(t * 0.4) * 0.8;
-            [islandGroup, castleGroup, buildingsGroup, cityGroup, pondGroup, riverGroup, roadGroup, greeneryGroup, carsGroup, peopleGroup, waterfalls].forEach(g => g.position.y = yOff);
+            [islandGroup, appsGroup, pondGroup, riverGroup, roadGroup, greeneryGroup, carsGroup, peopleGroup, waterfalls].forEach(g => g.position.y = yOff);
             const wfPos = waterfalls.geometry.attributes.position.array;
             for (let i = 0; i < pc; i++) {
                 wfPos[i * 3 + 1] += velocities[i];
@@ -1258,7 +1412,17 @@
                 fp[i * 3] += Math.cos(t * 0.5 + i * 0.1) * 0.002;
             }
             floating.geometry.attributes.position.needsUpdate = true;
-            if (flagMesh) flagMesh.rotation.y = Math.sin(t * 3) * 0.15;
+            spinners.forEach(s => {
+                if (s.shrink) { s.obj.scale.setScalar(0.55 + 0.45 * (0.5 + 0.5 * Math.cos(t * 1.6))); return; }
+                s.obj.rotation[s.axis] += s.speed * dt;
+                if (s.bob) s.obj.position.y = s.bob + Math.sin(t * 1.8) * 0.12;
+            });
+            landmarks.forEach(l => {
+                l.hover += ((l === hovered ? 1 : 0) - l.hover) * 0.15;
+                l.group.scale.setScalar(1.1 * (1 + l.hover * 0.12));
+                l.pin.position.y = l.pinY + Math.sin(t * 1.5 + l.phase) * 0.15 + l.hover * 0.4;
+                l.pin.material.color.setScalar(0.85 + l.hover * 0.15);
+            });
             controls.update();
             composer.render();
         }
