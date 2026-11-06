@@ -292,6 +292,13 @@
         .app-feature--cartridge .app-feature__tagline { color: #ff3d7f; }
         .app-feature--cartridge .gallery-shot { aspect-ratio: 1080 / 2400; }
 
+        /* Mumblr accent variant */
+        .app-feature--mumblr {
+            background: linear-gradient(160deg, rgba(109,91,208,0.12), rgba(255,143,163,0.05));
+        }
+        .app-feature--mumblr .feature-item__dot { background: #8f7ff0; box-shadow: 0 0 12px #8f7ff0; }
+        .app-feature--mumblr .app-feature__tagline { color: #b7a9ff; }
+        .app-feature--mumblr .gallery-shot { aspect-ratio: 1080 / 2000; }
         /* Big Heads accent variant */
         .app-feature--bigheads {
             background: linear-gradient(160deg, rgba(232,176,74,0.09), rgba(155,123,255,0.05));
@@ -399,6 +406,44 @@
     <!-- ===== APP FEATURES ===== -->
     <section style="padding-top: 0;">
         <div class="container">
+            <!-- ===== MUMBLR ===== -->
+            <article id="mumblr" class="app-feature app-feature--mumblr reveal">
+                <div class="app-feature__top">
+                    <div class="app-feature__icon"><img src="assets/mumblr/icon.png" alt="Mumblr"></div>
+                    <div>
+                        <div class="app-feature__name">Mumblr</div>
+                        <div class="app-feature__platform">Android · Offline Voice to Text · Coming soon</div>
+                    </div>
+                    <div class="app-feature__index">01 / 14</div>
+                </div>
+
+                <p class="app-feature__tagline">"Your voice, turned into text, without sending a word anywhere."</p>
+
+                <p class="app-feature__desc">
+                    Mumblr records your voice, or takes an audio file from WhatsApp or your files, and writes it out as text on your phone. It has no internet access at all, so your meetings, lectures and voice notes stay yours. Recordings save as you go, so a closed app does not cost you the whole thing, and you can tap any line to jump to that moment in the audio.
+                </p>
+
+                <div class="gallery">
+                    <div class="gallery-shot"><img src="assets/mumblr/screenshot_library.png" alt="The Mumblr library with four recordings and a search bar"></div>
+                    <div class="gallery-shot"><img src="assets/mumblr/screenshot_recording.png" alt="Recording with a live waveform and pause and stop buttons"></div>
+                    <div class="gallery-shot"><img src="assets/mumblr/screenshot_transcript.png" alt="A transcript with the audio player underneath"></div>
+                </div>
+
+                <h3 style="font-family: var(--font-display); font-size: 1.3rem; font-weight: 500; margin-bottom: 18px; color: var(--text-mute); letter-spacing: 0.02em;">Inside the build</h3>
+                <div class="features-grid">
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Accurate on-device transcription with punctuation, capital letters and numbers done for you</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Pause and resume, a Quick Settings tile, and recordings that survive the app being closed</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Search every transcript, tap a line to hear it, fix a word, then copy or share the text</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>25 European languages, light and dark themes</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>No account, no ads and no internet permission. Free for the first 10 minutes of each recording, with a one-time Pro unlock</p></div>
+                </div>
+
+                <div class="app-feature__cta-row">
+                    <span class="store-btn store-btn--soon">Coming soon to Google Play</span>
+                    <a href="mumblr-privacy-policy.html" class="text-link">Privacy Policy</a>
+                </div>
+            </article>
+
             <!-- ===== NINE POCKET ===== -->
             <article id="ninepocket" class="app-feature app-feature--ninepocket reveal">
                 <div class="app-feature__top">
@@ -407,7 +452,7 @@
                         <div class="app-feature__name">Nine Pocket</div>
                         <div class="app-feature__platform">Android · Magic: The Gathering Binders</div>
                     </div>
-                    <div class="app-feature__index">01 / 13</div>
+                    <div class="app-feature__index">02 / 14</div>
                 </div>
 
                 <p class="app-feature__tagline">"Every card in a sleeved pocket, in binders you carry on your phone."</p>
@@ -449,7 +494,7 @@
                         <div class="app-feature__name">The Little Things</div>
                         <div class="app-feature__platform">Android · Mindfulness</div>
                     </div>
-                    <div class="app-feature__index">02 / 13</div>
+                    <div class="app-feature__index">03 / 14</div>
                 </div>
 
                 <p class="app-feature__tagline">"Meditation for people who can't sit still."</p>
@@ -491,7 +536,7 @@
                         <div class="app-feature__name">Intelligent Receipt Scanner</div>
                         <div class="app-feature__platform">Android · Receipts & Spending</div>
                     </div>
-                    <div class="app-feature__index">03 / 13</div>
+                    <div class="app-feature__index">04 / 14</div>
                 </div>
 
                 <p class="app-feature__tagline">"Tells you before you lose the chance to take something back."</p>
@@ -533,7 +578,7 @@
                         <div class="app-feature__name">Cartridge</div>
                         <div class="app-feature__platform">Android · Game Collection</div>
                     </div>
-                    <div class="app-feature__index">04 / 13</div>
+                    <div class="app-feature__index">05 / 14</div>
                 </div>
 
                 <p class="app-feature__tagline">"Your game shelf, lit up like a shop."</p>
@@ -576,7 +621,7 @@
                         <div class="app-feature__name">Big Heads</div>
                         <div class="app-feature__platform">Android · Vinyl Figure Collection · Coming soon</div>
                     </div>
-                    <div class="app-feature__index">05 / 13</div>
+                    <div class="app-feature__index">06 / 14</div>
                 </div>
 
                 <p class="app-feature__tagline">"Your vinyl figures, in a lit display cabinet."</p>
@@ -613,7 +658,7 @@
                         <div class="app-feature__name">Cubby</div>
                         <div class="app-feature__platform">Android · Plush Collection · Coming soon</div>
                     </div>
-                    <div class="app-feature__index">06 / 13</div>
+                    <div class="app-feature__index">07 / 14</div>
                 </div>
 
                 <p class="app-feature__tagline">"Your plush collection, on a cosy cubby wall."</p>
@@ -650,7 +695,7 @@
                         <div class="app-feature__name">Kudos Cards</div>
                         <div class="app-feature__platform">Android · Team Rewards</div>
                     </div>
-                    <div class="app-feature__index">07 / 13</div>
+                    <div class="app-feature__index">08 / 14</div>
                 </div>
 
                 <p class="app-feature__tagline">"Get things done. Collect the cards."</p>
@@ -693,7 +738,7 @@
                         <div class="app-feature__name">Epafi</div>
                         <div class="app-feature__platform">Android · Keep in Touch</div>
                     </div>
-                    <div class="app-feature__index">08 / 13</div>
+                    <div class="app-feature__index">09 / 14</div>
                 </div>
 
                 <p class="app-feature__tagline">"A kind little nudge to keep in touch."</p>
@@ -736,7 +781,7 @@
                         <div class="app-feature__name">Shelfie</div>
                         <div class="app-feature__platform">Android · Book Tracker</div>
                     </div>
-                    <div class="app-feature__index">09 / 13</div>
+                    <div class="app-feature__index">10 / 14</div>
                 </div>
 
                 <p class="app-feature__tagline">"Your bookshelf, on your phone."</p>
@@ -779,7 +824,7 @@
                         <div class="app-feature__name">Chockablock</div>
                         <div class="app-feature__platform">Android · Block Puzzle</div>
                     </div>
-                    <div class="app-feature__index">10 / 13</div>
+                    <div class="app-feature__index">11 / 14</div>
                 </div>
 
                 <p class="app-feature__tagline">"A calm 8×8 block puzzle, with no timers and it plays offline."</p>
@@ -821,7 +866,7 @@
                         <div class="app-feature__name">Decision Spinner</div>
                         <div class="app-feature__platform">Android · Royal Edition</div>
                     </div>
-                    <div class="app-feature__index">11 / 13</div>
+                    <div class="app-feature__index">12 / 14</div>
                 </div>
 
                 <p class="app-feature__tagline">"The game-show wheel for everyday choices."</p>
@@ -863,7 +908,7 @@
                         <div class="app-feature__name">ShrinkRay</div>
                         <div class="app-feature__platform">Android · On-device AI</div>
                     </div>
-                    <div class="app-feature__index">12 / 13</div>
+                    <div class="app-feature__index">13 / 14</div>
                 </div>
 
                 <p class="app-feature__tagline">"Big tasks, shrunk down to doable."</p>
@@ -905,7 +950,7 @@
                         <div class="app-feature__name">Trivia Together</div>
                         <div class="app-feature__platform">Android · Trivia Duels</div>
                     </div>
-                    <div class="app-feature__index">13 / 13</div>
+                    <div class="app-feature__index">14 / 14</div>
                 </div>
 
                 <p class="app-feature__tagline">"The 1-v-1 trivia duel you play on your own time."</p>
