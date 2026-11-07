@@ -340,6 +340,22 @@
         .app-feature--receipt-scanner .app-feature__tagline { color: #38bd94; }
         .app-feature--receipt-scanner .gallery-shot { aspect-ratio: 1080 / 1920; }
 
+        /* Grovestead accent variant */
+        .app-feature--grovestead {
+            background: linear-gradient(160deg, rgba(120,190,90,0.08), rgba(120,190,255,0.05));
+        }
+        .app-feature--grovestead .feature-item__dot { background: #7bbf5a; box-shadow: 0 0 12px #7bbf5a; }
+        .app-feature--grovestead .app-feature__tagline { color: #8fd06c; }
+        .app-feature--grovestead .gallery-shot { aspect-ratio: 540 / 960; }
+
+        /* Lent Out accent variant */
+        .app-feature--lentout {
+            background: linear-gradient(160deg, rgba(206,136,108,0.09), rgba(240,228,205,0.04));
+        }
+        .app-feature--lentout .feature-item__dot { background: #ce886c; box-shadow: 0 0 12px #ce886c; }
+        .app-feature--lentout .app-feature__tagline { color: #e0a287; }
+        .app-feature--lentout .gallery-shot { aspect-ratio: 540 / 960; }
+
         /* Shelfie accent variant */
         .app-feature--shelfie {
             background: linear-gradient(160deg, rgba(200,85,61,0.08), rgba(201,164,92,0.05));
@@ -399,7 +415,7 @@
                 <span class="split-line" data-autoplay="true"><span>Apps with</span></span>
                 <span class="split-line" data-autoplay="true"><span><em>character.</em></span></span>
             </h1>
-            <p class="lead reveal" data-delay="3">Thirteen apps so far. Each one started as something I couldn't stop thinking about, and I kept going until I would happily use it on my own phone.</p>
+            <p class="lead reveal" data-delay="3">Sixteen apps so far. Each one started as something I couldn't stop thinking about, and I kept going until I would happily use it on my own phone.</p>
         </div>
     </section>
 
@@ -414,7 +430,7 @@
                         <div class="app-feature__name">Mumblr</div>
                         <div class="app-feature__platform">Android · Offline Voice to Text · Coming soon</div>
                     </div>
-                    <div class="app-feature__index">01 / 14</div>
+                    <div class="app-feature__index">01 / 16</div>
                 </div>
 
                 <p class="app-feature__tagline">"Your voice, turned into text, without sending a word anywhere."</p>
@@ -444,6 +460,92 @@
                 </div>
             </article>
 
+            <!-- ===== GROVESTEAD ===== -->
+            <article id="grovestead" class="app-feature app-feature--grovestead reveal">
+                <div class="app-feature__top">
+                    <div class="app-feature__icon"><img src="assets/grovestead/icon.png" alt="Grovestead"></div>
+                    <div>
+                        <div class="app-feature__name">Grovestead</div>
+                        <div class="app-feature__platform">Android · Brain Puzzle Game</div>
+                    </div>
+                    <div class="app-feature__index">02 / 16</div>
+                </div>
+
+                <p class="app-feature__tagline">"Solve the puzzle. Grow the woodland."</p>
+
+                <p class="app-feature__desc">
+                    Grovestead is a cosy logic puzzle with a garden at the end of it. Put one acorn in every colour, every row and every column, with no two touching, then plant what you earn. Every puzzle you finish gives you a seed, stars and a little growth for the trees you already have, so a tent slowly becomes a campsite, a cabin and a full homestead.
+                </p>
+
+                <div class="gallery">
+                    <div class="gallery-shot"><img src="assets/grovestead/screenshot_home.png" alt="The Grovestead home screen"></div>
+                    <div class="gallery-shot"><img src="assets/grovestead/screenshot_board.png" alt="A colour-region acorn puzzle on the board"></div>
+                    <div class="gallery-shot"><img src="assets/grovestead/screenshot_cabin.png" alt="A finished homestead with a cabin, trees and fences"></div>
+                    <div class="gallery-shot"><img src="assets/grovestead/screenshot_decor.png" alt="Decorating the homestead with fences, hedges and benches"></div>
+                </div>
+
+                <h3 style="font-family: var(--font-display); font-size: 1.3rem; font-weight: 500; margin-bottom: 18px; color: var(--text-mute); letter-spacing: 0.02em;">Inside the build</h3>
+                <div class="features-grid">
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Four puzzle sizes, from a relaxed 5 x 5 to a tricky 9 x 9</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>A new daily puzzle with a 20 star bonus and a streak</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>3 free hints on every puzzle, plus undo</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>25 kinds of tree to collect, grow and plant wherever you like</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Fences, hedges, benches, a wishing well and a fire pit to decorate with</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Plays offline with no account. A short ad after some puzzles, and one purchase removes ads for good</p></div>
+                </div>
+
+                <div class="app-feature__cta-row">
+                    <a href="https://play.google.com/store/apps/details?id=com.tristonia.grovestead&hl=en" class="store-btn" target="_blank" rel="noopener noreferrer" data-magnetic data-magnetic-strength="0.15">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.732l-2.302 1.33-2.542-2.546 2.542-2.546zM5.864 3.658L16.8 9.99l-2.302 2.302L5.864 3.658z"/></svg>
+                        Get it on Google Play
+                    </a>
+                    <a href="grovestead-privacy-policy.html" class="text-link">Privacy Policy</a>
+                </div>
+            </article>
+
+            <!-- ===== LENT OUT ===== -->
+            <article id="lentout" class="app-feature app-feature--lentout reveal">
+                <div class="app-feature__top">
+                    <div class="app-feature__icon"><img src="assets/lentout/icon.png" alt="Lent Out"></div>
+                    <div>
+                        <div class="app-feature__name">Lent Out</div>
+                        <div class="app-feature__platform">Android · Loan Tracker</div>
+                    </div>
+                    <div class="app-feature__index">03 / 16</div>
+                </div>
+
+                <p class="app-feature__tagline">"Remember who has your stuff."</p>
+
+                <p class="app-feature__desc">
+                    Lent Out is a simple loan tracker for the things you lend to friends, family and neighbours. Snap a photo of the item, say who has it and pick when you would like it back. Everything you have lent out sits on one list with the longest overdue at the top, so you can see at a glance what is still missing.
+                </p>
+
+                <div class="gallery">
+                    <div class="gallery-shot"><img src="assets/lentout/screenshot_list.png" alt="The list of things out on loan, with photos and due dates"></div>
+                    <div class="gallery-shot"><img src="assets/lentout/screenshot_add.png" alt="Adding a loan with a photo, a person and a reminder"></div>
+                    <div class="gallery-shot"><img src="assets/lentout/screenshot_reminder.png" alt="Choosing when to ask for the item back"></div>
+                    <div class="gallery-shot"><img src="assets/lentout/screenshot_person.png" alt="Everything one person has borrowed, on their own page"></div>
+                </div>
+
+                <h3 style="font-family: var(--font-display); font-size: 1.3rem; font-weight: 500; margin-bottom: 18px; color: var(--text-mute); letter-spacing: 0.02em;">Inside the build</h3>
+                <div class="features-grid">
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>A photo of every item, from your camera or gallery</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Pick the person from people you have lent to before, or add someone new</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Reminders for a week, two weeks, a month or any date you like</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>One tap for "Got it back", with an undo if you slip</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>A page for each person and a history of everything that came back</p></div>
+                    <div class="feature-item"><span class="feature-item__dot"></span><p>Completely free. No ads, no purchases, no account, and everything stays on your phone</p></div>
+                </div>
+
+                <div class="app-feature__cta-row">
+                    <a href="https://play.google.com/store/apps/details?id=com.tristonia.lentout&hl=en" class="store-btn" target="_blank" rel="noopener noreferrer" data-magnetic data-magnetic-strength="0.15">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33a1 1 0 0 1 0 1.732l-2.302 1.33-2.542-2.546 2.542-2.546zM5.864 3.658L16.8 9.99l-2.302 2.302L5.864 3.658z"/></svg>
+                        Get it on Google Play
+                    </a>
+                    <a href="lentout-privacy-policy.html" class="text-link">Privacy Policy</a>
+                </div>
+            </article>
+
             <!-- ===== NINE POCKET ===== -->
             <article id="ninepocket" class="app-feature app-feature--ninepocket reveal">
                 <div class="app-feature__top">
@@ -452,7 +554,7 @@
                         <div class="app-feature__name">Nine Pocket</div>
                         <div class="app-feature__platform">Android · Magic: The Gathering Binders</div>
                     </div>
-                    <div class="app-feature__index">02 / 14</div>
+                    <div class="app-feature__index">04 / 16</div>
                 </div>
 
                 <p class="app-feature__tagline">"Every card in a sleeved pocket, in binders you carry on your phone."</p>
@@ -494,7 +596,7 @@
                         <div class="app-feature__name">The Little Things</div>
                         <div class="app-feature__platform">Android · Mindfulness</div>
                     </div>
-                    <div class="app-feature__index">03 / 14</div>
+                    <div class="app-feature__index">05 / 16</div>
                 </div>
 
                 <p class="app-feature__tagline">"Meditation for people who can't sit still."</p>
@@ -536,7 +638,7 @@
                         <div class="app-feature__name">Intelligent Receipt Scanner</div>
                         <div class="app-feature__platform">Android · Receipts & Spending</div>
                     </div>
-                    <div class="app-feature__index">04 / 14</div>
+                    <div class="app-feature__index">06 / 16</div>
                 </div>
 
                 <p class="app-feature__tagline">"Tells you before you lose the chance to take something back."</p>
@@ -578,7 +680,7 @@
                         <div class="app-feature__name">Cartridge</div>
                         <div class="app-feature__platform">Android · Game Collection</div>
                     </div>
-                    <div class="app-feature__index">05 / 14</div>
+                    <div class="app-feature__index">07 / 16</div>
                 </div>
 
                 <p class="app-feature__tagline">"Your game shelf, lit up like a shop."</p>
@@ -621,7 +723,7 @@
                         <div class="app-feature__name">Big Heads</div>
                         <div class="app-feature__platform">Android · Vinyl Figure Collection · Coming soon</div>
                     </div>
-                    <div class="app-feature__index">06 / 14</div>
+                    <div class="app-feature__index">08 / 16</div>
                 </div>
 
                 <p class="app-feature__tagline">"Your vinyl figures, in a lit display cabinet."</p>
@@ -658,7 +760,7 @@
                         <div class="app-feature__name">Cubby</div>
                         <div class="app-feature__platform">Android · Plush Collection · Coming soon</div>
                     </div>
-                    <div class="app-feature__index">07 / 14</div>
+                    <div class="app-feature__index">09 / 16</div>
                 </div>
 
                 <p class="app-feature__tagline">"Your plush collection, on a cosy cubby wall."</p>
@@ -695,7 +797,7 @@
                         <div class="app-feature__name">Kudos Cards</div>
                         <div class="app-feature__platform">Android · Team Rewards</div>
                     </div>
-                    <div class="app-feature__index">08 / 14</div>
+                    <div class="app-feature__index">10 / 16</div>
                 </div>
 
                 <p class="app-feature__tagline">"Get things done. Collect the cards."</p>
@@ -738,7 +840,7 @@
                         <div class="app-feature__name">Epafi</div>
                         <div class="app-feature__platform">Android · Keep in Touch</div>
                     </div>
-                    <div class="app-feature__index">09 / 14</div>
+                    <div class="app-feature__index">11 / 16</div>
                 </div>
 
                 <p class="app-feature__tagline">"A kind little nudge to keep in touch."</p>
@@ -781,7 +883,7 @@
                         <div class="app-feature__name">Shelfie</div>
                         <div class="app-feature__platform">Android · Book Tracker</div>
                     </div>
-                    <div class="app-feature__index">10 / 14</div>
+                    <div class="app-feature__index">12 / 16</div>
                 </div>
 
                 <p class="app-feature__tagline">"Your bookshelf, on your phone."</p>
@@ -824,7 +926,7 @@
                         <div class="app-feature__name">Chockablock</div>
                         <div class="app-feature__platform">Android · Block Puzzle</div>
                     </div>
-                    <div class="app-feature__index">11 / 14</div>
+                    <div class="app-feature__index">13 / 16</div>
                 </div>
 
                 <p class="app-feature__tagline">"A calm 8×8 block puzzle, with no timers and it plays offline."</p>
@@ -866,7 +968,7 @@
                         <div class="app-feature__name">Decision Spinner</div>
                         <div class="app-feature__platform">Android · Royal Edition</div>
                     </div>
-                    <div class="app-feature__index">12 / 14</div>
+                    <div class="app-feature__index">14 / 16</div>
                 </div>
 
                 <p class="app-feature__tagline">"The game-show wheel for everyday choices."</p>
@@ -908,7 +1010,7 @@
                         <div class="app-feature__name">ShrinkRay</div>
                         <div class="app-feature__platform">Android · On-device AI</div>
                     </div>
-                    <div class="app-feature__index">13 / 14</div>
+                    <div class="app-feature__index">15 / 16</div>
                 </div>
 
                 <p class="app-feature__tagline">"Big tasks, shrunk down to doable."</p>
@@ -950,7 +1052,7 @@
                         <div class="app-feature__name">Trivia Together</div>
                         <div class="app-feature__platform">Android · Trivia Duels</div>
                     </div>
-                    <div class="app-feature__index">14 / 14</div>
+                    <div class="app-feature__index">16 / 16</div>
                 </div>
 
                 <p class="app-feature__tagline">"The 1-v-1 trivia duel you play on your own time."</p>
@@ -1005,7 +1107,7 @@
             <div class="t-footer__grid">
                 <div class="t-footer__brand">
                     <div class="t-footer__mark">Tris<em>tonia</em></div>
-                    <p style="color: var(--text-mute); font-size: 0.95rem; max-width: 320px;">Indie Android apps, built by one person in the UK.</p>
+                    <p style="color: var(--text-mute); font-size: 0.95rem; max-width: 320px;">Indie Android apps, made by Tris.</p>
                 </div>
                 <div class="t-footer__col">
                     <h4>Navigate</h4>
@@ -1021,7 +1123,7 @@
             </div>
             <div class="t-footer__bottom">
                 <span>© <span id="footer-year">2026</span> Tristonia Ltd. All rights reserved.</span>
-                <span>Made with care in the UK</span>
+                <span>Made with care by Tris</span>
             </div>
         </div>
     </footer>
