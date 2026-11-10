@@ -23,6 +23,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="modulepreload" href="assets/vendor/three/three.module.min.js">
     <link rel="stylesheet" href="assets/design/design.css">
     <style>
         /* ===== Hero — Three.js stage ===== */
@@ -60,6 +61,8 @@
             will-change: transform;
         }
         #island-tip em { font-style: normal; font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-top: 4px; }
+        .island-hint { display: none; }
+        .has-island .island-hint { display: block; }
         .island-hint { font-family: var(--font-mono, monospace); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-mute, #b8b8d0); opacity: 0.75; text-align: center; margin-top: 18px; }
         @media (max-width: 760px) { .island-hint { font-size: 0.62rem; margin-top: 10px; } }
         #island-tip strong { color: #fff; font-family: var(--font-display); font-size: 1.05rem; font-weight: 500; }
@@ -594,11 +597,11 @@
         <div class="container">
             <div class="stats reveal">
                 <div class="stat">
-                    <div class="stat__num" data-count="13">0</div>
+                    <div class="stat__num" data-count="16">0</div>
                     <div class="stat__label">Apps Built</div>
                 </div>
                 <div class="stat">
-                    <div class="stat__num" data-count="11">0</div>
+                    <div class="stat__num" data-count="13">0</div>
                     <div class="stat__label">On Google Play</div>
                 </div>
                 <div class="stat">
@@ -660,8 +663,8 @@
     <script type="importmap">
     {
         "imports": {
-            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+            "three": "./assets/vendor/three/three.module.min.js",
+            "three/addons/": "./assets/vendor/three/jsm/"
         }
     }
     </script>
@@ -1186,9 +1189,70 @@
                 }
                 return 2.9;
             },
+            // Mumblr: a studio microphone with sound rings rippling off it
+            mumblr(g) {
+                plinth(g, 1.8, 1.8, '#2a2450');
+                g.add(smoothCyl(0.5, 0.6, 0.18, '#3a3370', 0, 0.31, 0, { metalness: 0.5, roughness: 0.4 }));
+                g.add(smoothCyl(0.07, 0.07, 1.3, '#b9b4d8', 0, 1.05, 0, { segments: 10, metalness: 0.8, roughness: 0.25 }));
+                const body = { metalness: 0.6, roughness: 0.3 };
+                g.add(smoothCyl(0.42, 0.42, 0.7, '#8f7ff0', 0, 2.15, 0, body));
+                g.add(sphere(0.42, '#8f7ff0', 0, 2.5, 0, body));
+                g.add(sphere(0.42, '#8f7ff0', 0, 1.8, 0, body));
+                g.add(smoothCyl(0.445, 0.445, 0.1, '#d9d4ff', 0, 2.15, 0, { metalness: 0.8, roughness: 0.2 }));
+                const rings = new THREE.Group();
+                [0.78, 1.08, 1.38].forEach(r => {
+                    const ring = new THREE.Mesh(new THREE.TorusGeometry(r, 0.035, 8, 40), glow('#b7a9ff', 1.3));
+                    ring.material.transparent = true;
+                    ring.rotation.x = Math.PI / 2;
+                    rings.add(ring);
+                });
+                rings.position.set(0, 2.15, 0);
+                g.add(rings);
+                spinners.push({ obj: rings, pulse: true });
+                return 3.1;
+            },
+            // Grovestead: the puzzle board itself, one tree in every row and column
+            grovestead(g) {
+                plinth(g, 2.8, 2.8, '#4f6b3c');
+                const tones = ['#7bbf5a', '#69a94e'];
+                for (let r = 0; r < 4; r++) for (let c = 0; c < 4; c++) {
+                    g.add(box(0.58, 0.1, 0.58, tones[(r + c) % 2], (c - 1.5) * 0.62, 0.27, (r - 1.5) * 0.62, { roughness: 0.9 }));
+                }
+                [1, 3, 0, 2].forEach((c, r) => {
+                    const x = (c - 1.5) * 0.62, z = (r - 1.5) * 0.62;
+                    g.add(smoothCyl(0.06, 0.09, 0.4, '#6b4c3b', x, 0.52, z, { segments: 8, roughness: 0.9 }));
+                    g.add(cone(0.3, 0.7, '#2f7a4d', x, 1.05, z, { segments: 10, roughness: 0.85 }));
+                    g.add(cone(0.22, 0.55, '#3d8b5e', x, 1.5, z, { segments: 10, roughness: 0.85 }));
+                    add(g, new THREE.SphereGeometry(0.06, 8, 6), glow('#ffe9a8', 1.6), x, 1.83, z).castShadow = false;
+                });
+                return 2.2;
+            },
+            // Lent Out: a lending cupboard on a post, with a tag for who has what
+            lentout(g) {
+                plinth(g, 2.0, 1.6, '#8a6a58');
+                g.add(box(0.16, 1.2, 0.16, '#6b4c3b', 0, 0.82, 0));
+                g.add(box(1.5, 1.2, 0.08, '#ce886c', 0, 2.0, -0.36, { roughness: 0.7 }));
+                g.add(box(0.08, 1.2, 0.8, '#ce886c', -0.75, 2.0, 0, { roughness: 0.7 }));
+                g.add(box(0.08, 1.2, 0.8, '#ce886c', 0.75, 2.0, 0, { roughness: 0.7 }));
+                g.add(box(1.58, 0.08, 0.8, '#b5704f', 0, 1.42, 0));
+                g.add(box(1.5, 0.06, 0.74, '#b5704f', 0, 2.0, 0));
+                [[-0.4, 0.5], [0.4, -0.5]].forEach(([x, rz]) => {
+                    const slab = box(0.98, 0.08, 1.0, '#5a3d2e', x, 2.82, 0, { roughness: 0.8 });
+                    slab.rotation.z = rz; g.add(slab);
+                });
+                [['#3d5a80', -0.5], ['#e9c46a', -0.33], ['#c8553d', -0.16]].forEach(([c, x]) => g.add(box(0.14, 0.42, 0.5, c, x, 2.24, 0, { roughness: 0.75 })));
+                g.add(sphere(0.2, '#f4a261', 0.35, 2.23, 0.05, { roughness: 0.6 }));
+                g.add(box(0.5, 0.3, 0.4, '#2a9d8f', -0.3, 1.61, 0.05, { roughness: 0.6 }));
+                g.add(smoothCyl(0.13, 0.13, 0.3, '#f2f0ea', 0.35, 1.61, 0.05, { segments: 12 }));
+                add(g, new THREE.BoxGeometry(0.3, 0.4, 0.03), glow('#ffd9a0', 0.9), 0.98, 1.9, 0.42).castShadow = false;
+                return 3.3;
+            },
         };
 
         const APPS = [
+            { id: 'mumblr', b: 'mumblr', name: 'Mumblr', tag: 'Your voice, turned into text, without sending a word anywhere.', x: 3.0, z: -1.0 },
+            { id: 'grovestead', b: 'grovestead', name: 'Grovestead', tag: 'Solve the puzzle. Grow the woodland.', x: -1.5, z: 12.5 },
+            { id: 'lentout', b: 'lentout', name: 'Lent Out', tag: 'Remember who has your stuff.', x: -12.5, z: -6.5 },
             { id: 'decision-spinner', b: 'decisionspinner', name: 'Decision Spinner', tag: 'The game-show wheel for everyday choices.', x: -6.0, z: 0.0 },
             { id: 'trivia-together', b: 'trivia', name: 'Trivia Together', tag: 'The 1-v-1 trivia duel you play on your own time.', x: -1.2, z: -2.4 },
             { id: 'kudoscards', b: 'kudoscards', name: 'Kudos Cards', tag: 'Get things done. Collect the cards.', x: -1.0, z: 1.4 },
@@ -1852,6 +1916,7 @@
             blinkMats.forEach((m, i) => { m.emissiveIntensity = Math.sin(t * 3 + i * 1.7) > 0 ? 2.2 : 0.15; });
             spinners.forEach(s => {
                 if (s.shrink) { s.obj.scale.setScalar(0.55 + 0.45 * (0.5 + 0.5 * Math.cos(t * 1.6))); return; }
+                if (s.pulse) { s.obj.children.forEach((r, i) => { const k = (t * 0.5 + i / 3) % 1; r.scale.setScalar(0.7 + k * 0.6); r.material.emissiveIntensity = 1.6 * (1 - k); r.material.opacity = 1 - k; }); return; }
                 s.obj.rotation[s.axis] += s.speed * dt;
                 if (s.bob) s.obj.position.y = s.bob + Math.sin(t * 1.8) * 0.12;
             });

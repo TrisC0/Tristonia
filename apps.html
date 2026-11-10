@@ -57,6 +57,47 @@
             color: transparent;
         }
 
+        html { scroll-behavior: smooth; }
+
+        /* ===== App dock: every app as an icon, magnified near the pointer ===== */
+        .app-dock-wrap { margin-top: 48px; }
+        .app-dock {
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+            height: 92px;
+            padding: 0 4px 10px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+        .app-dock::-webkit-scrollbar { display: none; }
+        .app-dock a {
+            flex: 0 0 auto;
+            width: 52px; height: 52px;
+            border-radius: 14px;
+            overflow: hidden;
+            transform-origin: 50% 100%;
+            box-shadow: 0 10px 24px -12px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.18);
+            will-change: transform;
+        }
+        .app-dock img { width: 100%; height: 100%; object-fit: cover; }
+        .app-dock-label {
+            height: 1.4em;
+            margin-top: 6px;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--text-mute);
+            transition: opacity 0.3s;
+        }
+        @media (max-width: 760px) {
+            .app-dock { height: 70px; gap: 8px; margin: 0 -20px; padding: 0 20px 8px; }
+            .app-dock a { width: 46px; height: 46px; border-radius: 12px; }
+        }
+
         .app-feature {
             position: relative;
             margin: 60px 0;
@@ -417,6 +458,10 @@
                 <span class="split-line" data-autoplay="true"><span><em>character.</em></span></span>
             </h1>
             <p class="lead reveal" data-delay="3">Sixteen apps so far. Each one started as something I couldn't stop thinking about, and I kept going until I would happily use it on my own phone.</p>
+            <div class="app-dock-wrap reveal" data-delay="4">
+                <nav class="app-dock" aria-label="Jump to an app"></nav>
+                <div class="app-dock-label" aria-hidden="true">Jump to an app</div>
+            </div>
         </div>
     </section>
 
@@ -1132,5 +1177,55 @@
     <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
     <script src="assets/design/design.js"></script>
     <script src="assets/design/ambient.js"></script>
+    <script>
+        // App dock: built from the app cards below, so it never falls out of step with them
+        (function () {
+            const dock = document.querySelector('.app-dock');
+            const label = document.querySelector('.app-dock-label');
+            if (!dock) return;
+            const T = window.__tristonia;
+            const idle = label.textContent;
+            const items = [...document.querySelectorAll('article.app-feature[id]')].map(card => {
+                const name = card.querySelector('.app-feature__name').textContent.trim();
+                const a = document.createElement('a');
+                a.href = '#' + card.id;
+                a.setAttribute('aria-label', name);
+                const img = document.createElement('img');
+                img.src = card.querySelector('.app-feature__icon img').getAttribute('src');
+                img.alt = '';
+                a.appendChild(img);
+                a.addEventListener('pointerenter', () => { label.textContent = name; });
+                a.addEventListener('focus', () => { label.textContent = name; });
+                dock.appendChild(a);
+                return { a, s: { x: 0, v: 0 } };
+            });
+            dock.addEventListener('pointerleave', () => { label.textContent = idle; });
+            dock.addEventListener('focusout', () => { label.textContent = idle; });
+
+            // Magnify icons near the pointer, each on its own spring (mouse and pen only)
+            if (T.reduce || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+            let over = false, raf = 0, last = 0;
+            dock.addEventListener('pointerenter', () => { over = true; if (!raf) { last = performance.now(); raf = requestAnimationFrame(step); } });
+            dock.addEventListener('pointerleave', () => { over = false; });
+            function step(now) {
+                const dt = Math.min((now - last) / 1000, 1 / 20); last = now;
+                let moving = false;
+                for (const it of items) {
+                    let want = 0;
+                    if (over) {
+                        const r = it.a.getBoundingClientRect();
+                        const d = Math.abs(T.pointer.x - (r.left + r.width / 2));
+                        want = Math.exp(-(d * d) / (2 * 70 * 70));
+                    }
+                    T.spring(it.s, want, 260, 20, dt);
+                    it.a.style.transform = `translateY(${(-4 * it.s.x).toFixed(2)}px) scale(${(1 + 0.55 * it.s.x).toFixed(3)})`;
+                    it.a.style.zIndex = it.s.x > 0.5 ? 2 : 1;
+                    if (Math.abs(it.s.x) + Math.abs(it.s.v) > 0.002) moving = true;
+                }
+                raf = over || moving ? requestAnimationFrame(step) : 0;
+                if (!raf) items.forEach(it => { it.a.style.transform = ''; });
+            }
+        })();
+    </script>
 </body>
 </html>
