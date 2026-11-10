@@ -76,31 +76,97 @@ img { display: block; max-width: 100%; }
     top: 0; left: 0;
     pointer-events: none;
     z-index: 9999;
-    transform: translate3d(-50%, -50%, 0);
+    opacity: 0;
     mix-blend-mode: difference;
+    will-change: transform;
 }
 .cursor-dot {
     width: 6px; height: 6px;
+    margin: -3px 0 0 -3px;
     background: #fff;
     border-radius: 50%;
+    transition: opacity 0.3s;
 }
 .cursor-ring {
     width: 38px; height: 38px;
+    margin: -19px 0 0 -19px;
+    border-radius: 50%;
+    transition: opacity 0.3s;
+}
+/* The ring is drawn by a child so the spring can stretch the parent
+   while hover states resize the child without fighting it. */
+.cursor-ring::before {
+    content: "";
+    position: absolute;
+    inset: 0;
     border: 1px solid rgba(255,255,255,0.9);
     border-radius: 50%;
-    transition: width 0.28s var(--ease-out-quart),
-                height 0.28s var(--ease-out-quart),
-                background 0.28s,
-                border-color 0.28s;
+    transition: transform 0.45s var(--ease-out-expo), background 0.3s, border-color 0.3s, opacity 0.3s;
 }
-.cursor-ring.is-hover {
-    width: 64px; height: 64px;
-    background: rgba(255,255,255,0.12);
-    border-color: rgba(255,255,255,1);
-}
-@media (hover: none), (max-width: 768px) {
+.cursor-ready .cursor-dot, .cursor-ready .cursor-ring { opacity: 1; }
+.cursor-ring.is-hover::before { transform: scale(1.7); background: rgba(255,255,255,0.12); border-color: #fff; }
+.cursor-ring.is-down::before { transform: scale(0.72); background: rgba(255,255,255,0.2); }
+.cursor-ring.is-hover.is-down::before { transform: scale(1.35); }
+.cursor-ring.is-text::before { transform: scale(0.3); opacity: 0; }
+@media (hover: none), (pointer: coarse) {
     .cursor-dot, .cursor-ring { display: none; }
 }
+
+/* Soft light that trails the pointer or the finger */
+.pointer-glow {
+    position: fixed;
+    top: 0; left: 0;
+    width: 560px; height: 560px;
+    margin: -280px 0 0 -280px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    background: radial-gradient(circle, rgba(120,180,255,0.11) 0%, rgba(196,181,253,0.06) 38%, transparent 68%);
+    mix-blend-mode: screen;
+    will-change: transform, opacity;
+}
+@media (max-width: 760px) {
+    .pointer-glow { width: 380px; height: 380px; margin: -190px 0 0 -190px; }
+}
+
+/* Tap ripple (touch) */
+.tap-ripple {
+    position: fixed;
+    top: 0; left: 0;
+    width: 56px; height: 56px;
+    margin: -28px 0 0 -28px;
+    border-radius: 50%;
+    border: 1px solid rgba(196,181,253,0.7);
+    pointer-events: none;
+    z-index: 9998;
+    animation: tapRipple 0.65s var(--ease-out-expo) forwards;
+}
+@keyframes tapRipple {
+    from { scale: 0.2; opacity: 0.9; }
+    to { scale: 1.5; opacity: 0; }
+}
+
+/* Scroll progress hairline */
+.scroll-progress {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    z-index: 600;
+    background: var(--grad-aurora);
+    transform-origin: 0 50%;
+    transform: scaleX(0);
+    opacity: 0.85;
+    pointer-events: none;
+}
+
+/* Keyboard focus */
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 6px;
+}
+[id] { scroll-margin-top: 110px; }
 
 /* ===== Loader ===== */
 .page-loader {
@@ -111,7 +177,7 @@ img { display: block; max-width: 100%; }
     align-items: center;
     justify-content: center;
     z-index: 10000;
-    transition: opacity 0.8s var(--ease-out-quart);
+    transition: opacity 0.6s var(--ease-out-quart);
 }
 .page-loader.hidden {
     opacity: 0;
@@ -154,7 +220,26 @@ img { display: block; max-width: 100%; }
     border-radius: var(--radius-pill);
     border: 1px solid var(--border);
     box-shadow: 0 20px 60px -20px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.05);
+    transition: top 0.5s var(--ease-out-expo), background 0.4s, border-color 0.4s;
 }
+.t-nav.is-scrolled {
+    top: 14px;
+    background: rgba(8, 8, 24, 0.78);
+    border-color: var(--border-strong);
+}
+/* Sliding highlight, positioned by design.js */
+.t-nav__pill {
+    position: absolute;
+    top: 6px; bottom: 6px; left: 0;
+    width: 0;
+    border-radius: var(--radius-pill);
+    background: var(--surface-strong);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.55s var(--ease-out-expo), width 0.55s var(--ease-out-expo), opacity 0.3s;
+}
+.t-nav.has-pill .t-nav__link::before { display: none; }
 .t-nav__brand {
     font-family: var(--font-display);
     font-weight: 600;
@@ -204,7 +289,10 @@ img { display: block; max-width: 100%; }
 .t-nav__link.is-active { color: var(--text); }
 
 @media (max-width: 760px) {
-    .t-nav { top: 14px; gap: 0; padding: 4px; max-width: calc(100% - 28px); overflow-x: auto; }
+    .t-nav { top: 14px; gap: 0; padding: 4px; max-width: calc(100% - 28px); overflow-x: auto; scrollbar-width: none; }
+    .t-nav::-webkit-scrollbar { display: none; }
+    .t-nav.is-scrolled { top: 10px; }
+    .t-nav__pill { top: 4px; bottom: 4px; }
     .t-nav__brand { padding: 8px 12px; font-size: 0.72rem; }
     .t-nav__link { padding: 8px 12px; font-size: 0.66rem; letter-spacing: 0.05em; }
 }
@@ -322,7 +410,9 @@ img { display: block; max-width: 100%; }
     background: var(--surface-strong);
     border-color: rgba(255,255,255,0.4);
 }
+.btn:active { transform: translateY(0) scale(0.97); transition-duration: 0.12s; }
 .btn .arrow {
+    display: inline-flex;
     transition: transform 0.4s var(--ease-out-quart);
 }
 .btn:hover .arrow { transform: translateX(4px); }
@@ -428,17 +518,40 @@ section { position: relative; padding: clamp(80px, 12vh, 160px) 0; }
 }
 
 /* ===== Reveal animations ===== */
+/* Uses the standalone `translate` property so it never fights the
+   transforms used by hover states and the pointer tilt. */
 .reveal {
     opacity: 0;
-    transform: translateY(36px);
-    transition: opacity 1s var(--ease-out-quart), transform 1s var(--ease-out-quart);
+    translate: 0 32px;
 }
-.reveal.is-visible { opacity: 1; transform: translateY(0); }
+.reveal.reveal {
+    transition: opacity 1s var(--ease-out-quart), translate 1s var(--ease-out-expo),
+                transform 0.6s var(--ease-out-quart), border-color 0.5s, background-color 0.5s, box-shadow 0.5s;
+}
+.reveal.is-visible { opacity: 1; translate: 0 0; }
 .reveal[data-delay="1"].is-visible { transition-delay: 0.1s; }
 .reveal[data-delay="2"].is-visible { transition-delay: 0.2s; }
 .reveal[data-delay="3"].is-visible { transition-delay: 0.3s; }
 .reveal[data-delay="4"].is-visible { transition-delay: 0.4s; }
 .reveal[data-delay="5"].is-visible { transition-delay: 0.5s; }
+.reveal.reveal.is-settled { transition-delay: 0s; }
+
+/* ===== Pointer tilt (class added by design.js on fine pointers) ===== */
+.tilt.tilt, .tilt.tilt:hover {
+    transform: perspective(1100px) translateY(var(--lift, 0px)) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(var(--sc, 1));
+    transition: opacity 1s var(--ease-out-quart), translate 1s var(--ease-out-expo),
+                border-color 0.5s, background-color 0.5s, box-shadow 0.5s;
+    will-change: transform;
+}
+
+/* ===== Ambient canvas behind page heroes ===== */
+.ambient-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
 
 /* Split-text wrappers */
 .split-line { overflow: hidden; display: block; }
@@ -448,3 +561,16 @@ section { position: relative; padding: clamp(80px, 12vh, 160px) 0; }
     transition: transform 1.1s var(--ease-out-expo);
 }
 .split-line.is-visible > span { transform: translateY(0); }
+
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    .reveal, .split-line > span { opacity: 1; translate: none; transform: none; }
+    .pointer-glow, .tap-ripple, .scroll-progress { display: none; }
+}

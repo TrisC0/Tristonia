@@ -273,7 +273,7 @@
 
     <!-- ===== HERO ===== -->
     <section class="contact-hero">
-        <canvas id="contact-canvas"></canvas>
+        <canvas id="contact-canvas" class="ambient-canvas" data-ambient="constellation" aria-hidden="true"></canvas>
         <div class="container container--narrow">
             <span class="eyebrow split-line" data-autoplay="true"><span>Say hello</span></span>
             <h1>
@@ -395,84 +395,6 @@
         </div>
     </footer>
 
-    <script type="importmap">
-    {
-        "imports": {
-            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
-        }
-    }
-    </script>
-    <script type="module">
-        import * as THREE from 'three';
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const isSmallScreen = window.matchMedia('(max-width: 760px)').matches;
-        if (!prefersReducedMotion && !isSmallScreen) {
-        const canvas = document.getElementById('contact-canvas');
-        const heroEl = document.querySelector('.contact-hero');
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(60, heroEl.clientWidth / heroEl.clientHeight, 0.1, 100);
-        camera.position.z = 30;
-        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-        renderer.setSize(heroEl.clientWidth, heroEl.clientHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-        // Lines / constellation effect
-        const pc = 90;
-        const pts = [];
-        for (let i = 0; i < pc; i++) {
-            pts.push(new THREE.Vector3(
-                (Math.random() - 0.5) * 60,
-                (Math.random() - 0.5) * 36,
-                (Math.random() - 0.5) * 20
-            ));
-        }
-        const pGeo = new THREE.BufferGeometry().setFromPoints(pts);
-        const points = new THREE.Points(pGeo, new THREE.PointsMaterial({
-            color: 0x78b4ff, size: 0.18, transparent: true, opacity: 0.7, sizeAttenuation: true,
-            blending: THREE.AdditiveBlending
-        }));
-        scene.add(points);
-
-        // Lines between near points
-        const lineVerts = [];
-        for (let i = 0; i < pc; i++) {
-            for (let j = i + 1; j < pc; j++) {
-                if (pts[i].distanceTo(pts[j]) < 8) {
-                    lineVerts.push(pts[i].x, pts[i].y, pts[i].z);
-                    lineVerts.push(pts[j].x, pts[j].y, pts[j].z);
-                }
-            }
-        }
-        const lGeo = new THREE.BufferGeometry();
-        lGeo.setAttribute('position', new THREE.Float32BufferAttribute(lineVerts, 3));
-        const lines = new THREE.LineSegments(lGeo, new THREE.LineBasicMaterial({
-            color: 0xc4b5fd, transparent: true, opacity: 0.18
-        }));
-        scene.add(lines);
-
-        let mx = 0, my = 0, tmx = 0, tmy = 0;
-        window.addEventListener('mousemove', e => {
-            tmx = (e.clientX / window.innerWidth - 0.5);
-            tmy = (e.clientY / window.innerHeight - 0.5);
-        });
-        const clock = new THREE.Clock();
-        function animate() {
-            requestAnimationFrame(animate);
-            const t = clock.getElapsedTime();
-            mx += (tmx - mx) * 0.03;
-            my += (tmy - my) * 0.03;
-            scene.rotation.y = t * 0.04 + mx * 0.4;
-            scene.rotation.x = my * 0.3;
-            renderer.render(scene, camera);
-        }
-        animate();
-        window.addEventListener('resize', () => {
-            camera.aspect = heroEl.clientWidth / heroEl.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(heroEl.clientWidth, heroEl.clientHeight);
-        });
-        }
-    </script>
 
     <script>
         document.getElementById('footer-year').textContent = new Date().getFullYear();
@@ -495,5 +417,6 @@
         });
     </script>
     <script src="assets/design/design.js"></script>
+    <script src="assets/design/ambient.js"></script>
 </body>
 </html>
